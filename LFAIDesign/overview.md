@@ -1,89 +1,130 @@
-# LFAIDesign Repository Overview
+# LFAIDesign Module Documentation
 
-## Purpose
-The **LFAIDesign** repository is a comprehensive AI-driven design ideation and fashion technology platform. It is designed to streamline the creative workflow for designers by integrating state-of-the-art generative AI models (Stable Diffusion, DALL-E 3, Flux, and Gemini) with specialized fashion tools. 
+## Introduction and Purpose
 
-The platform enables users to perform visual searches for inspiration, generate iterative design variations, create technical sketches from photos, train custom LoRA models for specific styles, and perform virtual try-ons. It serves as an end-to-end "Creative Sandbox" that bridges the gap between initial design concepts and production-ready technical assets.
+The **LFAIDesign** module is a comprehensive Streamlit-based web application for **LF Design Ideation**, an AI-powered tool designed for fashion and apparel designers. It enables users to upload product images, perform AI-driven analysis, generate design variations, conduct similarity searches, estimate garment measurements, perform virtual try-ons, create 3D models and videos, and train custom AI models (LoRAs). 
 
----
+**Core Purpose**:
+- Accelerate fashion design ideation through multimodal AI integration.
+- Support end-to-end workflow: Image analysis → Ideation → Generation → Refinement → Export.
+- Integrates 20+ AI models/providers (Flux, DALL-E, Gemini, RunwayML, Kling, etc.) for diverse outputs.
 
-## End-to-End Architecture
-The repository follows a modular architecture where a **Streamlit-based Frontend** coordinates between various **AI Service Integrations**, **Cloud Storage**, and **Relational Databases**.
+This module fits into the **LF AI Suite** as the primary creative ideation engine, interfacing with shared utilities for storage (Azure Blob), database (PostgreSQL), and external APIs.
+
+## Architecture Overview
+
+The module follows a **session-state heavy Streamlit monolith** architecture with heavy reliance on utility modules for API orchestration.
 
 ```mermaid
-graph TD
-    subgraph Client_Layer [Frontend - Streamlit]
-        IW[Ideation Workbench]
-        LTM[LoRA Training Module]
-        DIC[Design Ideation Core]
+graph TB
+    subgraph "Core UI Design_Ideation.py"
+        UI[Streamlit UI + 100+ Callbacks]
+        SS[Session State Management Images Prompts Results]
     end
 
-    subgraph Logic_Layer [Backend Orchestration]
-        Util[Streamlit UI Utilities]
-        GMA[GenAI Multimodal Analysis]
+    subgraph "Search xts_util.py"
+        XTS[XTS Visual Keyword Search]
     end
 
-    subgraph AI_Service_Layer [AI & Search Engines]
-        CUI[ComfyUI Automation - AutoDL]
-        OAI[OpenAI Integration - DALL-E 3/GPT-4o]
-        FAI[Fal AI Integration - Flux/LoRA]
-        SS[Search Services - Bing/Google]
+    subgraph "AI Generation Utils"
+        FAL[FAL.ai Flux Kling Seedance etc.]
+        GENAI[Google Gemini Measurements Edits]
+        OPENAI[OpenAI DALL-E GPT-4o Sora]
+        RUNWAY[RunwayML Gen3 4 Videos]
+        COMFY[ComfyUI Sketches Try-On]
     end
 
-    subgraph Data_Layer [Storage & Persistence]
-        AZ[Azure Cloud Storage - Blobs/Images]
-        DB[Database Management - PostgreSQL]
+    subgraph "Storage DB"
+        AZURE[Azure Blob Images Videos LoRAs]
+        PGSQL[PostgreSQL LoRAs Users Quotas]
     end
 
-    %% Interactions
-    IW --> Logic_Layer
-    LTM --> Logic_Layer
-    DIC --> Logic_Layer
+    subgraph "Other Utils"
+        APP[app_util Helpers]
+        DB[db_util Queries]
+        STRM[streamlit_utils Logging History]
+    end
 
-    Logic_Layer --> AI_Service_Layer
-    
-    AI_Service_Layer --> AZ
-    LTM --> DB
-    DIC --> DB
-    
-    CUI -.-> |Workflows| OAI
-    SS --> |Inspiration| IW
+    UI --> SS
+    UI --> FAL
+    UI --> GENAI
+    UI --> OPENAI
+    UI --> RUNWAY
+    UI --> COMFY
+    UI --> XTS
+    UI --> AZURE
+    UI --> PGSQL
+
+    FAL --> AZURE
+    COMFY --> AZURE
+    SS --> PGSQL
 ```
 
-### Key Workflow: Technical Sketch Generation
-This diagram illustrates the cross-module interaction required to transform a design photo into a technical sketch:
+**Data Flow**:
+1. **Upload/Analysis**: Image → GPT-4V/Gemini → Attributes (JSON).
+2. **Generation**: Prompt + Image → Multi-model API calls (async threads + progress bars).
+3. **Output**: Images/Videos/3D → Azure Blob → Session State → UI Tabs.
+4. **Persistence**: LoRAs → DB → Training via FAL.ai.
+
+**Key Relationships**:
+- **Design_Ideation.py** orchestrates everything (500+ functions).
+- **xts_util.py** handles internal XTS product searches.
+- Utils like `fal_util.py` abstract 50+ external APIs.
+
+## High-Level Sub-Modules
+
+For detailed documentation, see individual files:
+
+- **[UI Core](Design_Ideation.md)**: Main Streamlit app logic, session state, all callbacks.
+- **[Search](xts_util.md)**: XTS visual/keyword product similarity search.
+- **[AI Generation](fal_util.md)**: FAL.ai integrations (Flux, Kling, etc.).
+- **[Gemini Utils](genai_util.md)**: Google Gemini for measurements/edits.
+- **[OpenAI Utils](openai_util.md)**: DALL-E, GPT-4o, Sora.
+- **[Storage/DB](db_util.md)**: PostgreSQL LoRA/user management, Azure Blob.
+
+## Component Interaction Diagram
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant IW as Ideation Workbench
-    participant GMA as Multimodal Analysis
-    participant CUI as ComfyUI Automation
-    participant AZ as Azure Storage
+    participant U as User/UI
+    participant SS as Session State
+    participant API as AI APIs
+    participant DB as PostgreSQL
+    participant AZ as Azure Blob
 
-    User->>IW: Upload Image & Request Sketch
-    IW->>GMA: Analyze Garment Attributes (Gemini/GPT-4o)
-    GMA-->>IW: Return Detailed Description
-    IW->>CUI: Trigger Sketch Workflow (ComfyUI API)
-    CUI->>CUI: Process Image-to-Sketch Nodes
-    CUI-->>IW: Return Generated Sketch
-    IW->>AZ: Persist Sketch Image
-    AZ-->>User: Display Final Technical Sketch
+    U->>SS: Upload Image
+    SS->>API: Analyze (Gemini/GPT)
+    API-->>SS: Attributes JSON
+    Note over SS: Generate Prompts
+
+    U->>SS: Select Model/Generate
+    SS->>API: Async Calls (Threads)
+    API->>AZ: Store Outputs
+    AZ-->>SS: URLs
+    SS->>U: Display Tabs
+
+    U->>SS: Train LoRA
+    SS->>DB: Pending Record
+    SS->>API: FAL Train
+    API->>AZ: LoRA File
+    AZ->>DB: Update Active
 ```
 
----
+## Process Flows
 
-## Core Modules Documentation
+### 1. Image Ideation Flow
+```
+Upload → Identify (GPT/Gemini) → Select Model (Flux/DALL-E/etc.) → Generate (Async) → Refine → Export
+```
 
-The following modules represent the functional pillars of the LFAIDesign system:
+### 2. Custom LoRA Training
+```
+Upload Images → Config (Trigger/Steps) → FAL Train (Async Poll) → DB Update → List/Use
+```
 
-| Module | Description |
-| :--- | :--- |
-| **[Ideation Workbench](app/backend/pages/Ideation_Workbench.py)** | The primary creative interface for iterative image generation, visual search, and design evolution. |
-| **[ComfyUI Automation](app/backend/utils/autodl_comfyui_util.py)** | Manages remote execution of complex node-based workflows for virtual try-ons and clothing extraction. |
-| **[OpenAI Integration](app/backend/utils/openai_util.py)** | Handles DALL-E 3 image generation, GPT-4o multimodal analysis, and prompt refinement. |
-| **[Database Management](app/backend/utils/db_util.py)** | Manages PostgreSQL persistence for user quotas, LoRA metadata, and access control. |
-| **[Azure Cloud Storage](app/backend/utils/azure_util.py)** | Provides a robust interface for storing and retrieving large binary assets like models and generated images. |
-| **[Search Services](app/backend/utils/bing_util.py)** | Integrates Bing and Google APIs for visual and keyword-based design inspiration. |
-| **[GenAI Multimodal Analysis](app/backend/utils/genai_util.py)** | Uses Gemini and other LLMs to identify garment types and measure design attributes. |
-| **[Fal AI Integration](app/backend/utils/fal_util.py)** | Facilitates high-end Flux model generation and cloud-based LoRA training. |
+### 3. POM (Point-of-Measure) Flow
+```
+Upload → Garment Type ID → Template Match → Gemini Estimate → Edit → Export Table
+```
+
+See sub-module docs for full details.

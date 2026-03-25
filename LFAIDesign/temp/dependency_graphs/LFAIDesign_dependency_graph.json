@@ -233,8 +233,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/utils/db_util.py::get_db_connect",
-      "app/backend/utils/xts_util.py::call_xts_keyword_search"
+      "app/backend/utils/xts_util.py::call_xts_keyword_search",
+      "app/backend/utils/db_util.py::get_db_connect"
     ],
     "source_code": "def xts_keyword_search(input_text):\n    xts_keyword_response = xts_util.call_xts_keyword_search(input_text)\n\n    st.session_state.errMsg = \"\"\n    st.session_state.XtsKeywordSearchResult.clear()\n    if(xts_keyword_response.status_code != 200):\n        st.session_state.errMsg = \"xts keyword search api error (\"+str(xts_keyword_response.status_code)+\"): \"+xts_keyword_response.reason\n        return\n\n    keyword_data = xts_keyword_response.json()['data'][:100]\n\n    query = 'SELECT \"DWIPID_DIVCOD\",\"DWIPID_IPIC_RUNNUM\",\"DWIPID_SRC_RUNNUM\",\"IMG_XTS_URL\" FROM xtsimgurl where \"DWIPID_SRC_RUNNUM\" in (' + ','.join(str(x['imageID']) for x in keyword_data) + ') AND \"DWIPID_DIVCOD\" NOT IN (\\'DD\\',\\'GLP\\',\\'PD\\',\\'PDP\\',\\'AHA\\') ORDER BY \"DWIPID_SRC_RUNNUM\" !=' + ',\"DWIPID_SRC_RUNNUM\" !='.join(str(x['imageID']) for x in keyword_data) + ' LIMIT 10;'\n\n    keyword_data_map = {}\n    for data in keyword_data:\n        keyword_data_map[data['imageID']] = data['distance']\n\n    # Connect to the database\n    conn = db_util.get_db_connect()\n\n    # Create a cursor object\n    cursor = conn.cursor()\n\n    # Execute the query\n    cursor.execute(query)\n\n    # Fetch all the rows\n    rows = cursor.fetchall()\n\n    for row in rows:\n        st.session_state.XtsKeywordSearchResult.append({\n            \"division_code\":row[0],\n            \"item_id\":row[1],\n            \"image_id\":row[2],\n            \"similarity\":keyword_data_map[row[2]],\n            \"image_url\":row[3],\n        })\n\n    # Close the cursor and connection\n    cursor.close()\n    conn.close()",
     "start_line": 503,
@@ -847,96 +847,96 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/utils/openai_util.py::call_mask_gpt_image_1",
-      "app/backend/Design_Ideation.py::ex_visual_search",
-      "app/backend/Design_Ideation.py::add_attempt_video",
-      "app/backend/utils/fal_util.py::seedance_v1_lite_r2v",
-      "app/backend/utils/sam2_util.py::model_predict_click",
-      "app/backend/utils/fal_util.py::qwen_image_edit_angles",
-      "app/backend/utils/autodl_comfyui_util.py::do_tryon",
-      "app/backend/utils/genai_util.py::veo2",
-      "app/backend/utils/fal_util.py::flux_1_pro",
-      "app/backend/Design_Ideation.py::internal_visual_search",
-      "app/backend/utils/fal_util.py::seedance_v1_5_pro_i2v",
-      "app/backend/utils/fal_util.py::inpaint_tryon_fal",
-      "app/backend/utils/fal_util.py::kling_video_v2_1_master",
-      "app/backend/utils/azure_util.py::get_blob_url",
-      "app/backend/utils/openai_util.py::get_revised_prompt",
-      "app/backend/utils/runway_util.py::runway_gen4",
-      "app/backend/utils/fal_util.py::flux_pro_lora_inpainting",
-      "app/backend/utils/fal_util.py::seedance_v1_5_pro_t2v",
-      "app/backend/utils/autodl_comfyui_util.py::do_print_to_product",
-      "app/backend/Design_Ideation.py::update_progress",
-      "app/backend/utils/fal_util.py::clarity_upscaler",
-      "app/backend/utils/app_util.py::reverse_mask_img",
-      "app/backend/streamlit_utils.py::get_techpack_gpt4vmessages",
-      "app/backend/utils/fal_util.py::virtual_try_on_fashn_v1_5",
-      "app/backend/streamlit_utils.py::logging",
-      "app/backend/utils/db_util.py::add_user_quota",
-      "app/backend/Design_Ideation.py::add_attempt_3d",
-      "app/backend/Design_Ideation.py::test_log",
-      "app/backend/utils/autodl_comfyui_util.py::change_pose",
-      "app/backend/utils/db_util.py::update_new_user_quota",
-      "app/backend/utils/fal_util.py::qwen_image_layered",
-      "app/backend/streamlit_utils.py::get_techpack_genaimessages",
-      "app/backend/utils/fal_util.py::flux_1_1_pro",
-      "app/backend/Design_Ideation.py::add_refine_img",
-      "app/backend/utils/fal_util.py::ic_light_v2",
-      "app/backend/utils/app_util.py::image_to_byte",
-      "app/backend/utils/fal_util.py::birefnet_v2",
-      "app/backend/Design_Ideation.py::add_attempt_img",
-      "app/backend/utils/runway_util.py::runway_gen3",
-      "app/backend/utils/fal_util.py::kontext_multi",
-      "app/backend/utils/fal_util.py::fal_Kling_Kolors_Virtual_TryOn",
-      "app/backend/Design_Ideation.py::resize_aliyun_img",
-      "app/backend/utils/openai_util.py::sora_download_video",
-      "app/backend/utils/comfyui_util.py::get_sketch",
-      "app/backend/utils/fal_util.py::kling_video_v2_1_pro",
-      "app/backend/utils/genai_util.py::img_edit_geminiv2",
-      "app/backend/utils/runway_util.py::runway_text_to_image",
-      "app/backend/utils/fal_util.py::flux_lora_inpainting",
       "app/backend/utils/fal_util.py::seedance_v1_lite_i2v",
-      "app/backend/utils/fal_util.py::drct_super_resolution",
-      "app/backend/utils/fal_util.py::kling_video_v2_6_pro",
-      "app/backend/utils/fal_util.py::seedance_v1_lite_t2v",
-      "app/backend/utils/fal_util.py::kontext_img2img",
-      "app/backend/utils/fal_util.py::virtual_try_on",
-      "app/backend/utils/runway_util.py::runway_video_to_video",
-      "app/backend/utils/network_link_test_util.py::upload_image",
-      "app/backend/utils/fal_util.py::seedance_v1_pro_i2v",
-      "app/backend/utils/openai_util.py::identify_image_openai_gpt4v",
-      "app/backend/utils/openai_util.py::sora_generate_video",
-      "app/backend/utils/sam2_util.py::check_local_sam2",
-      "app/backend/streamlit_utils.py::identify_image",
-      "app/backend/utils/replicate_util.py::ideogram_v2",
-      "app/backend/utils/genai_util.py::measure_size_gemini",
-      "app/backend/utils/fal_util.py::flux_1_img2img",
-      "app/backend/utils/fal_util.py::sam2",
-      "app/backend/utils/autodl_comfyui_util.py::do_textract",
-      "app/backend/utils/app_util.py::image_to_base64_str",
-      "app/backend/utils/runway_util.py::runway_video_upscale",
-      "app/backend/utils/aliyun_util.py::virtual_try_on_refiner",
-      "app/backend/utils/fal_util.py::seedance_v1_pro_t2v",
-      "app/backend/utils/fal_util.py::image_upscaler",
-      "app/backend/utils/db_util.py::update_user_quota",
-      "app/backend/utils/autodl_comfyui_util.py::multi_pose_multi_view_lora",
-      "app/backend/utils/app_util.py::add_console_log_without_time",
-      "app/backend/utils/dpi_util.py::adjust_image_dpi",
-      "app/backend/utils/runway_util.py::runway_gen4_5",
-      "app/backend/utils/fal_util.py::kontext_txt2img",
       "app/backend/utils/app_util.py::console_log_start",
-      "app/backend/utils/autodl_comfyui_util.py::get_3d_realism",
-      "app/backend/utils/fal_util.py::sam3d",
-      "app/backend/utils/openai_util.py::call_gen_gpt_image_1",
-      "app/backend/utils/fal_util.py::seedream_v4_edit",
-      "app/backend/utils/replicate_util.py::topazlabs_image_upscale",
-      "app/backend/utils/app_util.py::add_console_log",
-      "app/backend/utils/fal_util.py::upload_file",
-      "app/backend/utils/azure_gpt4v_util.py::identify_image_azure_gpt4v",
-      "app/backend/utils/fal_util.py::seedream_v4_txt2img",
-      "app/backend/utils/genai_util.py::identify_image_gemini",
+      "app/backend/Design_Ideation.py::add_attempt_3d",
       "app/backend/utils/genai_util.py::veo3_1",
-      "app/backend/utils/fal_util.py::character_realism_3d"
+      "app/backend/utils/fal_util.py::flux_pro_lora_inpainting",
+      "app/backend/utils/fal_util.py::ic_light_v2",
+      "app/backend/utils/fal_util.py::virtual_try_on",
+      "app/backend/utils/app_util.py::add_console_log_without_time",
+      "app/backend/utils/fal_util.py::seedance_v1_lite_r2v",
+      "app/backend/utils/openai_util.py::sora_download_video",
+      "app/backend/utils/fal_util.py::flux_1_1_pro",
+      "app/backend/utils/dpi_util.py::adjust_image_dpi",
+      "app/backend/utils/runway_util.py::runway_gen3",
+      "app/backend/utils/fal_util.py::kling_video_v2_1_pro",
+      "app/backend/utils/openai_util.py::call_gen_gpt_image_1",
+      "app/backend/streamlit_utils.py::identify_image",
+      "app/backend/utils/autodl_comfyui_util.py::get_3d_realism",
+      "app/backend/utils/fal_util.py::qwen_image_edit_angles",
+      "app/backend/streamlit_utils.py::get_techpack_genaimessages",
+      "app/backend/utils/aliyun_util.py::virtual_try_on_refiner",
+      "app/backend/utils/fal_util.py::seedance_v1_5_pro_i2v",
+      "app/backend/utils/runway_util.py::runway_gen4_5",
+      "app/backend/utils/sam2_util.py::model_predict_click",
+      "app/backend/utils/fal_util.py::kontext_img2img",
+      "app/backend/utils/db_util.py::update_new_user_quota",
+      "app/backend/utils/genai_util.py::veo2",
+      "app/backend/utils/fal_util.py::kontext_multi",
+      "app/backend/utils/runway_util.py::runway_gen4",
+      "app/backend/utils/fal_util.py::kontext_txt2img",
+      "app/backend/utils/app_util.py::add_console_log",
+      "app/backend/utils/fal_util.py::qwen_image_layered",
+      "app/backend/utils/fal_util.py::kling_video_v2_6_pro",
+      "app/backend/streamlit_utils.py::get_techpack_gpt4vmessages",
+      "app/backend/utils/runway_util.py::runway_text_to_image",
+      "app/backend/utils/app_util.py::image_to_byte",
+      "app/backend/utils/fal_util.py::sam3d",
+      "app/backend/utils/fal_util.py::kling_video_v2_1_master",
+      "app/backend/utils/azure_gpt4v_util.py::identify_image_azure_gpt4v",
+      "app/backend/utils/openai_util.py::get_revised_prompt",
+      "app/backend/utils/runway_util.py::runway_video_to_video",
+      "app/backend/utils/fal_util.py::fal_Kling_Kolors_Virtual_TryOn",
+      "app/backend/utils/autodl_comfyui_util.py::do_print_to_product",
+      "app/backend/utils/openai_util.py::sora_generate_video",
+      "app/backend/Design_Ideation.py::add_refine_img",
+      "app/backend/utils/genai_util.py::measure_size_gemini",
+      "app/backend/utils/fal_util.py::upload_file",
+      "app/backend/utils/fal_util.py::seedance_v1_pro_t2v",
+      "app/backend/utils/fal_util.py::seedance_v1_pro_i2v",
+      "app/backend/Design_Ideation.py::resize_aliyun_img",
+      "app/backend/utils/openai_util.py::identify_image_openai_gpt4v",
+      "app/backend/Design_Ideation.py::update_progress",
+      "app/backend/utils/autodl_comfyui_util.py::change_pose",
+      "app/backend/utils/autodl_comfyui_util.py::multi_pose_multi_view_lora",
+      "app/backend/Design_Ideation.py::internal_visual_search",
+      "app/backend/utils/db_util.py::update_user_quota",
+      "app/backend/utils/db_util.py::add_user_quota",
+      "app/backend/Design_Ideation.py::add_attempt_img",
+      "app/backend/utils/fal_util.py::seedream_v4_txt2img",
+      "app/backend/utils/fal_util.py::flux_1_pro",
+      "app/backend/utils/autodl_comfyui_util.py::do_tryon",
+      "app/backend/utils/genai_util.py::identify_image_gemini",
+      "app/backend/utils/fal_util.py::character_realism_3d",
+      "app/backend/utils/fal_util.py::seedance_v1_lite_t2v",
+      "app/backend/streamlit_utils.py::logging",
+      "app/backend/utils/app_util.py::reverse_mask_img",
+      "app/backend/utils/fal_util.py::birefnet_v2",
+      "app/backend/utils/replicate_util.py::ideogram_v2",
+      "app/backend/utils/replicate_util.py::topazlabs_image_upscale",
+      "app/backend/utils/fal_util.py::flux_lora_inpainting",
+      "app/backend/utils/fal_util.py::sam2",
+      "app/backend/utils/network_link_test_util.py::upload_image",
+      "app/backend/utils/autodl_comfyui_util.py::do_textract",
+      "app/backend/utils/runway_util.py::runway_video_upscale",
+      "app/backend/Design_Ideation.py::ex_visual_search",
+      "app/backend/utils/fal_util.py::seedance_v1_5_pro_t2v",
+      "app/backend/utils/comfyui_util.py::get_sketch",
+      "app/backend/utils/sam2_util.py::check_local_sam2",
+      "app/backend/utils/app_util.py::image_to_base64_str",
+      "app/backend/utils/genai_util.py::img_edit_geminiv2",
+      "app/backend/utils/fal_util.py::virtual_try_on_fashn_v1_5",
+      "app/backend/utils/openai_util.py::call_mask_gpt_image_1",
+      "app/backend/Design_Ideation.py::test_log",
+      "app/backend/utils/fal_util.py::inpaint_tryon_fal",
+      "app/backend/utils/fal_util.py::image_upscaler",
+      "app/backend/utils/fal_util.py::clarity_upscaler",
+      "app/backend/utils/fal_util.py::drct_super_resolution",
+      "app/backend/utils/fal_util.py::flux_1_img2img",
+      "app/backend/utils/azure_util.py::get_blob_url",
+      "app/backend/utils/fal_util.py::seedream_v4_edit",
+      "app/backend/Design_Ideation.py::add_attempt_video"
     ],
     "source_code": "        def apiCall():\n            if image_POM_upload is not None:\n                \n                image_bytes = image_POM_upload.read()\n                image_base64 = base64.b64encode(image_bytes).decode(\"utf-8\")\n\n                whole_sample_data = st.session_state.whole_sample_data\n\n                # 调用外部测針函数（示例：Gemini）\n                # 朝装类型已绝在上传时识别过了\n                garment_type = st.session_state.di_garment_type\n                dic = genai_util.measure_size_gemini(image_base64, whole_sample_data, input_data, garment_type)\n\n                # 更新 estimate_data\n                if dic is not None:\n                    # 确保 Size 数组长度与 Name 数组一致\n                    name_length = len(st.session_state.estimate_data[\"Name\"])\n                    if len(st.session_state.estimate_data[\"Size\"]) != name_length:\n                        st.session_state.estimate_data[\"Size\"] = [None] * name_length\n                        st.session_state.previous_values = [None] * name_length\n                    \n                    for name, size in dic.items():\n                        if name in st.session_state.estimate_data[\"Name\"]:\n                            idx = st.session_state.estimate_data[\"Name\"].index(name)\n                            st.session_state.estimate_data[\"Size\"][idx] = size\n                            st.session_state.previous_values[idx] = size\n                else:\n                    st.error(\"Measurement failed, please retry or check image quality\")",
     "start_line": 7054,
@@ -1056,9 +1056,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
+      "app/backend/Design_Ideation.py::update_di_painted_image_0",
       "app/backend/streamlit_utils.py::logging",
-      "app/backend/Design_Ideation.py::clear_api_result",
-      "app/backend/Design_Ideation.py::update_di_painted_image_0"
+      "app/backend/Design_Ideation.py::clear_api_result"
     ],
     "source_code": "            def uploader_callback():\n                if st.session_state.image_input_key is not None:\n                    streamlit_utils.logging('Entry','Upload','','')\n                    st.session_state.di_ai_image = Image.open(st.session_state.image_input_key)\n                    st.session_state.di_ai_image_type = st.session_state.di_ai_image.format\n                    st.session_state.di_ai_resize_image = st.session_state.di_ai_image\n                    st.session_state['canvas_im'] = st.session_state.di_ai_image.convert(\"RGB\")\n                    st.session_state.di_reset_canvas = True\n                    st.session_state.di_img_type = None\n                    clear_api_result()\n                    st.session_state.di_adobe_img_id = None\n                    st.session_state.di_gpt_prompt = \"\"\n                    update_di_painted_image_0(st.session_state.di_ai_image)\n                    st.session_state.di_mask = None\n                    st.session_state.di_display_mask = None",
     "start_line": 1369,
@@ -1124,8 +1124,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/Design_Ideation.py::clear_api_result",
-      "app/backend/streamlit_utils.py::logging"
+      "app/backend/streamlit_utils.py::logging",
+      "app/backend/Design_Ideation.py::clear_api_result"
     ],
     "source_code": "                    def model_uploader_callback():\n                        if st.session_state.Midjourney_Blend_image_input_key is not None:\n                            added_files = [f for f in st.session_state.Midjourney_Blend_image_input_key if f not in st.session_state.di_uploaded_files]\n                            removed_files = [f for f in st.session_state.di_uploaded_files if f not in st.session_state.Midjourney_Blend_image_input_key]\n                            if added_files:\n                                for added_file in added_files:\n                                    st.session_state.di_painted_image.append(Image.open(added_file))\n\n                            if removed_files:\n                                for removed_file in removed_files:\n                                    r_file_idx = st.session_state.di_uploaded_files.index(removed_file)\n                                    del st.session_state.di_painted_image[r_file_idx + 1]\n\n                            st.session_state.di_uploaded_files = st.session_state.Midjourney_Blend_image_input_key",
     "start_line": 1612,
@@ -1230,18 +1230,18 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/utils/genai_util.py::img_edit_geminiv3_1",
-      "app/backend/utils/fal_util.py::flux_1_pro_txt2img",
-      "app/backend/utils/genai_util.py::img_edit_geminiv3",
-      "app/backend/utils/fal_util.py::flux_1_dev_lora_txt2img",
       "app/backend/utils/fal_util.py::flux_1_dev_lora_img2img",
-      "app/backend/utils/fal_util.py::flux_realism_lora",
+      "app/backend/utils/genai_util.py::img_edit_geminiv3",
+      "app/backend/utils/fal_util.py::flux_1_pro_txt2img",
       "app/backend/utils/bfl_util.py::kontext_max",
       "app/backend/utils/genai_util.py::img_edit_geminiv2_5",
+      "app/backend/utils/fal_util.py::flux_1_1_pro_ultra",
+      "app/backend/utils/openai_util.py::call_gen_Dall_E_3_image",
+      "app/backend/utils/fal_util.py::flux_1_dev_lora_txt2img",
+      "app/backend/utils/genai_util.py::img_edit_geminiv3_1",
       "app/backend/Design_Ideation.py::add_attempt_img",
       "app/backend/utils/fal_util.py::flux_pro_fill",
-      "app/backend/utils/openai_util.py::call_gen_Dall_E_3_image",
-      "app/backend/utils/fal_util.py::flux_1_1_pro_ultra"
+      "app/backend/utils/fal_util.py::flux_realism_lora"
     ],
     "source_code": "                    def thread_target(index, image_url):\n                        blob_client = blob_service_client.get_blob_client(container=container_name, blob=image_url)\n                        st.session_state.di_history_blob_image_list[index] = blob_client.download_blob().readall()",
     "start_line": 6632,
@@ -1305,13 +1305,13 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/utils/fal_util.py::upload_file",
-      "app/backend/utils/mj_util.py::mj_blend",
-      "app/backend/utils/mj_util.py::split_image_into_four",
+      "app/backend/utils/mj_util.py::getimg",
       "app/backend/Design_Ideation.py::apiCall",
       "app/backend/utils/app_util.py::image_to_byte",
-      "app/backend/utils/mj_util.py::getimg",
-      "app/backend/Design_Ideation.py::add_attempt_img"
+      "app/backend/utils/mj_util.py::split_image_into_four",
+      "app/backend/Design_Ideation.py::add_attempt_img",
+      "app/backend/utils/fal_util.py::upload_file",
+      "app/backend/utils/mj_util.py::mj_blend"
     ],
     "source_code": "                            def process_ok(image_urls):\n                                image_url=mj_util.mj_blend(image_urls)\n                                img_data = requests.get(image_url).content\n                                img = Image.open(io.BytesIO(img_data))\n                                split_images = mj_util.split_image_into_four(img)\n                                for part in split_images:\n                                    img_byte_arr = io.BytesIO()\n                                    part.save(img_byte_arr, format='PNG')\n                                    img_byte_arr = img_byte_arr.getvalue()\n                                    add_attempt_img(img_byte_arr)",
     "start_line": 3807,
@@ -1334,12 +1334,12 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/utils/fal_util.py::upload_file",
-      "app/backend/utils/fal_util.py::trellis",
-      "app/backend/Design_Ideation.py::add_attempt_img",
       "app/backend/utils/fal_util.py::rodin",
+      "app/backend/utils/fal_util.py::trellis",
       "app/backend/utils/app_util.py::image_to_byte",
-      "app/backend/utils/autodl_comfyui_util.py::character_pose_replacement"
+      "app/backend/utils/autodl_comfyui_util.py::character_pose_replacement",
+      "app/backend/Design_Ideation.py::add_attempt_img",
+      "app/backend/utils/fal_util.py::upload_file"
     ],
     "source_code": "                    def triposr_api_call():\n                        image1 = st.session_state.di_ai_resize_image\n                        image1_format = st.session_state.di_ai_image_type\n                        \n                        # # 从会话状思获坖坂数\n                        # material = st.session_state.material\n                        # quality = st.session_state.quality\n                        \n                        # 上传图僝文件\n                        image_base64_url = fal_util.upload_file(app_util.image_to_byte(image1, image1_format), image1_format)\n                        # print(image_base64_url)\n                        # 构建请求坂数\n                        prompt = {\n                            \"image_url\": image_base64_url\n                            # \"material\": material,\n                            # \"quality\": quality\n                        }\n                        # print(prompt)\n                        # 调用 triposr API\n                        result = fal_util.trellis(prompt)\n                        # print(result)\n                        # 处睆结果\n                        if \"model_mesh\" in result and \"url\" in result[\"model_mesh\"]:\n                            model_url = result[\"model_mesh\"][\"url\"]\n                            file_name = result[\"model_mesh\"].get(\"file_name\", \"model.glb\")\n                            file_size = result[\"model_mesh\"].get(\"file_size\", 0)\n                            st.session_state.trellis_model_url = model_url",
     "start_line": 4021,
@@ -1546,8 +1546,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/streamlit_utils.py::download_videos",
-      "app/backend/utils/app_util.py::download_file"
+      "app/backend/utils/app_util.py::download_file",
+      "app/backend/streamlit_utils.py::download_videos"
     ],
     "source_code": "        def click_download_callback():\n            with st.spinner(text=f\"Please wait for {len(st.session_state.di_v_history_select_list_callback)} videos zip generation\"):\n                history_select_list = []\n                for item in st.session_state.di_v_history_select_list_callback:\n                    history_select_list.append(st.session_state.history_blob_video_url[item])\n                streamlit_utils.download_videos(history_select_list)\n                st.session_state.di_v_history_select_list_callback.clear()",
     "start_line": 6703,
@@ -1590,8 +1590,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "                def load_image():\n                    blob_service_client = azure_util.get_blob_service_client()\n                    container_name = azure_util.get_container_name()\n                    def thread_target(index, image_url):\n                        blob_client = blob_service_client.get_blob_client(container=container_name, blob=image_url)\n                        st.session_state.di_history_blob_image_list[index] = blob_client.download_blob().readall()\n\n                        # st.session_state.di_history_blob_image_list[index] = f\"{azure_util.get_account_url()}/aidesignoutput/{image_url}{azure_util.get_blob_url()}\"\n\n                    threads = []\n                    for index, image_url in enumerate(st.session_state.history_blob_image_url[page_start:page_start + per_page]):\n                        imgNo = page_start + index\n                        st.session_state.di_history_blob_image_list.append(None)\n                        t = threading.Thread(target=thread_target, args=(imgNo, image_url))\n                        threads.append(t)\n                        add_script_run_ctx(t)\n                        t.start()\n\n                    for t in threads:\n                        t.join()\n                        \n                    st.session_state.history_run_load_img = False",
     "start_line": 6629,
@@ -1719,8 +1719,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/Design_Ideation.py",
     "relative_path": "app/backend/Design_Ideation.py",
     "depends_on": [
-      "app/backend/Design_Ideation.py::ex_keyword_search",
-      "app/backend/Design_Ideation.py::xts_keyword_search"
+      "app/backend/Design_Ideation.py::xts_keyword_search",
+      "app/backend/Design_Ideation.py::ex_keyword_search"
     ],
     "source_code": "def load_keyword_search():\n    # st.write(\"con2\")\n    col1, col2 = st.columns([1,2])\n\n    with col1:\n        st.subheader(\"Keyword input\")\n        st.session_state.similarity_search_string=st.text_area(\"keyword\",value=st.session_state.similarity_search_string)\n        if st.button('Keyword search'):\n            # External\n            ex_keyword_search(st.session_state.similarity_search_string)\n\n            # Internal\n            xts_keyword_search(st.session_state.similarity_search_string)\n\n    with col2:\n        st.subheader(\"Search result\")\n        if st.session_state.ExTextSearchResult:\n            with st.container(border=True):\n                st.subheader(\"External\")\n                imagelist=[]\n                imagedates=[]\n                for index,item in enumerate(st.session_state.ExTextSearchResult):\n                    thumbnailUrl=str(item['thumbnailUrl'])\n                    imagelist.append(thumbnailUrl)\n                    # imagedates.append(\"Published: \" + str(item['datePublished']).split('T')[0])\n                exresultselected = image_select(\n                    label=\"\",\n                    images=imagelist,\n                    use_container_width =False,\n                    return_value=\"index\",\n                    # captions=imagedates,\n                )\n                selectedurl=st.session_state.ExTextSearchResult[exresultselected]['webSearchUrl']\n                st.link_button(\"Further search with image\", selectedurl)\n\n        if st.session_state.XtsKeywordSearchResult:\n            with st.container(border=True):\n                st.subheader(\"Internal\")\n                imagelist=[]\n                imagedescs=[]\n                for index,item in enumerate(st.session_state.XtsKeywordSearchResult):\n                    image_url = \"https://salftseapdlfp01.file.core.windows.net/lfpsharepd\" + item['image_url'] + \"?sv=2022-11-02&ss=bfqt&srt=sco&sp=rltf&se=2025-12-27T07:00:00Z&st=2023-12-27T07:00:00Z&spr=https&sig=uw0Gp1mfreSV8daOWm%2FU%2BmYKBCaX2JmZp8O%2BvQVRs8k%3D\"\n                    imagelist.append(image_url)\n                    date = ''\n                    try:\n                        # /OM/item/thumbnail/201903/19/192197_tn3.JPG to 201903/19\n                        date = item['image_url'].split('thumbnail/')[1].split('/' + str(item['image_id']))[0]\n                        date = date[:4] + '/' + date[4:]\n                    except Exception as e:\n                        print(f\"Error: {e}\")\n                    imagedescs.append(\"Item ID: \" + str(item['item_id'])\n                        + ', Division Code: ' + item['division_code']\n                        + ', Image Date: ' + date\n                        + ', Similarity: ' + f\"{float(item['similarity']):.2%}\"\n                        )\n                    # imagedescs.append(date)\n                # st.write(imagedescs)\n                keywordresultselected = image_select(\n                    label=\"\",\n                    images=imagelist,\n                    use_container_width =False,\n                    return_value=\"index\",\n                    captions=imagedescs,\n                )",
     "start_line": 7146,
@@ -1934,9 +1934,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
+      "app/backend/pages/Lora_Train.py::call_func_with_progress_bar",
       "app/backend/streamlit_utils.py::add_div_btn_group",
-      "app/backend/pages/Ideation_Workbench.py::similarity_search",
-      "app/backend/pages/Lora_Train.py::call_func_with_progress_bar"
+      "app/backend/pages/Ideation_Workbench.py::similarity_search"
     ],
     "source_code": "def add_gen_image_bottom_btn(line):\n    lineKey = st.session_state.ide_imgRowSetting[line]['title_num']\n    with st.container(border=False):\n        cols = st.columns([1, 4])\n        with cols[0]:\n            st.write(\"Functions:\")\n        with cols[1]:\n            with st.container(border=False):\n                streamlit_utils.add_div_btn_group()\n                if st.button('Change styles', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_styles_{lineKey}'):\n                    call_func_with_progress_bar(\"Please wait for generation\", 1, 60, add_new_sd_row, line, \"change style\", {\n                        'controlweight' : 0.2,\n                    }, \"style\")\n                if st.button('Change colors', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_colors_{lineKey}'):\n                    call_func_with_progress_bar(\"Please wait for generation\", 1, 60, add_new_sd_row, line, \"change color\", {\n                        'controlweight' : 1,\n                    }, \"color\")\n                if st.button('Change fabirc', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_fabirc_{lineKey}'):\n                    call_func_with_progress_bar(\"Please wait for generation\", 1, 60, add_new_sd_row, line, \"change fabirc\", None, \"fabirc\")\n                if st.button('Product extraction', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_extraction_{lineKey}'):\n                    call_func_with_progress_bar(\"Please wait for generation\", 1, 60, product_extraction, line)\n                if st.button('SD Drawing Sketch', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_d_sketch_{lineKey}'):\n                    call_func_with_progress_bar(\"Please wait for generation\", 1, 60, drawing_sketch, line)\n                if st.button('SD Tehnical Sketch', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_c_sketch_{lineKey}'):\n                    call_func_with_progress_bar(\"Please wait for generation\", 1, 60, technical_sketch, line)\n                if st.button('Similarity search', disabled=st.session_state.get(\"ide_apiIsRunning\", False), on_click=setIsRunning, key=f'btn_search_{lineKey}'):\n                    similarity_search(line)",
     "start_line": 118,
@@ -2002,10 +2002,10 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
-      "app/backend/pages/Ideation_Workbench.py::gen_sd_sketch_v2_image",
       "app/backend/pages/Ideation_Workbench.py::gen_Dall_E_3_image",
-      "app/backend/pages/Ideation_Workbench.py::gen_sd_sketch_image",
-      "app/backend/pages/Ideation_Workbench.py::gen_sd_image"
+      "app/backend/pages/Ideation_Workbench.py::gen_sd_image",
+      "app/backend/pages/Ideation_Workbench.py::gen_sd_sketch_v2_image",
+      "app/backend/pages/Ideation_Workbench.py::gen_sd_sketch_image"
     ],
     "source_code": "def gen_Image(line, image, rowSetting):\n    if rowSetting['style'] == 'SD Imaging':\n        # gen_test_image(line, image, rowSetting)\n        gen_sd_image(line, image, rowSetting)\n    if rowSetting['style'] == \"product extraction\":\n        gen_Dall_E_3_image(line, image, rowSetting)\n    elif rowSetting['style'] == \"drawing sketch\":\n        gen_sd_sketch_image(line, image, rowSetting)\n    elif rowSetting['style'] == \"technical sketch v2\":\n        gen_sd_sketch_v2_image(line, image, rowSetting)",
     "start_line": 161,
@@ -2053,12 +2053,12 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
-      "app/backend/streamlit_utils.py::upload_image_azure_blob",
-      "app/backend/utils/app_util.py::convertToJpeg",
-      "app/backend/utils/comfyui_util.py::get_sketch",
       "app/backend/streamlit_utils.py::get_sd_ip",
       "app/backend/streamlit_utils.py::identify_image",
-      "app/backend/utils/openai_util.py::call_gen_Dall_E_3_image"
+      "app/backend/utils/app_util.py::convertToJpeg",
+      "app/backend/utils/openai_util.py::call_gen_Dall_E_3_image",
+      "app/backend/utils/comfyui_util.py::get_sketch",
+      "app/backend/streamlit_utils.py::upload_image_azure_blob"
     ],
     "source_code": "    def thread_target(prompt, dalle3_style, dalle3_resolution, dalle3_quality):\n        try:\n            imgoutput = openai_util.call_gen_Dall_E_3_image(prompt, dalle3_style, dalle3_resolution, dalle3_quality)\n            # image = streamlit_utils.get_image_from_url(imgoutput.data[0].url)\n            image = Image.open(io.BytesIO(base64.b64decode(imgoutput.data[0].b64_json)))\n            st.session_state.ide_imageRowList[line].append(image)\n            img_url = streamlit_utils.upload_image_azure_blob(image, st.session_state.userEmail)\n        except Exception as error:\n            st.session_state.ide_apiThreadError = error\n            print(error)",
     "start_line": 370,
@@ -2224,13 +2224,13 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
-      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
-      "app/backend/streamlit_utils.py::get_apparel_gpt4vmessages",
       "app/backend/streamlit_utils.py::get_apparel_genaimessages",
+      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
+      "app/backend/streamlit_utils.py::identify_image",
+      "app/backend/streamlit_utils.py::get_apparel_gpt4vmessages",
       "app/backend/pages/Ideation_Workbench.py::gen_Image",
-      "app/backend/streamlit_utils.py::get_fabric_genaimessages",
       "app/backend/streamlit_utils.py::get_fabric_gpt4vmessages",
-      "app/backend/streamlit_utils.py::identify_image"
+      "app/backend/streamlit_utils.py::get_fabric_genaimessages"
     ],
     "source_code": "def add_new_sd_row(line, title_txt, tmpRowSetting, attrType):\n    image = get_select_image_by_line(line)\n    if image is None:\n        st.warning('Please select a image')\n        st.session_state.ide_apiIsRunning = False\n        time.sleep(1)\n        st.rerun()\n\n    lastRowSetting = st.session_state.ide_imgRowSetting[line]\n    lastRowSetting['genNum'] += 1\n    if lastRowSetting['title_num'] != \"0\":\n        title_num = lastRowSetting['title_num'] + f\".{lastRowSetting['genNum']}\"\n        title_txt += f\" of #{lastRowSetting['title_num']}\"\n    else:\n        title_num = f\"{lastRowSetting['genNum']}\"\n\n    newRowSetting = {\n        'selection' : -1,\n        'source_image' : image,\n        'style' : 'SD Imaging',\n        'title_num' : title_num,\n        'title_txt' : title_txt,\n        'genNum' : 0,\n        'open_adv' : False,\n        'options' : [],\n        'prositive_prompt' : [],\n        'negative_prompt' : \"NSFW, ugly, deformed, deformity, ugliness, blurry, disfigured, poorly drawn face, mutation, mutated, extra limbs, messy drawing, text, cropped head, cropped face\",\n        'controlweight' : 0.6,\n        'resolutiondesc' : 512,\n        'sd_seed' : -1,\n        'api_result': {\n            'all_seeds': [],\n        },\n    }\n\n    image_format = image.format\n    io_buffer = io.BytesIO()\n    image.save(io_buffer, format=image_format)\n    image_base64 = base64.b64encode(io_buffer.getvalue())\n    image_base64_url = \"data:image/\" + image_format + \";base64,\" + image_base64.decode(\"utf-8\")\n    if attrType == \"style\" or attrType == \"color\":\n        gpt4vmessages = streamlit_utils.get_apparel_gpt4vmessages(image_base64_url)\n        genaimessages = streamlit_utils.get_apparel_genaimessages()\n    if attrType == \"fabirc\":\n        gpt4vmessages = streamlit_utils.get_fabric_gpt4vmessages(image_base64_url)\n        genaimessages = streamlit_utils.get_fabric_genaimessages()\n\n    image_txt_result_json = identify_image(image, gpt4vmessages, genaimessages)\n    otherdata = ''\n    options = None\n    for index, item in enumerate(image_txt_result_json):\n        if item['Attribute'] == 'moodboard_ideas':\n            newRowSetting['moodboard_ideas'] = item['Value']\n            image_txt_result_json.pop(index)\n        elif item['Attribute'] == attrType:\n            options = item\n            # item['Variants'].insert(0, item['Value'])\n            # newRowSetting['options'] = item\n        else:\n            otherdata += f\"{item['Attribute']}: {item['Value']};\"\n            # item['Variants'].insert(0, item['Value'])\n\n    if options is not None:\n        options['Variants'].insert(0, options['Value'])\n    else:\n        options = {\n            'Attribute':attrType,\n        }\n        if attrType == \"style\":\n            options['Value'] = styles_list[0]\n            options['Variants'] = styles_list\n        elif attrType == \"color\":\n            options['Value'] = colors_list[0]\n            options['Variants'] = colors_list\n        elif attrType == \"fabirc\":\n            options['Value'] = fabirc_list[0]\n            options['Variants'] = fabirc_list\n        else:\n            options['Value'] = ''\n            options['Variants'] = []\n\n\n    newRowSetting['base_prompt'] = f\"A realistic photo of the product: {otherdata}\"\n\n    for i in range(attemptImgSize):\n        random_value = random.choice(options['Variants'])\n        tmpOptions = options.copy()\n        tmpOptions['Value'] = random_value\n        newRowSetting['options'].append(tmpOptions)\n        newRowSetting['prositive_prompt'].append(f\"{newRowSetting['base_prompt']}{attrType}: {random_value};\")\n        # newRowSetting['options'].append({'color':random_color})\n        # newRowSetting['prositive_prompt'].append(f\"A realistic photo of the product: color: {random_color};\")\n\n    if tmpRowSetting is not None:\n        newRowSetting.update(tmpRowSetting)\n\n    st.session_state.ide_imgRowSetting.insert(line + 1, newRowSetting)\n    st.session_state.ide_imageRowList.insert(line, [])\n    gen_Image(line, image, newRowSetting)",
     "start_line": 401,
@@ -2283,9 +2283,9 @@
     "depends_on": [
       "app/backend/streamlit_utils.py::get_apparel_v2_genaimessages",
       "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
-      "app/backend/streamlit_utils.py::get_apparel_v2_gpt4vmessages",
+      "app/backend/pages/Ideation_Workbench.py::identify_image",
       "app/backend/pages/Ideation_Workbench.py::gen_Image",
-      "app/backend/pages/Ideation_Workbench.py::identify_image"
+      "app/backend/streamlit_utils.py::get_apparel_v2_gpt4vmessages"
     ],
     "source_code": "def product_extraction(line):\n    image = get_select_image_by_line(line)\n    if image is None:\n        st.warning('Please select a image')\n        st.session_state.ide_apiIsRunning = False\n        time.sleep(1)\n        st.rerun()\n\n    title_txt = \"product extraction result\"\n    lastRowSetting = st.session_state.ide_imgRowSetting[line]\n    lastRowSetting['genNum'] += 1\n    if lastRowSetting['title_num'] != \"0\":\n        title_num = lastRowSetting['title_num'] + f\".{lastRowSetting['genNum']}\"\n        title_txt += f\" of #{lastRowSetting['title_num']}\"\n    else:\n        title_num = f\"{lastRowSetting['genNum']}\"\n\n    newRowSetting = {\n        'selection' : -1,\n        'source_image' : image,\n        'style' : \"product extraction\",\n        'title_num' : title_num,\n        'title_txt' : title_txt,\n        'genNum' : 0,\n        'open_adv' : False,\n        'dalle3_resolution' : '1024x1024',\n        'dalle3_quality' : 'standard',\n        'dalle3_style' : 'vivid',\n    }\n\n    image_format = image.format\n    io_buffer = io.BytesIO()\n    image.save(io_buffer, format=image_format)\n    image_base64 = base64.b64encode(io_buffer.getvalue())\n    image_base64_url = \"data:image/\" + image_format + \";base64,\" + image_base64.decode(\"utf-8\")\n    gpt4vmessages = streamlit_utils.get_apparel_v2_gpt4vmessages(image_base64_url)\n    genaimessages = streamlit_utils.get_apparel_v2_genaimessages()\n\n    image_txt_result_json = identify_image(image, gpt4vmessages, genaimessages)\n    # st.write(image_txt_result_json)\n    newRowSetting['options'] = image_txt_result_json\n\n    denew=''\n    for index, item in enumerate(image_txt_result_json):\n        if item['Attribute'] == 'moodboard_ideas':\n            newRowSetting['moodboard_ideas'] = item['Value']\n            # st.write(index)\n            image_txt_result_json.pop(index)\n        else:\n            denew += f\"{item['Attribute']}: {item['Value']};\"\n            item['Variants'].insert(0, item['Value'])\n\n    newRowSetting['prompt'] = \"A realistic photo of the product: \" + denew\n\n    st.session_state.ide_imgRowSetting.insert(line + 1, newRowSetting)\n    st.session_state.ide_imageRowList.insert(line, [])\n    gen_Image(line, image, newRowSetting)",
     "start_line": 511,
@@ -2308,8 +2308,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
-      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
-      "app/backend/pages/Ideation_Workbench.py::gen_Image"
+      "app/backend/pages/Ideation_Workbench.py::gen_Image",
+      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line"
     ],
     "source_code": "def drawing_sketch(line):\n    image = get_select_image_by_line(line)\n    if image is None:\n        st.warning('Please select a image')\n        st.session_state.ide_apiIsRunning = False\n        time.sleep(1)\n        st.rerun()\n\n    title_txt = \"drawing sketch result\"\n    lastRowSetting = st.session_state.ide_imgRowSetting[line]\n    lastRowSetting['genNum'] += 1\n    if lastRowSetting['title_num'] != \"0\":\n        title_num = lastRowSetting['title_num'] + f\".{lastRowSetting['genNum']}\"\n        title_txt += f\" of #{lastRowSetting['title_num']}\"\n    else:\n        title_num = f\"{lastRowSetting['genNum']}\"\n\n    newRowSetting = {\n        'selection' : -1,\n        'source_image' : image,\n        'style' : \"drawing sketch\",\n        'title_num' : title_num,\n        'title_txt' : title_txt,\n        'genNum' : 0,\n        'open_adv' : False,\n        'options' : [],\n        'prositive_prompt': \"Quick sketches outline in black and white (+ white init), Minimalist, line drawing, no color, white background, no pattern, no fill, no detail, no hatching\",\n        'negative_prompt' : \"out of frame, people, animals, head, hand, leg, foot, face, neck, mutated body parts, deformed body features, uncoordinated body, blurry, cropped head, cropped face, text, shadow, signature, logo, prints, patterns, Hatching, cross-hatching\",\n        # 'controlweight' : 0.6,\n        'resolutiondesc' : 800,\n        'sd_seed' : -1,\n        'api_result': {\n            'all_seeds': [],\n        },\n    }\n\n    # image_format = image.format\n    # io_buffer = io.BytesIO()\n    # image.save(io_buffer, format=image_format)\n    # image_base64 = base64.b64encode(io_buffer.getvalue())\n    # image_base64_url = \"data:image/\" + image_format + \";base64,\" + image_base64.decode(\"utf-8\")\n    # gpt4vmessages = streamlit_utils.get_apparel_v2_gpt4vmessages(image_base64_url)\n    # genaimessages = streamlit_utils.get_apparel_v2_genaimessages()\n\n    # image_txt_result_json = identify_image(image, gpt4vmessages, genaimessages)\n    # # st.write(image_txt_result_json)\n    # newRowSetting['options'] = image_txt_result_json\n\n    # denew=''\n    # for index, item in enumerate(image_txt_result_json):\n    #     if item['Attribute'] in ('moodboard_ideas', 'color', 'occasion'):\n    #         image_txt_result_json.pop(index)\n    #     else:\n    #         denew += f\"{item['Attribute']}: {item['Value']};\"\n    #         item['Variants'].insert(0, item['Value'])\n\n    # newRowSetting['prositive_prompt'] = \"lfdresstechpack,<lora:dress168r100x3lr1e5:1>masterpiece,Vector picture,clear line,line art, Quick sketches outline in black and white (+ white init), Minimalist, line drawing, no color, white background, no pattern, no fill, no detail, no hatching: \" + denew\n\n    st.session_state.ide_imgRowSetting.insert(line + 1, newRowSetting)\n    st.session_state.ide_imageRowList.insert(line, [])\n    gen_Image(line, image, newRowSetting)",
     "start_line": 569,
@@ -2332,14 +2332,14 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
-      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
-      "app/backend/streamlit_utils.py::upload_image_azure_blob",
-      "app/backend/utils/fal_util.py::upload_file",
-      "app/backend/utils/comfyui_util.py::get_sketch",
-      "app/backend/streamlit_utils.py::get_techpack_genaimessages",
       "app/backend/streamlit_utils.py::get_techpack_gpt4vmessages",
+      "app/backend/utils/fal_util.py::upload_file",
       "app/backend/utils/app_util.py::image_to_byte",
-      "app/backend/streamlit_utils.py::identify_image"
+      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
+      "app/backend/streamlit_utils.py::identify_image",
+      "app/backend/utils/comfyui_util.py::get_sketch",
+      "app/backend/streamlit_utils.py::upload_image_azure_blob",
+      "app/backend/streamlit_utils.py::get_techpack_genaimessages"
     ],
     "source_code": "def technical_sketch(line):\n    \"\"\"\n    对第 line 行的图像进行“技术草图”处理。\n    这里把原来的注释都改成了调试信息（print）。\n    \"\"\"\n    try:\n        # 1. 获取选定图像并检查\n        print(\"[DEBUG] Step 1: Attempting to get the selected image by line =\", line)\n        image = get_select_image_by_line(line)\n        if image is None:\n            print(\"[ERROR] No image selected for line =\", line)\n            st.warning('Please select an image')\n            st.session_state.ide_apiIsRunning = False\n            time.sleep(1)\n            st.rerun()\n        else:\n            print(f\"[DEBUG] Successfully got image for line = {line}\")\n\n        # 2. 处理行标题和计数\n        print(\"[DEBUG] Step 2: Updating title and generation count.\")\n        lastRowSetting = st.session_state.ide_imgRowSetting[line]\n        lastRowSetting['genNum'] += 1\n        if lastRowSetting['title_num'] != \"0\":\n            title_num = lastRowSetting['title_num'] + f\".{lastRowSetting['genNum']}\"\n            title_txt = f\"technical sketch result of #{lastRowSetting['title_num']}\"\n        else:\n            title_num = f\"{lastRowSetting['genNum']}\"\n            title_txt = \"technical sketch result\"\n\n        # 3. 构造新的行设置\n        print(\"[DEBUG] Step 3: Constructing newRowSetting.\")\n        newRowSetting = {\n            'selection': -1,\n            'source_image': image,\n            'style': \"technical sketch\",\n            'title_num': title_num,\n            'title_txt': title_txt,\n            'genNum': 0,\n            'open_adv': False,\n            'img_path': '',\n            'options': {},\n        }\n\n        # 4. 上传图像并获得路径\n        img_path = fal_util.upload_file(\n            app_util.image_to_byte(image, image.format or \"jpeg\"),\n            image.format or \"jpeg\"\n        )\n        newRowSetting['img_path'] = img_path\n        print(f\"[DEBUG] Image path for line={line} is {img_path}\")\n\n        # 5. 生成 Base64 URL\n        image_format = image.format or \"jpeg\"\n        io_buffer = io.BytesIO()\n        image.save(io_buffer, format=image_format)\n        image_base64 = base64.b64encode(io_buffer.getvalue())\n        image_base64_url = f\"data:image/{image_format};base64,\" + image_base64.decode(\"utf-8\")\n\n        # 6. 调用多模态描述，获得 model_type、clothes_describe\n        genaimessages_combined = streamlit_utils.get_techpack_genaimessages()\n        gpt4vmessages_combined = streamlit_utils.get_techpack_gpt4vmessages(image_base64_url)\n        result = streamlit_utils.identify_image(image, gpt4vmessages_combined, genaimessages_combined)\n        parsed_result = json.loads(result)\n        model_type = parsed_result.get(\"model_type\")\n        clothes_describe = parsed_result.get(\"clothes_describe\")\n\n        if model_type not in [\"Bottom\", \"Top\", \"Dress\", \"Shorts\", \"Skirt\"]:\n            print(\"[WARN] model_type is out of expected range, defaulting to 'Dress'.\")\n            model_type = \"Dress\"\n        newRowSetting['options']['model_type'] = model_type\n\n        # 7. 调用 comfyui_util.get_sketch(prompt)\n        prompt = {\n            \"image\": img_path,\n            \"image_type\": model_type,\n            \"clothes_describe\": clothes_describe,\n        }\n        imgoutput = comfyui_util.get_sketch(prompt)\n        # 插入新行\n        st.session_state.ide_imgRowSetting.insert(line + 1, newRowSetting)\n        st.session_state.ide_imageRowList.insert(line, [])    \n        for index, item in enumerate(imgoutput):\n            # item 是图片 URL，先获取二进制内容\n            content = requests.get(item).content\n            \n            # 再用 Image.open\n            image = Image.open(io.BytesIO(content))\n            \n            # 把 image append 到对应的列表里\n            st.session_state.ide_imageRowList[line].append(image)\n            \n            # 如果要上传到 Azure Blob，则调用你自己的上传方法\n            img_url = streamlit_utils.upload_image_azure_blob(image, st.session_state.userEmail)\n\n    except Exception as error:\n        st.session_state.ide_apiThreadError = error\n        print(\"[ERROR] Main thread encountered error:\", error)\n        st.session_state.ide_apiIsRunning = False",
     "start_line": 691,
@@ -2362,9 +2362,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Ideation_Workbench.py",
     "relative_path": "app/backend/pages/Ideation_Workbench.py",
     "depends_on": [
-      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line",
       "app/backend/streamlit_utils.py::get_image_from_url",
-      "app/backend/utils/app_util.py::auto_retry"
+      "app/backend/utils/app_util.py::auto_retry",
+      "app/backend/pages/Ideation_Workbench.py::get_select_image_by_line"
     ],
     "source_code": "def similarity_search(line):\n    image = get_select_image_by_line(line)\n    if image is None:\n        st.warning('Please select a image')\n        st.session_state.ide_apiIsRunning = False\n        time.sleep(1)\n        st.rerun()\n\n    title_txt = \"search result\"\n    lastRowSetting = st.session_state.ide_imgRowSetting[line]\n    lastRowSetting['genNum'] += 1\n    if lastRowSetting['title_num'] != \"0\":\n        title_num = lastRowSetting['title_num'] + f\".{lastRowSetting['genNum']}\"\n        title_txt += f\" of #{lastRowSetting['title_num']}\"\n    else:\n        title_num = f\"{lastRowSetting['genNum']}\"\n\n    newRowSetting = {\n        'selection' : -1,\n        'source_image' : image,\n        'style' : 'similarity search',\n        'title_num' : title_num,\n        'title_txt' : title_txt,\n        'genNum' : 0,\n    }\n\n    result = []\n    for item in app_util.auto_retry(serpapi_util.visual_search, image, 4):\n        result.append(streamlit_utils.get_image_from_url(item['thumbnailUrl']))\n\n    st.session_state.ide_imgRowSetting.insert(line + 1, newRowSetting)\n    st.session_state.ide_imageRowList.insert(line, result)\n\n    st.session_state.ide_apiIsRunning = False\n    st.rerun()",
     "start_line": 793,
@@ -2778,9 +2778,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Lora_Train.py",
     "relative_path": "app/backend/pages/Lora_Train.py",
     "depends_on": [
-      "app/backend/utils/db_util.py::list_lora_image",
       "app/backend/utils/db_util.py::retrieve_lora_access_user_list",
-      "app/backend/utils/db_util.py::view_lora"
+      "app/backend/utils/db_util.py::view_lora",
+      "app/backend/utils/db_util.py::list_lora_image"
     ],
     "source_code": "def view_lora(lora_id):\n    st.session_state.lt_mode = lora_id\n    st.session_state.lora_data = db_util.view_lora(lora_id)\n    st.session_state.lora_image_list = db_util.list_lora_image(lora_id)\n    lora_image_view = 10\n    st.session_state.lora_access_user_list = db_util.retrieve_lora_access_user_list(lora_id)",
     "start_line": 132,
@@ -2825,24 +2825,24 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Lora_Train.py",
     "relative_path": "app/backend/pages/Lora_Train.py",
     "depends_on": [
-      "app/backend/utils/fal_util.py::upload_file",
-      "app/backend/utils/db_util.py::update_lora",
-      "app/backend/utils/db_util.py::add_pending_lora",
-      "app/backend/utils/app_util.py::load_lora",
-      "app/backend/utils/app_util.py::remove_after_last_dot",
-      "app/backend/pages/Lora_Train.py::list_mode",
-      "app/backend/pages/Lora_Train.py::zip_file",
-      "app/backend/utils/db_util.py::add_lora_image",
-      "app/backend/utils/fal_util.py::train_flux_lora_pro",
-      "app/backend/utils/fal_util.py::train_flux_lora_async",
-      "app/backend/utils/db_util.py::delete_all_lora_access",
-      "app/backend/utils/db_util.py::view_lora",
-      "app/backend/utils/db_util.py::delete_lora",
-      "app/backend/utils/azure_util.py::upload_lora_image",
       "app/backend/utils/db_util.py::add_pending_lora_pro",
-      "app/backend/utils/db_util.py::delete_all_lora_image",
+      "app/backend/utils/app_util.py::remove_after_last_dot",
+      "app/backend/pages/Lora_Train.py::zip_file",
+      "app/backend/utils/db_util.py::retry_failed_lora",
       "app/backend/utils/azure_util.py::delete_lora_image",
-      "app/backend/utils/db_util.py::retry_failed_lora"
+      "app/backend/pages/Lora_Train.py::list_mode",
+      "app/backend/utils/fal_util.py::upload_file",
+      "app/backend/utils/db_util.py::delete_all_lora_image",
+      "app/backend/utils/azure_util.py::upload_lora_image",
+      "app/backend/utils/db_util.py::delete_lora",
+      "app/backend/utils/db_util.py::view_lora",
+      "app/backend/utils/fal_util.py::train_flux_lora_pro",
+      "app/backend/utils/db_util.py::add_pending_lora",
+      "app/backend/utils/fal_util.py::train_flux_lora_async",
+      "app/backend/utils/db_util.py::add_lora_image",
+      "app/backend/utils/db_util.py::update_lora",
+      "app/backend/utils/db_util.py::delete_all_lora_access",
+      "app/backend/utils/app_util.py::load_lora"
     ],
     "source_code": "            def apiCall():\n                update_data = {\n                    \"lora_id\": lora_id,\n                    \"lora_name\": lora_name,\n                    \"lora_descrption\": lora_descrption,\n                    \"lora_status\": lora_status,\n                    \"lora_visibility\": lora_visibility,\n                }\n                db_util.update_lora(update_data)",
     "start_line": 810,
@@ -2907,8 +2907,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Lora_Train.py",
     "relative_path": "app/backend/pages/Lora_Train.py",
     "depends_on": [
-      "app/backend/streamlit_utils.py::identify_image",
-      "app/backend/utils/app_util.py::image_to_base64_str"
+      "app/backend/utils/app_util.py::image_to_base64_str",
+      "app/backend/streamlit_utils.py::identify_image"
     ],
     "source_code": "def generate_image_caption(image):\n    # 将图片转换为base64\n    image_format = image.format if hasattr(image, 'format') else 'PNG'\n    image_base64_url = \"data:image/\" + image_format + \";base64,\" + app_util.image_to_base64_str(image, image_format)\n    \n    gpt4vmessages = [\n        {\n            \"role\": \"system\",\n            \"content\": [\n                {\"type\": \"text\", \"text\": \"You are a helpful assistant that generates concise and accurate captions for images. Describe the image in a clear, natural way without any prefix or suffix.\"}\n            ],\n        },\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\"type\": \"text\", \"text\": \"Please describe this image\"},\n                {\n                    \"type\": \"image_url\",\n                    \"image_url\": {\n                        \"url\": image_base64_url\n                    },\n                },\n            ],\n        }\n    ]\n    \n    return streamlit_utils.identify_image(image, gpt4vmessages, \"Please describe this image\")",
     "start_line": 199,
@@ -2988,8 +2988,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/pages/Lora_Train.py",
     "relative_path": "app/backend/pages/Lora_Train.py",
     "depends_on": [
-      "app/backend/utils/db_util.py::add_lora_access",
-      "app/backend/utils/db_util.py::retrieve_lora_access_user_list"
+      "app/backend/utils/db_util.py::retrieve_lora_access_user_list",
+      "app/backend/utils/db_util.py::add_lora_access"
     ],
     "source_code": "                                def add_access(lora_id, grante_access_level, grant_status, grantee_user_id, grantee_user_email, grantee_user_name):\n                                    access_level = st.session_state[grante_access_level]\n                                    \n                                    db_util.add_lora_access(lora_id, access_level, grant_status, grantee_user_id, grantee_user_email, grantee_user_name)\n                                    st.session_state.lora_access_user_list = db_util.retrieve_lora_access_user_list(lora_id)",
     "start_line": 721,
@@ -3074,8 +3074,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/streamlit_utils.py::get_user_name",
-      "app/backend/streamlit_utils.py::logging"
+      "app/backend/streamlit_utils.py::logging",
+      "app/backend/streamlit_utils.py::get_user_name"
     ],
     "source_code": "def initUserState():\n    if 'userId' not in st.session_state:\n        st.session_state.userId = \"\"\n    if 'userName' not in st.session_state:\n        st.session_state.userName = \"\"\n    if 'userEmail' not in st.session_state:\n        st.session_state.userEmail = \"\"\n\n    if st.session_state.userName == '':# for local env\n        get_user_name()\n        logging('Entry','Login','','')",
     "start_line": 42,
@@ -3202,9 +3202,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/genai_util.py::identify_image_gemini",
+      "app/backend/utils/openai_util.py::identify_image_openai_gpt4v",
       "app/backend/utils/azure_gpt4v_util.py::identify_image_azure_gpt4v",
-      "app/backend/utils/openai_util.py::identify_image_openai_gpt4v"
+      "app/backend/utils/genai_util.py::identify_image_gemini"
     ],
     "source_code": "def identify_image(image, gpt4vmessages, genaimessages):\n    runOpenaiGPT4V = True\n    runAzureGPT4V = False\n    runGemini = False\n    # openai gpt4v\n    if runOpenaiGPT4V:\n        try:\n            start_time = time.time()\n            gptjsonstringcleaned = openai_util.identify_image_openai_gpt4v(gpt4vmessages)\n            end_time = time.time()\n            elapsed_time = end_time - start_time\n            print('Image identified by OpenAI GPT4V successfully. elapsed time: ' + str(int(round(elapsed_time,0))))\n        except Exception as error:\n            runAzureGPT4V = True\n            # st.toast('OpenAI GPT4V error, retrying Azure GPT4V.')\n            print('OpenAI GPT4V error, retrying Azure GPT4V.')\n            print(error)\n            # raise error\n    #azure gpt4v\n    if runAzureGPT4V:\n        try:\n            start_time = time.time()\n            gptjsonstringcleaned = azure_gpt4v_util.identify_image_azure_gpt4v(gpt4vmessages)\n            end_time = time.time()\n            elapsed_time = end_time - start_time\n            print('Image identified by Azure GPT4V successfully. elapsed time: ' + str(int(round(elapsed_time,0))))\n        except Exception as error:\n            runGemini = True\n            # st.toast('Azure GPT4V error, retrying Google Gemini.')\n            print('Azure GPT4V error, retrying Google Gemini.')\n            print(error)\n            # raise error\n    # Gemini\n    if runGemini:\n        start_time = time.time()\n        gptjsonstringcleaned = genai_util.identify_image_gemini(image, genaimessages)\n        end_time = time.time()\n        elapsed_time = end_time - start_time\n        print('Image identified by Google Gemini successfully. elapsed time: ' + str(int(round(elapsed_time,0))))\n\n    try:\n        # return json.loads(gptjsonstringcleaned)\n        return gptjsonstringcleaned\n    except Exception as error:\n        st.error(f'Error response: {gptjsonstringcleaned}')\n        print(gptjsonstringcleaned)\n        raise error",
     "start_line": 116,
@@ -3389,8 +3389,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_account_url",
       "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_account_url",
       "app/backend/streamlit_utils.py::pil_image_to_byte",
       "app/backend/utils/azure_util.py::get_blob_url",
       "app/backend/utils/azure_util.py::get_blob_service_client"
@@ -3417,10 +3417,10 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_account_url",
       "app/backend/utils/azure_util.py::get_container_name",
-      "app/backend/utils/azure_util.py::get_blob_url"
+      "app/backend/utils/azure_util.py::get_account_url",
+      "app/backend/utils/azure_util.py::get_blob_url",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def upload_video_azure_blob(video, video_type, userEmail):\n    blob_service_client = azure_util.get_blob_service_client()\n    container_name = azure_util.get_container_name()\n\n    error_count = 0\n    is_succeed = False\n    while not is_succeed:\n        try:\n            video_file_name = f\"video_history/{userEmail}/{str(time.time()) + str(uuid.uuid4())}.{video_type}\"\n\n            blob_client = blob_service_client.get_blob_client(container=container_name, blob=video_file_name)\n            blob_client.upload_blob(video)\n            is_succeed = True\n        except Exception as error:\n            error_count += 1\n            if error_count >= 10:\n                raise error\n\n    st.session_state.history_video_refresh = True\n    return f\"{azure_util.get_account_url()}/aidesignoutput/{video_file_name}{azure_util.get_blob_url()}\"",
     "start_line": 304,
@@ -3445,8 +3445,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def get_image_azure_blob(userEmail):\n    blob_service_client = azure_util.get_blob_service_client()\n    container_name = azure_util.get_container_name()\n\n    # container_client = blob_service_client.create_container(container_name)\n    container_client = blob_service_client.get_container_client(container=container_name)\n    blob_list = container_client.list_blobs(name_starts_with=userEmail)\n    blob_image_url = []\n    # list_size = 500\n    for blob in blob_list:\n        # blob_image_url.append(f\"{azure_util.get_account_url()}/aidesignoutput/{blob.name}{azure_util.get_blob_url()}\")\n        blob_image_url.append(blob.name)\n        # list_size -= 1\n        # if list_size == 0:\n        #     break\n    return blob_image_url[::-1]",
     "start_line": 325,
@@ -3469,8 +3469,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def get_video_azure_blob(userEmail):\n    blob_service_client = azure_util.get_blob_service_client()\n    container_name = azure_util.get_container_name()\n\n    container_client = blob_service_client.get_container_client(container=container_name)\n    blob_list = container_client.list_blobs(name_starts_with=f\"video_history/{userEmail}/\")\n    blob_image_url = []\n\n    for blob in blob_list:\n        blob_image_url.append(blob.name)\n\n    return blob_image_url[::-1]",
     "start_line": 342,
@@ -3514,8 +3514,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def download_file(history_select_list):\n    blob_service_client = azure_util.get_blob_service_client()\n    container_name = azure_util.get_container_name()\n\n    zip_buffer = io.BytesIO()\n    with zipfile.ZipFile(zip_buffer, \"a\", zipfile.ZIP_DEFLATED, False) as zip_file:\n        st.session_state.download_img_file_list = []\n        def thread_target(image_url):\n            blob_client = blob_service_client.get_blob_client(container=container_name, blob=image_url)\n            st.session_state.download_img_file_list.append(blob_client.download_blob().readall())\n\n        threads = []\n        for image_url in history_select_list:\n            t = threading.Thread(target=thread_target, args=(image_url,))\n            threads.append(t)\n            add_script_run_ctx(t)\n            t.start()\n\n        for t in threads:\n            t.join()\n\n        for i, item in enumerate(st.session_state.download_img_file_list):\n            item = Image.open(io.BytesIO(item))\n            io_buffer = io.BytesIO()\n            \n            # 尝试从session_state获取对应的DPI值，如果没有则使用默认值\n            target_dpi = 300  # 默认DPI\n            if hasattr(st, 'session_state') and 'di_image_dpi_list' in st.session_state:\n                # 计算当前图片在attemptImg中的索引\n                attempt_index = len(st.session_state.attemptImg) - len(st.session_state.download_img_file_list) + i\n                if 0 <= attempt_index < len(st.session_state.di_image_dpi_list):\n                    target_dpi = st.session_state.di_image_dpi_list[attempt_index]\n            \n            # 应用DPI调整\n            if item.format and item.format.upper() == 'JPEG':\n                item.save(io_buffer, format='JPEG', dpi=(target_dpi, target_dpi), quality=95)\n            elif item.format and item.format.upper() == 'PNG':\n                item.save(io_buffer, format='PNG', dpi=(target_dpi, target_dpi))\n            elif item.format and item.format.upper() == 'TIFF':\n                item.save(io_buffer, format='TIFF', dpi=(target_dpi, target_dpi))\n            else:\n                # 默认使用PNG格式并设置DPI\n                item.save(io_buffer, format='PNG', dpi=(target_dpi, target_dpi))\n            \n            data = io_buffer.getvalue()\n            dataType = item.format if item.format else 'PNG'\n\n            zip_file.writestr(f'img{i}.{dataType}', data)\n\n    components.html(f\"\"\"\n        <script>\n            var newA = document.createElement('a');\n            newA.href = \"data:text/csv;base64,{base64.b64encode(zip_buffer.getvalue()).decode()}\";\n            newA.download = \"image.zip\";\n            newA.click()\n        </script>\n        \"\"\",height=0)",
     "start_line": 360,
@@ -3562,8 +3562,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def download_videos(history_select_list):\n    blob_service_client = azure_util.get_blob_service_client()\n    container_name = azure_util.get_container_name()\n\n    zip_buffer = io.BytesIO()\n    with zipfile.ZipFile(zip_buffer, \"a\", zipfile.ZIP_DEFLATED, False) as zip_file:\n        st.session_state.download_img_file_list = []\n        def thread_target(v_url):\n            blob_client = blob_service_client.get_blob_client(container=container_name, blob=v_url)\n            st.session_state.download_img_file_list.append({\n                \"blob_client\": blob_client.download_blob().readall(),\n                \"url\": v_url\n            })\n\n        threads = []\n        for v_url in history_select_list:\n            t = threading.Thread(target=thread_target, args=(v_url,))\n            threads.append(t)\n            add_script_run_ctx(t)\n            t.start()\n\n        for t in threads:\n            t.join()\n\n        for i, item in enumerate(st.session_state.download_img_file_list):\n            dataType = item[\"url\"].split('.')[-1]\n\n            zip_file.writestr(f'video{i + 1}.{dataType}', item[\"blob_client\"])\n\n    components.html(f\"\"\"\n        <script>\n            var newA = document.createElement('a');\n            newA.href = \"data:text/csv;base64,{base64.b64encode(zip_buffer.getvalue()).decode()}\";\n            newA.download = \"videos.zip\";\n            newA.click()\n        </script>\n        \"\"\",height=0)\n    time.sleep(3)",
     "start_line": 419,
@@ -3586,8 +3586,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def remove_azure_blob(history_select_list):\n    blob_service_client = azure_util.get_blob_service_client()\n    container_name = azure_util.get_container_name()\n\n    for blob in history_select_list:\n        blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob)\n        blob_client.delete_blob()",
     "start_line": 458,
@@ -3812,8 +3812,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/streamlit_utils.py",
     "relative_path": "app/backend/streamlit_utils.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "                def load_image():\n                    blob_service_client = azure_util.get_blob_service_client()\n                    container_name = azure_util.get_container_name()\n                    def thread_target(index, image_url):\n                        blob_client = blob_service_client.get_blob_client(container=container_name, blob=image_url)\n                        st.session_state.history_blob_image_list[index] = blob_client.download_blob().readall()\n                        app_util.add_console_log(f\"load_history_img {len(st.session_state.history_blob_image_list)}\")\n\n                        # st.session_state.history_blob_image_list[index] = f\"{azure_util.get_account_url()}/aidesignoutput/{image_url}{azure_util.get_blob_url()}\"\n\n                    threads = []\n                    st.session_state.history_blob_image_list = [None] * per_page\n                    # for image_url in st.session_state.history_blob_image_url[page_start:page_start + per_page]:\n                    for index, image_url in enumerate(st.session_state.history_blob_image_url[page_start:page_start + per_page]):\n                        t = threading.Thread(target=thread_target, args=(index, image_url))\n                        threads.append(t)\n                        add_script_run_ctx(t)\n                        t.start()\n\n                    for t in threads:\n                        t.join()\n                        \n                    st.session_state.history_run_load_img = False",
     "start_line": 559,
@@ -3920,9 +3920,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/aliyun_util.py",
     "relative_path": "app/backend/utils/aliyun_util.py",
     "depends_on": [
-      "app/backend/utils/app_util.py::add_console_log",
+      "app/backend/utils/aliyun_util.py::load_result",
       "app/backend/utils/aliyun_util.py::call_outfitAnyone",
-      "app/backend/utils/aliyun_util.py::load_result"
+      "app/backend/utils/app_util.py::add_console_log"
     ],
     "source_code": "def virtual_try_on(prompt):\n    payload = {\n        \"model\": \"aitryon\",\n        \"input\": {\n            \"top_garment_url\": prompt[\"top_garment_url\"],\n            \"bottom_garment_url\": prompt[\"bottom_garment_url\"],\n            \"person_image_url\": prompt[\"person_image_url\"],\n        },\n        \"parameters\": {\n            \"resolution\": -1,\n            \"restore_face\": True\n        }\n    }\n    # if prompt[\"top_garment_url\"] is not None:\n    #     payload[\"input\"][\"top_garment_url\"] = prompt[\"top_garment_url\"]\n    # if prompt[\"bottom_garment_url\"] is not None:\n    #     payload[\"input\"][\"bottom_garment_url\"] = prompt[\"bottom_garment_url\"]\n    # st.write(payload)\n\n    response = call_outfitAnyone(payload)\n    app_util.add_console_log(response)\n    app_util.add_console_log(response.json())\n    response.raise_for_status()\n\n    task_id = response.json()[\"output\"][\"task_id\"]\n    # task_id = \"ClogHGb1P5IAAAAAAcXmig\"\n\n    time.sleep(10)\n    response = load_result(task_id)\n    task_result = response.json()\n    if task_result[\"output\"][\"task_status\"] != \"SUCCEEDED\":\n        raise Exception(task_result)\n    return task_result",
     "start_line": 47,
@@ -3945,9 +3945,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/aliyun_util.py",
     "relative_path": "app/backend/utils/aliyun_util.py",
     "depends_on": [
-      "app/backend/utils/app_util.py::add_console_log",
+      "app/backend/utils/aliyun_util.py::load_result",
       "app/backend/utils/aliyun_util.py::call_outfitAnyone",
-      "app/backend/utils/aliyun_util.py::load_result"
+      "app/backend/utils/app_util.py::add_console_log"
     ],
     "source_code": "def virtual_try_on_refiner(prompt):\n    payload = {\n        \"model\": \"aitryon\",\n        \"input\": {\n            \"top_garment_url\": prompt[\"top_garment_url\"],\n            # \"bottom_garment_url\": prompt[\"bottom_garment_url\"],\n            \"person_image_url\": prompt[\"person_image_url\"],\n            \"coarse_image_url\":  prompt[\"coarse_image_url\"],\n        },\n        \"parameters\": {\n            \"gender\": prompt[\"gender\"]\n        }\n    }\n    if prompt[\"bottom_garment_url\"] is not None:\n        payload[\"input\"][\"bottom_garment_url\"] = prompt[\"bottom_garment_url\"]\n    # st.write(payload)\n\n    response = call_outfitAnyone(payload)\n    app_util.add_console_log(response)\n    app_util.add_console_log(response.json())\n    response.raise_for_status()\n\n    task_id = response.json()[\"output\"][\"task_id\"]\n    # task_id = \"ClogHGb1P5IAAAAAAcXmig\"\n\n    time.sleep(10)\n    response = load_result(task_id)\n    task_result = response.json()\n    if task_result[\"output\"][\"task_status\"] != \"SUCCEEDED\":\n        raise Exception(task_result)\n    return task_result",
     "start_line": 81,
@@ -4291,16 +4291,16 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/app_util.py",
     "relative_path": "app/backend/utils/app_util.py",
     "depends_on": [
-      "app/backend/utils/fal_util.py::train_flux_lora_pro_status",
-      "app/backend/utils/db_util.py::update_pending_lora_pro",
-      "app/backend/utils/fal_util.py::train_flux_lora_pro_result",
-      "app/backend/utils/db_util.py::list_pending_lora",
-      "app/backend/utils/db_util.py::update_pending_lora_fail",
       "app/backend/utils/azure_util.py::upload_lora_azure_blob",
-      "app/backend/utils/fal_util.py::train_flux_lora_result",
-      "app/backend/utils/fal_util.py::train_flux_lora_status",
+      "app/backend/utils/db_util.py::update_pending_lora_fail",
+      "app/backend/utils/db_util.py::update_pending_lora_pro",
+      "app/backend/utils/fal_util.py::train_flux_lora_pro_status",
+      "app/backend/utils/db_util.py::update_pending_lora",
+      "app/backend/utils/db_util.py::list_pending_lora",
+      "app/backend/utils/fal_util.py::train_flux_lora_pro_result",
       "app/backend/utils/app_util.py::add_console_log",
-      "app/backend/utils/db_util.py::update_pending_lora"
+      "app/backend/utils/fal_util.py::train_flux_lora_result",
+      "app/backend/utils/fal_util.py::train_flux_lora_status"
     ],
     "source_code": "    def thread_cfunc_call():\n        try:\n            start_time = time.time()\n            while True:\n                if (time.time() - start_time) > 1000:\n                    # app_util.add_console_log(\"load_result timeout 300\")\n                    break\n                lora_list = db_util.list_pending_lora(st.session_state.userId)\n                if len(lora_list) == 0:\n                    break\n                # print(lora_list)\n                for lora_item in lora_list:\n                    if lora_item[\"lora_model_type\"] == \"dev\":\n                        try:\n                            status = fal_util.train_flux_lora_status(lora_item[\"request_id\"])\n                            if status:\n                                result = fal_util.train_flux_lora_result(lora_item[\"request_id\"])\n                                azure_reslut = azure_util.upload_lora_azure_blob(requests.get(result[\"diffusers_lora_file\"][\"url\"]).content,st.session_state.userEmail)\n                                prompt = {\n                                    \"lora_id\": lora_item[\"lora_id\"],\n                                    \"lora_url\": azure_reslut,\n                                }\n                                db_util.update_pending_lora(prompt)\n                        except Exception as error:\n                            db_util.update_pending_lora_fail({\n                                \"lora_id\": lora_item[\"lora_id\"],\n                            })\n                    elif lora_item[\"lora_model_type\"] == \"pro\":\n                        try:\n                            status = fal_util.train_flux_lora_pro_status(lora_item[\"request_id\"])\n                            if status:\n                                result = fal_util.train_flux_lora_pro_result(lora_item[\"request_id\"])\n                                prompt = {\n                                    \"lora_id\": lora_item[\"lora_id\"],\n                                    \"finetune_id\": result[\"finetune_id\"],\n                                }\n                                db_util.update_pending_lora_pro(prompt)\n                        except Exception as error:\n                            db_util.update_pending_lora_fail({\n                                \"lora_id\": lora_item[\"lora_id\"],\n                            })\n                time.sleep(10)\n        except Exception as error:\n            add_console_log(error)\n        st.session_state.loading_lora = False",
     "start_line": 208,
@@ -4460,8 +4460,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/autodl_comfyui_util.py",
     "relative_path": "app/backend/utils/autodl_comfyui_util.py",
     "depends_on": [
-      "app/backend/utils/autodl_comfyui_util.py::queue_prompt",
       "app/backend/utils/autodl_comfyui_util.py::poll_result_until_ready",
+      "app/backend/utils/autodl_comfyui_util.py::queue_prompt",
       "app/backend/utils/autodl_comfyui_util.py::get_image"
     ],
     "source_code": "def get_images_by_polling(workflow):\n    \"\"\"\n    1) 把 workflow 作为 prompt 提交到 /prompt\n    2) 拿到 prompt_id\n    3) 轮询 get_history(prompt_id) 判断是否完成\n    4) 如果完成，从 outputs 里下载所有图片并返回\n    \"\"\"\n    # 提交到队列\n    resp = queue_prompt(workflow)\n    prompt_id = resp['prompt_id']\n    # logger.info(f\"获得 prompt_id: {prompt_id}\")\n\n    # 轮询直到有结果\n    record = poll_result_until_ready(prompt_id)\n    outputs = record.get('outputs', {})\n\n    # 下载并转成 PIL\n    output_images = {}\n    # logger.info(\"开始下载生成的图像...\")\n    for node_id, node_data in outputs.items():\n        if 'images' in node_data:\n            images_output = []\n            for image_info in node_data['images']:\n                # 只处理有 subfolder 字段的图像\n                if 'subfolder' not in image_info:\n                    continue\n                    \n                filename = image_info.get('filename')\n                if not filename:\n                    continue\n                \n                try:\n                    img_data = get_image(\n                        filename,\n                        image_info['subfolder'],\n                        image_info.get('type', 'output')\n                    )\n                    images_output.append(img_data)\n                except Exception as e:\n                    print(f\"获取图像失败: {str(e)}, 节点: {node_id}, 图像信息: {image_info}\")\n                    continue\n                    \n            if images_output:  # 只添加有图像的节点\n                output_images[node_id] = images_output\n            # logger.info(f\"节点 {node_id} 的图像下载完成\")\n    return output_images",
@@ -4832,9 +4832,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/azure_util.py",
     "relative_path": "app/backend/utils/azure_util.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
+      "app/backend/utils/azure_util.py::get_container_name",
       "app/backend/utils/azure_util.py::get_account_url",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def upload_lora_azure_blob(file, userEmail):\n    blob_service_client = get_blob_service_client()\n    container_name = get_container_name()\n\n    error_count = 0\n    is_succeed = False\n    while not is_succeed:\n        try:\n            lora_id = str(uuid.uuid4())\n            lora_time = time.time()\n            lora_file_name = f\"lora/{userEmail}/{str(lora_time)}{lora_id}\"\n\n            blob_client = blob_service_client.get_blob_client(container=container_name, blob=lora_file_name)\n            blob_client.upload_blob(file)\n            is_succeed = True\n        except Exception as error:\n            error_count += 1\n            if error_count >= 10:\n                raise error\n\n    st.session_state.history_refresh = True\n    return f\"{get_account_url()}/aidesignoutput/{lora_file_name}\"",
     "start_line": 31,
@@ -4858,9 +4858,9 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/azure_util.py",
     "relative_path": "app/backend/utils/azure_util.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
+      "app/backend/utils/azure_util.py::get_container_name",
       "app/backend/utils/azure_util.py::get_account_url",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def upload_lora_image(img, lora_id):\n    # return  f\"{azure_util.get_account_url()}/aidesignoutput/d33dbdce-2f21-4e0a-82cd-0652f8a3b843.JPG\"\n    \n    blob_service_client = get_blob_service_client()\n    container_name = get_container_name()\n\n    error_count = 0\n    is_succeed = False\n    while not is_succeed:\n        try:\n            img_id = str(uuid.uuid4())\n            lora_time = time.time()\n            img_file_name = f\"lora/image/{lora_id}/{str(time.time())}{str(uuid.uuid4())}.JPG\"\n\n            blob_client = blob_service_client.get_blob_client(container=container_name, blob=img_file_name)\n            blob_client.upload_blob(img)\n            is_succeed = True\n        except Exception as error:\n            error_count += 1\n            if error_count >= 10:\n                raise error\n\n    st.session_state.history_refresh = True\n    return f\"{get_account_url()}/aidesignoutput/{img_file_name}\"",
     "start_line": 54,
@@ -4884,8 +4884,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/azure_util.py",
     "relative_path": "app/backend/utils/azure_util.py",
     "depends_on": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::get_container_name"
+      "app/backend/utils/azure_util.py::get_container_name",
+      "app/backend/utils/azure_util.py::get_blob_service_client"
     ],
     "source_code": "def delete_lora_image(lora_id):\n    blob_service_client = get_blob_service_client()\n    container_name = get_container_name()\n\n    blob_service_client = get_blob_service_client()\n    container_name = get_container_name()\n\n    container_client = blob_service_client.get_container_client(container=container_name)\n    blob_list = container_client.list_blobs(name_starts_with=f\"lora/image/{lora_id}/\")\n    for blob in blob_list:\n        blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob)\n        blob_client.delete_blob()",
     "start_line": 79,
@@ -5001,8 +5001,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/bing_util.py",
     "relative_path": "app/backend/utils/bing_util.py",
     "depends_on": [
-      "app/backend/utils/bing_util.py::resize_image",
-      "app/backend/streamlit_utils.py::logging"
+      "app/backend/streamlit_utils.py::logging",
+      "app/backend/utils/bing_util.py::resize_image"
     ],
     "source_code": "def call_bing_visual_search(image_search_input, result_num):\n    image_search_resized=resize_image(image_search_input)\n    streamlit_utils.logging('Visual Search','Upload','','')\n    # endpoint = \"https://api.bing.microsoft.com/bing/v7.0/search\"\n    BASE_URI = 'https://api.bing.microsoft.com/v7.0/images/visualsearch'\n    SUBSCRIPTION_KEY = BING_VISUAL_SUBSCRIPTION_KEY\n    HEADERS = {'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY}\n    file = {'image' : ('myfile', image_search_resized)}\n    responsebing = requests.post(BASE_URI, headers=HEADERS, files=file)\n    responsebing.raise_for_status()\n    # st.write(responsebing.json()['tags'][0]['actions'])\n    # https://learn.microsoft.com/en-us/bing/search-apis/bing-visual-search/how-to/search-response\n    bingresultactions=responsebing.json()['tags'][0]['actions']\n    # return bingresultactions\n    result = []\n    for item in bingresultactions:\n        if item['actionType'] == 'VisualSearch':\n            # st.write(item['data']['value'])\n            # st.session_state.BingVisualSearchResult=item['data']['value'][:15]\n            resultItem = 0\n            for img in item['data']['value']:\n                if resultItem >= result_num:\n                    break\n                if img['isFamilyFriendly']:\n                    result.append(img)\n                    resultItem += 1\n            # st.session_state.BingVisualSearchResult=pd.DataFrame(item['data']['value'][1:10])\n            # dfbingresult = pd.DataFrame(json_data)\n            break\n    return result",
     "start_line": 48,
@@ -5048,8 +5048,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/bing_util.py",
     "relative_path": "app/backend/utils/bing_util.py",
     "depends_on": [
-      "app/backend/utils/genai_util.py::identify_image_gemini",
-      "app/backend/utils/genai_util.py::keyword_search"
+      "app/backend/utils/genai_util.py::keyword_search",
+      "app/backend/utils/genai_util.py::identify_image_gemini"
     ],
     "source_code": "def visual_search(image_search_input, result_num):\n    aimessages = \"Please analyze the attached image and provide a comprehensive textual description that can be used for a text-based search to find visually similar images. Only return Keywords and phrases for image search in 1 line.\"\n    aiDesc = genai_util.identify_image_gemini(image_search_input, aimessages)\n    return keyword_search(aiDesc, result_num)",
     "start_line": 106,
@@ -7925,8 +7925,8 @@
     "relative_path": "app/backend/utils/network_link_test_util.py",
     "depends_on": [
       "app/backend/utils/network_link_test_util.py::queue_prompt",
-      "app/backend/utils/network_link_test_util.py::poll_result_until_ready",
-      "app/backend/utils/network_link_test_util.py::get_image"
+      "app/backend/utils/network_link_test_util.py::get_image",
+      "app/backend/utils/network_link_test_util.py::poll_result_until_ready"
     ],
     "source_code": "def get_images_by_polling(workflow):\n    \"\"\"\n    1) 把 workflow 作为 prompt 提交到 /prompt\n    2) 拿到 prompt_id\n    3) 轮询 get_history(prompt_id) 判断是否完成\n    4) 如果完成，从 outputs 里下载所有图片并返回\n    \"\"\"\n    # 提交到队列\n    resp = queue_prompt(workflow)\n    prompt_id = resp['prompt_id']\n    # logger.info(f\"获得 prompt_id: {prompt_id}\")\n\n    # 轮询直到有结果\n    record = poll_result_until_ready(prompt_id)\n    outputs = record.get('outputs', {})\n\n    # 下载并转成 PIL\n    output_images = {}\n    # logger.info(\"开始下载生成的图像...\")\n    for node_id, node_data in outputs.items():\n        if 'images' in node_data:\n            images_output = []\n            for image_info in node_data['images']:\n                img_data = get_image(\n                    image_info['filename'],\n                    image_info['subfolder'],\n                    image_info['type']\n                )\n                images_output.append(img_data)\n            output_images[node_id] = images_output\n            # logger.info(f\"节点 {node_id} 的图像下载完成\")\n    return output_images",
     "start_line": 305,
@@ -7949,8 +7949,8 @@
     "file_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign/app/backend/utils/network_link_test_util.py",
     "relative_path": "app/backend/utils/network_link_test_util.py",
     "depends_on": [
-      "app/backend/utils/network_link_test_util.py::upload_image",
       "app/backend/utils/network_link_test_util.py::get_images_by_polling",
+      "app/backend/utils/network_link_test_util.py::upload_image",
       "app/backend/utils/network_link_test_util.py::update_feishu_record"
     ],
     "source_code": "def network_link_test():\n    \"\"\"\n    执行网络链接测试，将固定图像通过ComfyUI工作流处理并返回结果图像\n    \n    \"\"\"\n    start_time = time.time()\n    \n    # 生成唯一的文件名\n    input_filename = f\"input_{str(uuid.uuid4())[:8]}.png\"\n    \n    # 使用固定的图像路径，确保使用正确的路径格式\n    # 使用绝对路径来避免路径问题\n    current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n    fixed_image_path = os.path.join(current_dir, \"assets\", \"img\", \"logo_onetech.png\")    \n    # 上传固定图像\n    try:\n        up_input = upload_image(fixed_image_path, input_filename)\n    except Exception as e:\n        print(f\"[Network Link Test] 上传图像失败: {str(e)}\")\n        score_data = {\n        \"Time\": int(time.time() * 1000),\n        \"Code\": \"501\",\n        \"Status\": \"Upload failed\",\n        \"time\": round(time.time() - start_time, 2)\n        }\n        # Call the function and print the result\n        result = update_feishu_record(score_data)\n        pass\n    \n    # 加载network_link_test.json工作流配置，使用绝对路径\n    json_path = os.path.join(current_dir, \"assets\", \"comfyui\", \"network_link_test.json\")\n    \n\n    # 创建一个简单的默认工作流\n    default_workflow = {\n        \"1\": {\n            \"inputs\": {\n            \"images\": [\n                \"2\",\n                0\n            ]\n            },\n            \"class_type\": \"PreviewImage\",\n            \"_meta\": {\n            \"title\": \"预览图像\"\n            }\n        },\n        \"2\": {\n            \"inputs\": {\n            \"image\": \"1SazP6cjDOxjO0h2S27Zn3aLsmCWCg.png\",\n            \"upload\": \"image\"\n            },\n            \"class_type\": \"LoadImage\",\n            \"_meta\": {\n            \"title\": \"加载图像\"\n            }\n        }\n    }\n    workflow = default_workflow\n    \n    # 确保目录存在\n    os.makedirs(os.path.dirname(json_path), exist_ok=True)\n    \n    # 将默认工作流写入文件\n    with open(json_path, \"w\", encoding=\"utf-8\") as f:\n        json.dump(workflow, f, indent=2)\n    \n    # 从上传响应中获取正确的图片名称\n    input_name = up_input.get('name', input_filename)\n    \n    # 更新工作流中的输入图像路径\n    workflow[\"2\"][\"inputs\"][\"image\"] = input_name  # 输入图像\n    \n    \n    # 获取处理结果\n    try:\n        images_data = get_images_by_polling(workflow)\n        \n        # 转换并返回图像数据\n        results = []\n        for _, img_list in images_data.items():\n            for img_data in img_list:\n                results.append(img_data)\n        \n        # print(f\"[Network Link Test] 生成 {len(results)} 张图, 耗时 {(time.time() - start_time):.2f} 秒\")\n        score_data = {\n        \"Time\": int(time.time() * 1000),\n        \"Code\": \"200\",\n        \"Status\": \"Success\",\n        \"time\": round(time.time() - start_time, 2)\n        }\n        \n        # Call the function and print the result\n        result = update_feishu_record(score_data)\n        return []\n    except TimeoutError as e:\n        restart_time=time.time()\n        # print(f\"[Network Link Test] 图片上传成功但返回超时: {str(e)}，尝试重试一次\")\n        # print(oktime)\n        # print(f\"{(time.time() - oktime):.2f}\")\n        score_data = {\n            \"Time\": int(time.time() * 1000),\n            \"Code\": \"502\",\n            \"Status\": \"Upload successfully but return timed out\",\n            \"time\": round(time.time() - start_time, 2)\n            }\n        \n            # Call the function and print the result\n        result = update_feishu_record(score_data)\n\n        try:\n            # 重新获取处理结果\n            images_data = get_images_by_polling(workflow)\n            \n            # 转换并返回图像数据\n            results = []\n            for _, img_list in images_data.items():\n                for img_data in img_list:\n                    results.append(img_data)\n            \n            score_data = {\n            \"Time\": int(time.time() * 1000),\n            \"Code\": \"200\",\n            \"Status\": \"Success\",\n            \"time\": round(time.time() - restart_time, 2)\n            }\n        \n            # Call the function and print the result\n            result = update_feishu_record(score_data)\n            return []\n        except Exception as retry_e:\n            # 重试也失败\n            # print(f\"[Network Link Test] 重试失败: {str(retry_e)}\")\n            score_data = {\n            \"Time\": int(time.time() * 1000),\n            \"Code\": \"502\",\n            \"Status\": \"Upload successfully but return timed out (retry)\",\n            \"time\": round(time.time() - restart_time, 2)\n            }\n        \n            # Call the function and print the result\n            result = update_feishu_record(score_data)\n            pass\n    except Exception as e:\n        # 其他错误\n        pass",
@@ -8177,8 +8177,8 @@
     "relative_path": "app/backend/utils/openai_util.py",
     "depends_on": [
       "app/backend/utils/openai_util.py::_openai_headers",
-      "app/backend/utils/openai_util.py::_request_with_retry",
-      "app/backend/utils/openai_util.py::_build_openai_url"
+      "app/backend/utils/openai_util.py::_build_openai_url",
+      "app/backend/utils/openai_util.py::_request_with_retry"
     ],
     "source_code": "def sora_generate_video(\n    prompt: str,\n    model: str = \"sora-2\",\n    seconds: Optional[int] = None,\n    size: Optional[str] = None,\n    input_reference: Optional[str] = None,\n    poll_interval: int = 5,\n    input_reference_file: Optional[Tuple[str, bytes, str]] = None,\n    progress_callback: Optional[Callable[[int, str], None]] = None,\n):\n    payload = {\n        \"model\": model,\n        \"prompt\": prompt,\n    }\n    if seconds is not None:\n        if seconds not in {4, 8, 12}:\n            raise ValueError(\"seconds must be one of 4, 8, or 12 for Sora\")\n        payload[\"seconds\"] = str(seconds)\n    if size:\n        payload[\"size\"] = size\n    if input_reference and input_reference_file is None:\n        payload[\"input_reference\"] = input_reference\n\n    if input_reference_file is not None:\n        files = {key: (None, value) for key, value in payload.items() if value is not None}\n        files[\"input_reference\"] = input_reference_file\n        response = _request_with_retry(\n            \"post\",\n            _build_openai_url(\"/videos\"),\n            headers=_openai_headers(),\n            files=files,\n            max_attempts=3,\n            backoff=2.0,\n        )\n    else:\n        response = _request_with_retry(\n            \"post\",\n            _build_openai_url(\"/videos\"),\n            headers=_openai_headers({\"Content-Type\": \"application/json\"}),\n            json=payload,\n            max_attempts=3,\n            backoff=2.0,\n        )\n    video = response.json()\n    status = video.get(\"status\", \"queued\")\n    video_id = video.get(\"id\")\n    if progress_callback:\n        progress_callback(video.get(\"progress\", 0) or 0, status)\n\n    while status in (\"queued\", \"in_progress\"):\n        time.sleep(max(1, poll_interval))\n        poll_resp = _request_with_retry(\n            \"get\",\n            _build_openai_url(f\"/videos/{video_id}\"),\n            headers=_openai_headers(),\n            max_attempts=3,\n            backoff=2.0,\n        )\n        video = poll_resp.json()\n        status = video.get(\"status\", \"unknown\")\n        if progress_callback:\n            progress_callback(video.get(\"progress\", 0) or 0, status)\n\n    if status == \"failed\":\n        error = video.get(\"error\") or {}\n        message = error.get(\"message\", \"Video generation failed\")\n        raise RuntimeError(message)\n\n    if progress_callback:\n        progress_callback(video.get(\"progress\", 100) or 100, status)\n\n    return video",
     "start_line": 124,
@@ -8209,8 +8209,8 @@
     "relative_path": "app/backend/utils/openai_util.py",
     "depends_on": [
       "app/backend/utils/openai_util.py::_openai_headers",
-      "app/backend/utils/openai_util.py::_request_with_retry",
-      "app/backend/utils/openai_util.py::_build_openai_url"
+      "app/backend/utils/openai_util.py::_build_openai_url",
+      "app/backend/utils/openai_util.py::_request_with_retry"
     ],
     "source_code": "def sora_download_video(video_id: str, variant: str = \"video\") -> bytes:\n    response = _request_with_retry(\n        \"get\",\n        _build_openai_url(f\"/videos/{video_id}/content\"),\n        headers=_openai_headers(),\n        params={\"variant\": variant},\n        stream=True,\n        max_attempts=3,\n        backoff=2.0,\n    )\n    data = bytearray()\n    for chunk in response.iter_content(chunk_size=1024 * 1024):\n        if chunk:\n            data.extend(chunk)\n    return bytes(data)",
     "start_line": 198,

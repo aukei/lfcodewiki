@@ -374,10 +374,10 @@
             
             <div class="repo-info" id="repo-info" style="display: block;">
                 <h4>Generation Info</h4>
-                <div id="info-content"><div class="info-row"><strong>Model:</strong> google/gemini-3-flash-preview</div>
+                <div id="info-content"><div class="info-row"><strong>Model:</strong> x-ai/grok-4.1-fast</div>
                 <div class="info-row"><strong>Generated:</strong> 2026-03-25</div>
                 <div class="info-row"><strong>Components:</strong> 381</div>
-                <div class="info-row"><strong>Max Depth:</strong> 2</div></div>
+                <div class="info-row"><strong>Max Depth:</strong> 3</div></div>
             </div>
             
             <div class="nav-section">
@@ -402,132 +402,11 @@
     <script>
         // Embedded configuration
         const CONFIG = {};
-        const MODULE_TREE = {
-  "Design_Ideation_Core": {
-    "path": "app/backend/Design_Ideation.py",
-    "components": [
-      "app/backend/Design_Ideation.py::apiCall",
-      "app/backend/Design_Ideation.py::callApiWithCheck",
-      "app/backend/Design_Ideation.py::load_history",
-      "app/backend/Design_Ideation.py::update_progress",
-      "app/backend/Design_Ideation.py::add_lora",
-      "app/backend/Design_Ideation.py::add_prompt_writer",
-      "app/backend/Design_Ideation.py::show_inpaint_popup",
-      "app/backend/Design_Ideation.py::on_extract_line_draft_click",
-      "app/backend/Design_Ideation.py::identify_garment"
-    ],
-    "children": {}
-  },
-  "Ideation_Workbench": {
-    "path": "app/backend/pages/Ideation_Workbench.py",
-    "components": [
-      "app/backend/pages/Ideation_Workbench.py::gen_Image",
-      "app/backend/pages/Ideation_Workbench.py::gen_sd_image",
-      "app/backend/pages/Ideation_Workbench.py::gen_comfyui_sketch_image",
-      "app/backend/pages/Ideation_Workbench.py::add_sd_fine_tune",
-      "app/backend/pages/Ideation_Workbench.py::product_extraction",
-      "app/backend/pages/Ideation_Workbench.py::technical_sketch",
-      "app/backend/pages/Ideation_Workbench.py::identify_image"
-    ],
-    "children": {}
-  },
-  "Lora_Training_Module": {
-    "path": "app/backend/pages/Lora_Train.py",
-    "components": [
-      "app/backend/pages/Lora_Train.py::upload_imge_file",
-      "app/backend/pages/Lora_Train.py::generate_image_caption",
-      "app/backend/pages/Lora_Train.py::view_lora",
-      "app/backend/pages/Lora_Train.py::new_mode",
-      "app/backend/pages/Lora_Train.py::list_mode"
-    ],
-    "children": {}
-  },
-  "Streamlit_UI_Utilities": {
-    "path": "app/backend/streamlit_utils.py",
-    "components": [
-      "app/backend/streamlit_utils.py::initUserState",
-      "app/backend/streamlit_utils.py::load_history",
-      "app/backend/streamlit_utils.py::refresh_history",
-      "app/backend/streamlit_utils.py::get_image_azure_blob",
-      "app/backend/streamlit_utils.py::upload_image_azure_blob",
-      "app/backend/streamlit_utils.py::identify_image"
-    ],
-    "children": {}
-  },
-  "Fal_AI_Integration": {
-    "path": "app/backend/utils/fal_util.py",
-    "components": [
-      "app/backend/utils/fal_util.py::flux_1_pro",
-      "app/backend/utils/fal_util.py::train_flux_lora",
-      "app/backend/utils/fal_util.py::virtual_try_on",
-      "app/backend/utils/fal_util.py::inpaint_tryon_fal",
-      "app/backend/utils/fal_util.py::flux_lora_inpainting",
-      "app/backend/utils/fal_util.py::image_upscaler"
-    ],
-    "children": {}
-  },
-  "ComfyUI_Automation": {
-    "path": "app/backend/utils/autodl_comfyui_util.py",
-    "components": [
-      "app/backend/utils/autodl_comfyui_util.py::queue_prompt",
-      "app/backend/utils/autodl_comfyui_util.py::get_images_by_polling",
-      "app/backend/utils/autodl_comfyui_util.py::clothing_extraction_white",
-      "app/backend/utils/autodl_comfyui_util.py::do_tryon"
-    ],
-    "children": {}
-  },
-  "GenAI_Multimodal_Analysis": {
-    "path": "app/backend/utils/genai_util.py",
-    "components": [
-      "app/backend/utils/genai_util.py::identify_image_gemini",
-      "app/backend/utils/genai_util.py::identify_garment_type",
-      "app/backend/utils/genai_util.py::measure_size_gemini",
-      "app/backend/utils/genai_util.py::img_edit_gemini"
-    ],
-    "children": {}
-  },
-  "OpenAI_Integration": {
-    "path": "app/backend/utils/openai_util.py",
-    "components": [
-      "app/backend/utils/openai_util.py::call_gen_Dall_E_3_image",
-      "app/backend/utils/openai_util.py::identify_image_openai_gpt4v",
-      "app/backend/utils/openai_util.py::get_revised_prompt"
-    ],
-    "children": {}
-  },
-  "Database_Management": {
-    "path": "app/backend/utils/db_util.py",
-    "components": [
-      "app/backend/utils/db_util.py::get_db_connect",
-      "app/backend/utils/db_util.py::add_lora",
-      "app/backend/utils/db_util.py::list_lora",
-      "app/backend/utils/db_util.py::add_lora_access",
-      "app/backend/utils/db_util.py::update_user_quota"
-    ],
-    "children": {}
-  },
-  "Azure_Cloud_Storage": {
-    "path": "app/backend/utils/azure_util.py",
-    "components": [
-      "app/backend/utils/azure_util.py::get_blob_service_client",
-      "app/backend/utils/azure_util.py::upload_lora_azure_blob",
-      "app/backend/utils/azure_util.py::get_blob_url"
-    ],
-    "children": {}
-  },
-  "Search_Services": {
-    "path": "app/backend/utils/bing_util.py",
-    "components": [
-      "app/backend/utils/bing_util.py::call_bing_visual_search",
-      "app/backend/utils/bing_util.py::call_bing_keyword_search"
-    ],
-    "children": {}
-  }
-};
+        const MODULE_TREE = {};
         const METADATA = {
   "generation_info": {
-    "timestamp": "2026-03-25T17:38:58.868546",
-    "main_model": "google/gemini-3-flash-preview",
+    "timestamp": "2026-03-25T22:43:50.968223",
+    "main_model": "x-ai/grok-4.1-fast",
     "generator_version": "1.0.1",
     "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign",
     "commit_id": null
@@ -535,18 +414,12 @@
   "statistics": {
     "total_components": 381,
     "leaf_nodes": 379,
-    "max_depth": 2
+    "max_depth": 3
   },
   "files_generated": [
     "overview.md",
     "module_tree.json",
-    "first_module_tree.json",
-    "Database_Management.md",
-    "Search_Services.md",
-    "Azure_Cloud_Storage.md",
-    "ComfyUI_Automation.md",
-    "Ideation_Workbench.md",
-    "OpenAI_Integration.md"
+    "first_module_tree.json"
   ]
 };
         const DOCS_BASE_PATH = '';

@@ -1,7 +1,7 @@
 {
     "generation_info": {
-        "timestamp": "2026-03-25T17:46:17.766742",
-        "main_model": "google/gemini-3-flash-preview",
+        "timestamp": "2026-03-25T22:53:31.290715",
+        "main_model": "x-ai/grok-4.1-fast",
         "generator_version": "1.0.1",
         "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFCreditAI",
         "commit_id": null
@@ -9,30 +9,12 @@
     "statistics": {
         "total_components": 388,
         "leaf_nodes": 196,
-        "max_depth": 2
+        "max_depth": 3
     },
     "files_generated": [
         "overview.md",
         "module_tree.json",
         "first_module_tree.json",
-        "frontend_templates.md",
-        "News_Intelligence.md",
-        "news_processing.md",
-        "Frontend_Core.md",
-        "AI_Engine_Models.md",
-        "access_control.md",
-        "Credit_Agent.md",
-        "data_retrieval_listing.md",
-        "Entity_Management.md",
-        "Workflow_Automation.md",
-        "session_lifecycle.md",
-        "subsidiary_management.md",
-        "Authentication_Access.md",
-        "news_interaction.md",
-        "Credit_Report_Service.md",
-        "frontend_providers.md",
-        "AI_Core_Engine.md",
-        "Potential_Analysis.md",
-        "external_integration.md"
+        "ai_apis.md"
     ]
 }

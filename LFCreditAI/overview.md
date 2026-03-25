@@ -1,75 +1,106 @@
-# LFCreditAI Repository Overview
+# LFCreditAI Module Documentation
 
-## Purpose
-The **LFCreditAI** repository is a comprehensive Credit Analysis and Risk Management platform. It leverages Large Language Models (LLMs), Robotic Process Automation (RPA), and real-time news intelligence to automate the lifecycle of credit assessments for both existing and potential corporate entities. The platform transforms raw financial data, corporate hierarchies, and global news feeds into structured credit memos, risk ratings, and actionable business development insights.
+## Introduction and Purpose
 
-## End-to-End Architecture
-The system follows a service-oriented architecture, integrating a React-based frontend with a Python backend that orchestrates AI models, database persistence, and external automation tools.
+**LFCreditAI** is a comprehensive AI-powered platform designed for credit risk assessment and management within Li & Fung's supply chain ecosystem. It integrates frontend React applications for user interfaces, backend Flask APIs for data handling, AI models leveraging Google's Gemini for automated report drafting, company profiling, news analysis, and chat functionalities, and robust database and storage integrations for persistence.
 
-```mermaid
+### Core Functionality
+- **Credit Report Generation & Management**: Automates drafting of credit memos, risk ratings, and financial factsheets using AI.
+- **Company Profiling (BD AI)**: Generates detailed company profiles including logos, images, social media, revenue breakdowns via web scraping and AI summarization.
+- **News Monitoring & Risk Alerts**: Crawls Google News, classifies events (e.g., bankruptcy), and generates alerts.
+- **Entity Hierarchy & Relationships**: Manages company hierarchies from Excel transformations and SPG data.
+- **Chat & Agent Interfaces**: AI chatbots for querying reports, with attachment support and tool integrations.
+- **Frontend Dashboards**: Interactive UIs for reports, potentials, news, with PPT/PDF exports.
+
+The module fits into the broader LF Credit system as the AI intelligence layer, enhancing manual processes with automation, reducing assessment time from days to minutes.
+
+## Architecture Overview
+
+```
 graph TD
-    subgraph "Frontend (React/TypeScript)"
-        UI[User Interface]
-        FC[Frontend Core: Types & Providers]
+    subgraph Frontend
+        A[React/TS Types & Components] --> B[Navbar, Login, Report Views, PPT Gen]
     end
-
-    subgraph "API & Orchestration Layer"
-        Auth[Authentication & Access: Azure AD]
-        CRS[Credit Report Service]
-        PA[Potential Analysis]
-        EM[Entity Management]
-        NI[News Intelligence]
-        WA[Workflow Automation]
+    subgraph Backend APIs
+        C[Flask Routes: AI, Reports, News, Entities] --> D[DB: PostgreSQL]
     end
-
-    subgraph "Intelligence & Processing"
-        AI[AI Engine Models: Gemini/Azure OpenAI]
-        RPA[UiPath RPA Bots]
+    subgraph AI Layer
+        E[CreditAI Base] --> F[BDAI: Profiles]
+        E --> G[CreditDraft: Reports]
+        E --> H[CreditChat/Agent: Queries]
+        E --> I[CreditNewsAI: Events]
     end
-
-    subgraph "Data & Infrastructure"
-        DB[(PostgreSQL)]
-        Blob[Azure Blob Storage]
-        Queue[Azure Storage Queues]
+    subgraph Data
+        D --> J[Azure Blob: Attachments]
+        D --> K[Azure Queue: Jobs/RPA]
     end
-
-    %% Interactions
-    UI --> Auth
-    UI --> CRS & PA & EM & NI
-    CRS & PA --> WA
-    WA --> AI
-    WA --> Queue
-    Queue --> RPA
-    NI --> AI
-    EM --> DB
-    CRS --> Blob
-    RPA --> DB
+    subgraph External
+        L[Google Gemini LLM] <--> E
+        M[Google News/Firecrawl] <--> I
+        N[UiPath RPA] <--> K
+    end
+    B <--> C
+    C <--> E
+    E <--> L
+    I <--> M
+    K <--> N
 ```
 
-## Core Modules Documentation
+**Component Relationships**:
+- **Types** define data structures used across frontend/backend.
+- **AI Models** (ai_bd.py, ai_draft.py) depend on prompts/DB for generation.
+- **APIs** (ai_api.py) orchestrate AI calls, DB queries.
+- **News Pipeline** (google_news.py, event_consumer.py) feeds risk data.
+- **Entity Services** build hierarchies for reports.
+- **Reports** integrate all for full credit memos.
 
-The repository is organized into several specialized modules, each handling a specific domain of the credit assessment process:
+See sub-module docs for details:
+- [AI Core](ai_core.md)
+- [News Processing](news_processing.md)
+- [Entity Management](entity_management.md)
+- [Report Services](report_services.md)
+- [Frontend Types](frontend_types.md)
 
-### 1. [AI Engine Models](AI_Engine_Models.md)
-The core intelligence layer. It utilizes Google Gemini and Azure OpenAI to perform RAG (Retrieval-Augmented Generation), news sentiment analysis, and automated drafting of credit memos.
+## High-Level Functionality
 
-### 2. [Credit Report Service](Credit_Report_Service.md)
-Manages the lifecycle of credit reports. It handles the creation, versioning, and storage of financial assessments, including PDF/XLSX exports and integration with RPA for data gathering.
+| Sub-Module | Purpose | Key Components |
+|------------|---------|----------------|
+| [AI Core](ai_core.md) | AI drafting/profiling/chat | BDAI, CreditDraft, CreditChat |
+| [News Processing](news_processing.md) | News crawling/classification | GoogleNewsConsumer, CreditNewsAI |
+| [Entity Management](entity_management.md) | Hierarchies/relationships | EntityHierarchyService, ExcelTransformation |
+| [Report Services](report_services.md) | CRUD/Excel extraction | ReportService, ExcelExtractor |
+| [Frontend Types](frontend_types.md) | TS interfaces | Entity, CompanyCredit, etc. |
 
-### 3. [Entity Management](Entity_Management.md)
-Handles corporate identity and structure. It manages complex parent-child hierarchies and subsidiary tracking, providing the foundational data for risk aggregation.
+## Data Flow
 
-### 4. [News Intelligence](News_Intelligence.md)
-An automated monitoring system that crawls Google News for entity-specific keywords, uses AI to categorize risk events, and allows analysts to "pin" relevant news to credit reports.
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant API as APIs
+    participant AI as AI Models
+    participant DB as DB
+    participant Q as Queue
+    U->>F: Login/View Reports
+    F->>API: GET /reports
+    API->>DB: Query Reports
+    DB->>API: Data
+    API->>F: Render
+    Note over U,DB: AI Draft
+    U->>API: POST /ai/draft?report_id=123
+    API->>AI: Generate Draft
+    AI->>DB: Fetch Context
+    DB->>AI: Factsheet/News
+    AI->>API: Output
+    API->>DB: Save Report
+    Note over U,Q: RPA Jobs
+    API->>Q: Queue UiPath
+    Q->>RPA: Process Excel
+    RPA->>API: Upload Results
+```
 
-### 5. [Potential Analysis](Potential_Analysis.md)
-Specifically designed for lead management and prospective customer evaluation. It distinguishes between listed and non-listed companies to trigger appropriate data-gathering workflows.
+## Dependencies
+- **External**: Google Gemini, Azure Blob/Queue, UiPath RPA, Firecrawl.
+- **Internal**: PostgreSQL schemas (credit_report, etc.).
 
-### 6. [Workflow Automation](Workflow_Automation.md)
-The orchestration engine that bridges internal services with external platforms like **UiPath** (for RPA) and **DTC** (Data Tracking Center) to automate periodic re-assessments.
-
-### 7. [Authentication & Access](Authentication_Access.md)
-Security module integrating **Azure Active Directory** for identity management and implementing Role-Based Access Control (RBAC) across the platform.
-
-### 8. [Frontend Core](Frontend_Core.md)
-The foundational UI layer containing global TypeScript definitions, context providers for application state, and standardized layout templates.
+For detailed sub-module breakdowns, see linked docs.
