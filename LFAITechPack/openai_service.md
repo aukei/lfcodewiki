@@ -70,7 +70,7 @@ The service is configured via environment variables, with defaults set for the A
 | Variable | Description | Default Value |
 | :--- | :--- | :--- |
 | `OPENAI_ENDPOINT` | Azure OpenAI resource endpoint | `https://oaieusggtpd01.openai.azure.com/` |
-| `OPENAI_API_KEY` | Authentication key | `068d54...` |
+| `OPENAI_API_KEY` | Authentication key | `[redacted]` |
 | `OPENAI_MODEL_NAME` | Model used for embeddings | `text-embedding-3-small` |
 | `OPENAI_DEPLOYMENT` | Azure deployment name | `text-embedding-3-small` |
 | `OPENAI_API_VERSION_CURRENT` | API version for requests | `2024-12-01-preview` |

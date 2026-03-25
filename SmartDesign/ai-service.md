@@ -394,7 +394,7 @@ The module initializes the FAL.ai client with authentication credentials:
 
 ```typescript
 fal.config({
-  credentials: '0db5c6ec-c8b7-4a0e-a457-b521e982ddcf:6914d0ca1f415f83762afe8e9124dbd3'
+  credentials: '[redacted]'
 });
 ```
 
