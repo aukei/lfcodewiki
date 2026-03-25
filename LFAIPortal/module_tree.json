@@ -1,96 +1,46 @@
 {
-    "database_repository": {
-        "path": "app/backend/database/repository",
-        "components": [
-            "CustomBot",
-            "CustomBotChat",
-            "File",
-            "ChatThread",
-            "StoreItem",
-            "StoreItemCustomBot",
-            "Processer"
-        ],
-        "children": {}
-    },
-    "llm_clients": {
-        "path": "app/backend/utils/chat_utils.py",
-        "components": [
-            "BaseChat",
-            "OpenaiChat",
-            "ClaudeChat",
-            "DeepseekChat",
-            "GrokChat",
-            "GenaiChat"
-        ],
-        "children": {}
-    },
-    "agent_orchestration": {
-        "path": "app/backend/utils/agent_router_utils.py",
-        "components": [
-            "AgentRouterChat",
-            "BaseChatSession",
-            "GenericAgentClient",
-            "VibeAppClient"
-        ],
-        "children": {}
-    },
-    "openai_integration": {
-        "path": "app/backend/utils/openai_utils.py",
-        "components": [
-            "OpenaiClient",
-            "OpenaiClientAssistant",
-            "LFAssistantEventHandler"
-        ],
-        "children": {}
-    },
-    "google_cloud_integration": {
-        "path": "app/backend/google_utils",
-        "components": [
-            "GoogleVertexaiChat",
-            "GenaiInteractions",
-            "LFGoogleCredentials"
-        ],
-        "children": {}
-    },
-    "external_tools": {
-        "path": "app/backend/utils/tools",
-        "components": [
-            "BaseTool",
-            "DeepResearchTool",
-            "FirecrawlSearchTool",
-            "GoogleSearchTool",
-            "FileSearchProTool",
-            "EmailNotificationTool"
-        ],
-        "children": {}
-    },
-    "e2b_sandbox_execution": {
-        "path": "app/backend/utils/e2b_utils.py",
-        "components": [
-            "E2BClient",
-            "E2BAgentClient",
-            "CreateSandboxConfig",
-            "RunCommandConfig"
-        ],
-        "children": {}
-    },
-    "api_layer": {
-        "path": "app/backend/api",
-        "components": [
-            "LoggingMiddleware",
-            "ConfigRouterRequest",
-            "AgentConfigItem"
-        ],
-        "children": {}
-    },
-    "frontend_gui_logic": {
-        "path": "app/backend/utils/gui_utils.py",
-        "components": [
-            "BaseGUI",
-            "ChatbotGUI",
-            "VibeAppConfigGUI",
-            "VibeAPPStoreGUI"
-        ],
-        "children": {}
-    }
+  "database_repository": {
+    "path": "app/backend/database/repository",
+    "components": [
+      "CustomBot",
+      "CustomBotChat",
+      "File",
+      "ChatThread",
+      "StoreItem",
+      "StoreItemCustomBot",
+      "Processer"
+    ],
+    "children": {}
+  },
+  "external_tools": {
+    "path": "app/backend/utils/tools",
+    "components": [
+      "BaseTool",
+      "DeepResearchTool",
+      "FirecrawlSearchTool",
+      "GoogleSearchTool",
+      "FileSearchProTool",
+      "EmailNotificationTool"
+    ],
+    "children": {}
+  },
+  "e2b_sandbox_execution": {
+    "path": "app/backend/utils/e2b_utils.py",
+    "components": [
+      "E2BClient",
+      "E2BAgentClient",
+      "CreateSandboxConfig",
+      "RunCommandConfig"
+    ],
+    "children": {}
+  },
+  "api_layer": {
+    "path": "app/backend/api",
+    "components": [
+      "LoggingMiddleware",
+      "ConfigRouterRequest",
+      "AgentConfigItem"
+    ],
+    "children": {}
+  }
 }

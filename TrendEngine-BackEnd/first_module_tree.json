@@ -1,96 +1,76 @@
 {
-    "Goods-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/espo/goods/GoodsBusPO.java::GoodsPk",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/goods/sku/GoodsSkuPO.java::GoodsSkuPO",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodServiceImpl.java::GoodServiceImpl",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodsListServiceImpl.java::GoodsListServiceImpl",
-            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/goods/GoodsListController.java::GoodsListController",
-            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/builder/goods/LfGoodsQueryBuilder.java::LfGoodsQueryBuilder"
-        ],
-        "children": {}
-    },
-    "Fashion-Ins-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsBloggerPO.java::InsBloggerPO",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsTopicPO.java::InsTopicPO",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBloggerServiceImpl.java::InsBloggerServiceImpl",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBlogServiceImpl.java::InsBlogServiceImpl",
-            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/fashion/InsBloggerController.java::InsBloggerController",
-            "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/dao/mapper/olapfashion/InsBloggerMapper.java::InsBloggerMapper"
-        ],
-        "children": {}
-    },
-    "TikTok-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/tiktok",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/tiktok/TiktokStreamerPO.java::TiktokStreamerPO",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/tiktok/TiktokVideoPO.java::TiktokVideoPO",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/tiktok/streamer/TiktokStreamerServiceImpl.java::TiktokStreamerServiceImpl",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/tiktok/video/TiktokVideoServiceImpl.java::TiktokVideoServiceImpl",
-            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/tiktok/TiktokStreamerController.java::TiktokStreamerController"
-        ],
-        "children": {}
-    },
-    "Pinterest-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/user/PinterestUserInfoPO.java::PinterestUserInfoPO",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/blog/PinterestBlogPO.java::PinterestBlogPO",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest/impl/PinterestBlogServiceImpl.java::PinterestBlogServiceImpl",
-            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/pinterest/PinterestBlogController.java::PinterestBlogController"
-        ],
-        "children": {}
-    },
-    "Monitor-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/dto/monitor/MonitorManageInfoDTO.java::MonitorManageInfoDTO",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor/MonitorManageHelper.java::MonitorManageHelper",
-            "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/helper/monitor/UserCustomMonitorShopHelper.java::UserCustomMonitorShopHelper",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/monitor/UserCustomMonitorShopPO.java::UserCustomMonitorShopPO"
-        ],
-        "children": {}
-    },
-    "Translation-Module": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate/client/config/TranslatorConfiguration.java::TranslatorConfiguration",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/impl/TranslationServiceImpl.java::TranslationServiceImpl",
-            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/translate/TranslateController.java::TranslateController",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/GoogleInterfaceTranslationApi.java::GoogleInterfaceTranslationApi"
-        ],
-        "children": {}
-    },
-    "Analysis-Insight-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview",
-        "components": [
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview/OverviewAnalyzeHelper.java::OverviewAnalyzeHelper",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/overview/impl/OverviewAnalyzeServiceImpl.java::OverviewAnalyzeServiceImpl",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/request/overview/insight/OverviewAnalyzeRequest.java::OverviewAnalyzeRequest",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/vo/analyze/insight/OverviewTrendAnalysisVO.java::OverviewTrendAnalysisVO"
-        ],
-        "children": {}
-    },
-    "Auth-Account-Module": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority",
-        "components": [
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/domain/user/UserInfoEntity.java::UserInfoEntity",
-            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority/impl/AuthorityServiceImpl.java::AuthorityServiceImpl",
-            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/authority/AuthController.java::AuthController",
-            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/util/AuthUtils.java::AuthUtils"
-        ],
-        "children": {}
-    },
-    "ElasticSearch-Infrastructure": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/config",
-        "components": [
-            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/config/ElasticRestJavaClientConfig.java::ElasticRestJavaClientConfig",
-            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/base/model/constant/EsIndexNamesConstant.java::EsIndexNamesConstant",
-            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/base/model/agg/NestedAgg.java::NestedAgg"
-        ],
-        "children": {}
-    }
+  "Goods-Module": {
+    "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods",
+    "components": [
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/espo/goods/GoodsBusPO.java::GoodsPk",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/goods/sku/GoodsSkuPO.java::GoodsSkuPO",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodServiceImpl.java::GoodServiceImpl",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodsListServiceImpl.java::GoodsListServiceImpl",
+      "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/goods/GoodsListController.java::GoodsListController",
+      "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/builder/goods/LfGoodsQueryBuilder.java::LfGoodsQueryBuilder"
+    ],
+    "children": {}
+  },
+  "Fashion-Ins-Module": {
+    "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion",
+    "components": [
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsBloggerPO.java::InsBloggerPO",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsTopicPO.java::InsTopicPO",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBloggerServiceImpl.java::InsBloggerServiceImpl",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBlogServiceImpl.java::InsBlogServiceImpl",
+      "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/fashion/InsBloggerController.java::InsBloggerController",
+      "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/dao/mapper/olapfashion/InsBloggerMapper.java::InsBloggerMapper"
+    ],
+    "children": {}
+  },
+  "Pinterest-Module": {
+    "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest",
+    "components": [
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/user/PinterestUserInfoPO.java::PinterestUserInfoPO",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/blog/PinterestBlogPO.java::PinterestBlogPO",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest/impl/PinterestBlogServiceImpl.java::PinterestBlogServiceImpl",
+      "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/pinterest/PinterestBlogController.java::PinterestBlogController"
+    ],
+    "children": {}
+  },
+  "Monitor-Module": {
+    "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor",
+    "components": [
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/dto/monitor/MonitorManageInfoDTO.java::MonitorManageInfoDTO",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor/MonitorManageHelper.java::MonitorManageHelper",
+      "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/helper/monitor/UserCustomMonitorShopHelper.java::UserCustomMonitorShopHelper",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/monitor/UserCustomMonitorShopPO.java::UserCustomMonitorShopPO"
+    ],
+    "children": {}
+  },
+  "Translation-Module": {
+    "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate",
+    "components": [
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate/client/config/TranslatorConfiguration.java::TranslatorConfiguration",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/impl/TranslationServiceImpl.java::TranslationServiceImpl",
+      "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/translate/TranslateController.java::TranslateController",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/GoogleInterfaceTranslationApi.java::GoogleInterfaceTranslationApi"
+    ],
+    "children": {}
+  },
+  "Analysis-Insight-Module": {
+    "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview",
+    "components": [
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview/OverviewAnalyzeHelper.java::OverviewAnalyzeHelper",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/overview/impl/OverviewAnalyzeServiceImpl.java::OverviewAnalyzeServiceImpl",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/request/overview/insight/OverviewAnalyzeRequest.java::OverviewAnalyzeRequest",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/vo/analyze/insight/OverviewTrendAnalysisVO.java::OverviewTrendAnalysisVO"
+    ],
+    "children": {}
+  },
+  "Auth-Account-Module": {
+    "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority",
+    "components": [
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/domain/user/UserInfoEntity.java::UserInfoEntity",
+      "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority/impl/AuthorityServiceImpl.java::AuthorityServiceImpl",
+      "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/authority/AuthController.java::AuthController",
+      "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/util/AuthUtils.java::AuthUtils"
+    ],
+    "children": {}
+  }
 }
