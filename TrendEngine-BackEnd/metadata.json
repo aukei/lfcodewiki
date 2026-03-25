@@ -1,0 +1,35 @@
+{
+    "generation_info": {
+        "timestamp": "2026-03-25T18:25:07.904229",
+        "main_model": "google/gemini-3-flash-preview",
+        "generator_version": "1.0.1",
+        "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/TrendEngine-BackEnd",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 5784,
+        "leaf_nodes": 1097,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "Pinterest-Module.md",
+        "Fashion-Ins-Module.md",
+        "Auth-Account-Module.md",
+        "goods_search_listing.md",
+        "monitor_services.md",
+        "dictionary_management.md",
+        "Translation-Module.md",
+        "Analysis-Insight-Module.md",
+        "Goods-Module.md",
+        "monitor_core.md",
+        "translation_core.md",
+        "Monitor-Module.md",
+        "pinterest_user_data.md",
+        "authentication_service.md",
+        "external_integration.md",
+        "pinterest_blog_management.md"
+    ]
+}

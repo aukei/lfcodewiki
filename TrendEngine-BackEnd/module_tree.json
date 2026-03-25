@@ -1,1637 +1,214 @@
 {
-    "common_constants": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/common",
-        "components": [
-            "AbroadPermCodeConstant",
-            "AuthCacheKeyConstant",
-            "AuthConstants",
-            "CacheKeyConstant",
-            "DateConstant",
-            "FashionImageConstant",
-            "FashionOptionEntityConstant",
-            "GoodsCommentConstant",
-            "GoodsConstants",
-            "GoodsSortConstant",
-            "IndustryConstant",
-            "LabelArrayConstant",
-            "LanguageConstant",
-            "ParentTypeCodeConstant",
-            "RegexpConstant",
-            "RoleConstants",
-            "SystemConstant"
-        ],
-        "children": {}
-    },
-    "common_entities_domain": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/domain",
-        "components": [
-            "LifengAbroadBloggerInfoDO",
-            "LifengAbroadCategoryKeywordNumDO",
-            "LifengAbroadKeywordCategoryCountAggDO",
-            "LifengAbroadKeywordCategoryInfoDO",
-            "LifengAbroadSocialBlogKeywordsInfoDO",
-            "LifengAbroadSocialBrandInfoDO",
-            "LifengAbroadSocialHotBlogInfoDO",
-            "LifengAbroadSocialHotBloggerFansInfoDO",
-            "LifengAbroadSocialHotBloggerInfoDO",
-            "LifengAbroadSocialHotTopicInfoDO",
-            "RankListAnalyzeDO",
-            "RankListAnalyzeIntervalDO",
-            "RankListAnalyzePropertyDO",
-            "AnalysisDetailsDO",
-            "TranslationLanguageDO",
-            "UserInfoEntity"
-        ],
-        "children": {}
-    },
-    "common_entities_dto": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/dto",
-        "components": [
-            "TranslateDataDTO",
-            "UserRoleDTO",
-            "PinterestBindLogDTO",
-            "TiktokBindLogDTO",
-            "ExportExcelDTO",
-            "ExportTaskDTO",
-            "FollowLogDTO",
-            "InsAtBloggerDTO",
-            "GoodsPkDTO",
-            "GoodsRankMetricDTO",
-            "RankMetric",
-            "GroupEntityCountDTO",
-            "Blogger",
-            "InternalFiberStatisticsDTO",
-            "DateRangeDTO",
-            "GoodsListAggProcessDTO",
-            "GoodsMetricDataDTO",
-            "OverviewAggDTO",
-            "OverviewMetricDTO",
-            "OverviewMulitLevelMetricDTO",
-            "OverviewPutOnSaleVO",
-            "PeriodMetricDTO",
-            "PriceBandDTO",
-            "PriceDataDTO",
-            "EntityMonitorStatusDTO",
-            "MonitorManageInfoDTO",
-            "PinterestBoardDTO",
-            "PinterestMonitorUserDTO",
-            "PlatformGoodsMetricDTO",
-            "ImageEntityDTO",
-            "BaseLabelValueDTO",
-            "CategoryMappingDTO",
-            "GoodsStyleExtraDataDTO",
-            "PropertiesInfoDTO",
-            "PropertyTopValueDTO",
-            "ConsumerProductDTO",
-            "TiktokStreamerDTO",
-            "TiktokStreamerStatsDTO",
-            "TiktokVideoDTO",
-            "TranslateDictDTO",
-            "AssortmentComparisonDTO",
-            "BrandInfo",
-            "GoogleSearchCount",
-            "KeywordProductSocialCount"
-        ],
-        "children": {}
-    },
-    "common_entities_espo": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/espo",
-        "components": [
-            "GoodsBusFields",
-            "GoodsPriceFields",
-            "GoodsSkcFields",
-            "RankBusFields",
-            "BoxPosition",
-            "GoodsBoxLabelPO",
-            "GoodsPk",
-            "GoodsOnSaleDatePO",
-            "GoodsProductIdBusPO",
-            "GoodsSaleDatePO",
-            "GoodsSellerPO",
-            "GoodsTimeDataPO",
-            "RankInfoPO",
-            "Ali1688SkuPricePO",
-            "GoodsPropertiesPo",
-            "GoodsSkuInfoPO",
-            "GoodsSkcBusFields",
-            "GoodsSkcOnSaleDataPO",
-            "GoodsSkcTimeDataPO"
-        ],
-        "children": {}
-    },
-    "common_entities_po": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po",
-        "components": [
-            "AuthPagePO",
-            "AuthPermissionPO",
-            "PlatformBrandMappingPO",
-            "CommentContentDistPO",
-            "CommentInfoPO",
-            "CommentSelectionPO",
-            "CommentSummaryPO",
-            "FrontEndConfigPO",
-            "PlatformGoodsHoloConfigPO",
-            "QueryRuleConfigPO",
-            "RankAnalyzeConfigPO",
-            "LabelExcludeResultPO",
-            "LfDesignCategoryInfoDO",
-            "TitleExcludeResultPO",
-            "ExportTaskPO",
-            "BloggerBagPO",
-            "BloggerTagPO",
-            "InsAccountPO",
-            "BloggerInfo",
-            "InsAtBloggerInfo",
-            "InsBloggerAtDataPO",
-            "InsBloggerDailyPO",
-            "InsBloggerFollowPO",
-            "InsBloggerIncludePO",
-            "InsBloggerPO",
-            "InsBloggerPeakPO",
-            "InsBloggerSumPO",
-            "InsBloggerTopicAggPO",
-            "InsBloggerTopicDataPO",
-            "RelativeEntity",
-            "InsTopicAggPO",
-            "InsTopicBasePO",
-            "InsTopicDailyPO",
-            "InsTopicPO",
-            "InsTopicPeakPO",
-            "InsTopicRelatedPO",
-            "InsTopicSumPO",
-            "RankingDataDO",
-            "ExcludeTagPO",
-            "FashionBloggerAvgLikePO",
-            "FashionBloggerFansRangePO",
-            "FashionBloggerHotRatioPO",
-            "FashionBrandPO",
-            "FashionCategoryPO",
-            "FashionColor3PO",
-            "FashionColorPO",
-            "FashionInsBloggerSelectionPO",
-            "FashionSeasonPO",
-            "ImageLabelPO",
-            "LfRegionZhiyiMappingPO",
-            "LifengCategoryZhiyiRecognitionMapRulePO",
-            "LifungAbroadTagInfoPO",
-            "SelectedUserPerfreencePO",
-            "ShowDetailInfoPO",
-            "GoodsCurrencyPO",
-            "GoodsSelectionPO",
-            "SheinGoodsSkuCommentDailyPO",
-            "GoodsSkuPriceChangePO",
-            "Ali1688SkcInfoPO",
-            "SequentialSkcInfoPO",
-            "SheinSkcInfoPO",
-            "TemuSkcInfoPO",
-            "GoodsSkuPO",
-            "TimeData",
-            "ItemDailyDataPO",
-            "ItemMonthDataPO",
-            "ItemWeekDataPO",
-            "UserGroupMonitorInsBloggerPO",
-            "UserGroupMonitorPinterestUserPO",
-            "UserGroupMonitorPlatformPO",
-            "UserGroupMonitorShopPO",
-            "UserGroupMonitorTiktokStreamerPO",
-            "AbroadImageSearchFeedbackPO",
-            "PinterestUserIncludePO",
-            "ProductIncludePO",
-            "TiktokStreamerIncludePO",
-            "InternalGroupPO",
-            "KeywordCategoryInfoPO",
-            "KeywordInfoPO",
-            "KeywordInfoQueryUpdatePO",
-            "FacebookBloggerMappingPO",
-            "InsBloggerMappingPO",
-            "MetaAccountInfoPO",
-            "MetaAdBlogPO",
-            "MetaAdBlogProductPO",
-            "MetaAdvertCartPO",
-            "MetaPostPO",
-            "MetaPublishedPlatformPO",
-            "MetaRelationProductPO",
-            "MetaShopProductPO",
-            "SimilarFansInfoPO",
-            "UserCustomMonitorPlatformPO",
-            "UserCustomMonitorShopPO",
-            "OssPictureLinkPO",
-            "PinterestAccountBindPO",
-            "PinterestBloggerFollowPO",
-            "PinterestBlogPO",
-            "PinterestRecognitionBoxPO",
-            "PinterestBoardPO",
-            "PinterestUserFollowPO",
-            "PinterestUserInfoPO",
-            "PinterestUserPlatformRelatedPO",
-            "PinterestUserTagsPO",
-            "PlatformCurrencyPO",
-            "PlatformInfoLfPO",
-            "PlatformRelatedLinkPO",
-            "PlatformRuleDetailPO",
-            "PlatformSelectionPO",
-            "PlatformTabRequireEventPO",
-            "GoodsRankInfoPO",
-            "RankBusPO",
-            "RankInfo",
-            "PromotionInfoPO",
-            "CategoryRadioConfigPO",
-            "GoodsCategoryPO",
-            "GoodsColorPO",
-            "GoodsMappedPropertyPO",
-            "GoodsOriginCategoryEnMappingPO",
-            "GoodsOriginStylePO",
-            "GoodsStylePO",
-            "MappedPropertySelectionPO",
-            "MetaAdBlogSelectionPO",
-            "PinterestSelectionPO",
-            "PlatformRegionPO",
-            "PropertiesInfoPO",
-            "StyleRadioConfigPO",
-            "UserSearchHistoryPO",
-            "AbroadAmazonShopInfoPO",
-            "ShopPk",
-            "AbroadShopInfoPO",
-            "AbroadShopSelectionPO",
-            "AbroadTemuShopInfoPO",
-            "SystemConfigPO",
-            "CommonGoodsPO",
-            "TiktokCountryPO",
-            "TiktokStreamerAtInfoPO",
-            "TiktokStreamerPO",
-            "FansAgeDist",
-            "TiktokStreamerPlatformPO",
-            "TiktokStreamerSelectionPO",
-            "TiktokStreamerStatsDailyPO",
-            "TiktokStreamerStatsNpPO",
-            "TiktokStreamerTagsPO",
-            "TiktokStreamerTopicInfoPO",
-            "TiktokVideoGoodsDetailPO",
-            "TiktokVideoPO",
-            "TiktokVideoRecognitionPO",
-            "TiktokVideoSelectionPO",
-            "TiktokVideoStatsDailyPO",
-            "TiktokVideoStatsNpPO",
-            "TiktokAccountBindPO",
-            "TiktokStreamerFollowPO",
-            "TranslateDictPO",
-            "TextTranslatePO",
-            "TranslationInfoPO",
-            "AbroadRecommendInfoPO"
-        ],
-        "children": {}
-    },
-    "common_entities_request": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/request",
-        "components": [
-            "PageRequest",
-            "AlimtTranslateRequest",
-            "CreateRoleRequest",
-            "DeleteUserRequest",
-            "DeleteUserRoleRequest",
-            "EditRolePermissionRequest",
-            "EditRoleRequest",
-            "EditUserRoleRequest",
-            "GrantAuthRequest",
-            "GrantsAuthUser",
-            "InvitationRequest",
-            "FollowBloggerQueryRequest",
-            "CommentKeywordRequest",
-            "CommentListRequest",
-            "CommentSummaryRequest",
-            "CategoryRadioConfigRequest",
-            "ConsumerAnalysisKeywordRequest",
-            "HotTopRequest",
-            "SocialBrandRequest",
-            "BrandDetailsRequest",
-            "BrandRequest",
-            "BrandSearchRequest",
-            "EditCategoryQTO",
-            "EditCategoryQueryQTO",
-            "EditImageReviewQTO",
-            "EditShelfQTO",
-            "EditShelfQueryQTO",
-            "BloggerDetailTrendAnalysisParam",
-            "CategoryAnalysisParam",
-            "ColorAnalysisParam",
-            "CrossAnalysisParam",
-            "DetailTrendAnalysisParam",
-            "InsAccountRequest",
-            "InsBlogRequest",
-            "InsBloggerMarkRequest",
-            "InsBloggerRequest",
-            "InsItemRequest",
-            "InsTopicRequest",
-            "OptionBrandRequest",
-            "RunwayAnalysisStatisticsRequest",
-            "ShowInfoRequest",
-            "ShowSeasonParam",
-            "ImageZipDownloadFolder",
-            "CommonGoodsPriceTrendRequest",
-            "ExportGoodsRequest",
-            "GoodsDetailStockChangeRequest",
-            "GoodsNewCalendarRequest",
-            "GoodsZoneAnalyzeRequest",
-            "MonitorPlatformHotGoodsRequest",
-            "MonitorPlatformNewGoodsRequest",
-            "NewSaleCalendarRequest",
-            "PlatformAllGoodsListRequest",
-            "PlatformHotGoodsListRequest",
-            "PlatformSpecificGoodsListRequest",
-            "RegionGoodsListRequest",
-            "SimilarGoodsListRequest",
-            "SimilarGoodsListV2Request",
-            "StockRangeRequest",
-            "StyleRequest",
-            "MonitorShopGoodsListRequest",
-            "MonitorShopHotGoodsListRequest",
-            "MonitorShopNewGoodsListSelectionRequest",
-            "ShopDetailAllGoodsListSelectionRequest",
-            "ShopDetailHotGoodsListRequest",
-            "AmazonGoodsFirstOnSaleSkuQueryRequest",
-            "AmazonGoodsHotSkuQueryRequest",
-            "AmazonGoodsSkuMetricTrendRequest",
-            "GoodsHotSkuRequest",
-            "GoodsStockSkuRequest",
-            "SkuShelvesStatusRequest",
-            "TemuGoodsListRequest",
-            "TemuMonitorGoodsListRequest",
-            "UserGroupEntityInfoReadRequest",
-            "Entity",
-            "UserGroupInsertEntityRequest",
-            "UserGroupRankRequest",
-            "GroupRank",
-            "UserGroupReadRequest",
-            "TeamUser",
-            "UserGroupWriteRequest",
-            "AddCustomisationRequest",
-            "DeleteCustomisationRequest",
-            "EditCustomisationRequest",
-            "HomeSearchQTO",
-            "ListCustomisationBloggerRequest",
-            "ListCustomisationRequest",
-            "GoodsImgSearchListRequest",
-            "ImageSearchFeedbackRequest",
-            "InsImgSearchListRequest",
-            "PinterestImgSearchListRequest",
-            "TiktokImgSearchListRequest",
-            "PinterestSimilarListRequest",
-            "BatchAddIncludeRequest",
-            "GoodsIncludeRequest",
-            "InternalPomRequest",
-            "RawMaterialStatisticsRequest",
-            "RawMaterialSummaryTrendRequest",
-            "InvestigateRequest",
-            "KeywordDeleteQTO",
-            "KeywordIncludeManageQTO",
-            "KeywordIncludeQTO",
-            "KeywordIncludeQueryQTO",
-            "KeywordUpdateQTO",
-            "KeywordUpdateQueryQTO",
-            "AuthorizationCodeLoginQTO",
-            "LoginUserEmailPasswordQTO",
-            "LoginUserRegisterQTO",
-            "MarketAnalysisStatisticsRequest",
-            "InsImageBlogRequest",
-            "MetaAdvertRequest",
-            "MetaPostRequest",
-            "MetaShopProductRequest",
-            "PlatformMappingBloggerListRequest",
-            "MetaAdBlogDetailRequest",
-            "MetaAdBlogForBloggerPageRequest",
-            "MetaAdBlogForProductPageRequest",
-            "ImageRecognizeParam",
-            "BlogParam",
-            "BatchAddMonitorRequest",
-            "BatchCancelMonitorRequest",
-            "CancelMonitorInfoRequest",
-            "MonitorInfoRequest",
-            "MonitorManageInfoRequest",
-            "ProductMonitorInfoRequest",
-            "UserCustomMonitorInsBloggerRequest",
-            "UserCustomMonitorPinterestUserRequest",
-            "UserCustomMonitorPlatformRequest",
-            "UserCustomMonitorProductRequest",
-            "UserCustomMonitorShopRequest",
-            "UserCustomMonitorTiktokStreamerRequest",
-            "AnalyzeBaseRequest",
-            "CrossFlatLevelDTO",
-            "ItemHotSaleListRequest",
-            "OverviewAnalyzeRequest",
-            "OverviewContrastAnalyzeRequest",
-            "OverviewCrossAnalyzeRequest",
-            "OverviewDimensionSelectionRequest",
-            "OverviewMetricRequest",
-            "SingleIndex",
-            "MultiIndex",
-            "PriceRangeDetailsRequest",
-            "PriceRangeRequest",
-            "RankListAnalyzeRequest",
-            "RankListAnalyzeTopGoodsRequest",
-            "BsrRankSelectRequest",
-            "ShopExistSelectionRequest",
-            "BsrRankChangeSelectRequest",
-            "OnSaleSkuNumRangeSelectRequest",
-            "TeamUserInfoRequest",
-            "ShopAreaSelectionRequest",
-            "ShortInSizeSelectRequest",
-            "PinterestAccountBindRequest",
-            "PinterestBlogDetailRequest",
-            "PinterestBlogDownloadRequest",
-            "PinterestBoardListRequest",
-            "PinterestUserSearchRequest",
-            "BloggerRefPlatformQueryRequest",
-            "PlatformTabRequireRequest",
-            "AmazonRankListRequest",
-            "RankGoodsRequest",
-            "RankListRequest",
-            "TemuRankListRequest",
-            "SearchByKeywordRequest",
-            "UserSelectRequest",
-            "MonitorAmazonShopListRequest",
-            "MonitorTemuShopListRequest",
-            "ShopOverviewHistogramRequest",
-            "SocialAnalysisRequest",
-            "PropertySelectionRequest",
-            "UserSearchCategoryHistoryRequest",
-            "UserSearchFashionCategoryHistory",
-            "UserSearchHistoryRequest",
-            "UserSearchTiktokVideoCategoryHistory",
-            "BanTemplateRequest",
-            "DelBanTemplateRequest",
-            "DelFilterTemplateRequest",
-            "FilterTemplateRequest",
-            "GetBanTemplateRequest",
-            "TiktokAccountBindRequest",
-            "TranslateDeleteRequest",
-            "TranslateEditRequest",
-            "WhitespaceLfApiRequest",
-            "DeleteParamFilterRequest",
-            "RecentRecordQueryRequest",
-            "RecentRecordWriteRequest",
-            "SaveParamFilterRequest",
-            "ToppingRecordWriteRequest"
-        ],
-        "children": {}
-    },
-    "common_entities_vo": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/vo",
-        "components": [
-            "TeamUserInfoVO",
-            "PropertyInfo",
-            "CrossKeyInfoVO",
-            "DateItemNumVO",
-            "TermAggDateNumVO",
-            "ItemAggDateNumVO",
-            "ItemHotSaleVO",
-            "ItemNumRatioVO",
-            "OverviewContrastDistVO",
-            "OverviewCrossAnalyzeSummaryVO",
-            "OverviewCrossTabVO",
-            "OverviewDimensionAnalyzeVO",
-            "OverviewDimensionBoxPlotVO",
-            "OverviewDimensionTrendVO",
-            "OverviewPricePairVO",
-            "OverviewTrendAnalysisVO",
-            "TrendAnalysisCommonVO",
-            "AnalysisDetailsVO",
-            "RankListAnalyzeTopGoodsVO",
-            "RankListAnalyzeVO",
-            "RankListAnalyzePropertyVO",
-            "RankListAnalyzeIntervalVO",
-            "RankListAnalyzeVOBak",
-            "BindBloggerCompareVO",
-            "FollowBloggerCountVO",
-            "CommentInfoVO",
-            "CommentKeywordVO",
-            "CommentLabelVO",
-            "CommentSummaryVO",
-            "CommentTopicVO",
-            "LanguageConfigVO",
-            "RankAnalyzeConfigVO",
-            "StyleRadioConfigVO",
-            "LifengAbroadGoogleInsiteKeywordsTrendVO",
-            "LifengAbroadGoogleInsiteKeywordsVO",
-            "LifengAbroadSocialBlogKeywordsInfoVO",
-            "LifengAbroadSocialHotBlogInfoVO",
-            "LifengAbroadSocialHotBloggerFansInfoVO",
-            "LifengAbroadSocialHotBloggerInfoVO",
-            "LifengAbroadSocialHotTopicInfoVO",
-            "TrendDiscoveryVO",
-            "TrendCellVO",
-            "BrandUrlDTO",
-            "EditCategoryVO",
-            "EditShelfVO",
-            "RunwayBox",
-            "PromotionInfoExtraDataVO",
-            "CrossAnalysisDTO",
-            "DetailShowInfoVO",
-            "FashionOptionVO",
-            "NewEntity",
-            "ImageBusCollectEntityVO",
-            "ImageBoxLabelVO",
-            "UnionImageVO",
-            "UnionImageBoxVO",
-            "ImageLabelTypeConstant",
-            "InsAccountVO",
-            "InsBlogDataVO",
-            "TopicDataVO",
-            "ToTagBloggerDataVO",
-            "InsBloggerIncludeVO",
-            "InsBloggerInteractionVO",
-            "InsBloggerRecommendVO",
-            "SingleTopicVO",
-            "InsBloggerSingleTopicVO",
-            "InsBloggerSummaryVO",
-            "SummaryInfo",
-            "InsBloggerTrendParticle",
-            "InsBloggerTrendVO",
-            "InsBloggerVO",
-            "InsItemDataVO",
-            "InsTopicAggVO",
-            "RelativeTopic",
-            "InsTopicDataVO",
-            "InsTopicInteractionVO",
-            "InsTopicMetricTrendVO",
-            "InsTopicTrendParticle",
-            "InsTopicSummaryVO",
-            "InsVideoVO",
-            "TrendAnalysisNumDTO",
-            "TrendDetailItemDTO",
-            "TrendDetailSummaryDTO",
-            "TrendImageBoxDataDO",
-            "InsBloggerFollowVO",
-            "CommonGoodsListVO",
-            "CommonGoodsPriceTrendVO",
-            "GoodsCategoryVO",
-            "GoodsRankTrendVO",
-            "Ali1688SkuPriceVO",
-            "UserInfo",
-            "AmazonGoodsListVO",
-            "CommonGoodsSkcInfoVO",
-            "CommonGoodsSkuInfoVO",
-            "GoodsSkcSimpleInfoVO",
-            "CommonGoodsOriginCategoryVO",
-            "GoodsZoneIndustryMappingVO",
-            "SkcInfoVO",
-            "OutOfStockRateTrendItem",
-            "GoodsSkuRatio",
-            "SkuDetailVO",
-            "ColorSizeInfo",
-            "SkuInfoVO",
-            "SkuMetricTrendVO",
-            "SkuSummaryVO",
-            "OnSaleSkcEvent",
-            "SkcShelvesEventVO",
-            "TemuGoodsListVO",
-            "UserGroupDetailInfoVO",
-            "UserGroupEntityInfoVO",
-            "UserGroupInfoVO",
-            "UserTeamGroupInfoVO",
-            "GoodsIncludeSubmitResultVO",
-            "IncludeEntityExistCheckVO",
-            "KeywordIncludeVO",
-            "CategorySimpleVO",
-            "MarketingPlatformMappingBloggerListVO",
-            "MetaRelationProductVO",
-            "MetaAdBlogDetailVO",
-            "MetaAdBlogPageVO",
-            "MetaAdvertCardVO",
-            "MetaAdvertSimpleVO",
-            "MetaAdvertSummaryVO",
-            "MetaAdvertVO",
-            "InsBlogVO",
-            "InsImageBlogSampleVO",
-            "InsOptionVO",
-            "MetaPostSummaryVO",
-            "MetaShopProductVO",
-            "AgeDistribution",
-            "Keyword",
-            "SocialNetworksSource",
-            "AddMonitorEntityInfoVO",
-            "AllMonitorPlatformInfoOfTeamVO",
-            "MonitorEntityInfoVO",
-            "MonitorInsBloggerInfoVO",
-            "MonitorManageEntityVO",
-            "MonitorPinterestUserInfoVO",
-            "MonitorPlatformCountVO",
-            "MonitorPlatformInfoVO",
-            "MonitorProductInfoVO",
-            "MonitorShopInfoVO",
-            "MonitorTiktokStreamInfoVO",
-            "MonitorUpdatesInfoVO",
-            "LastEntry",
-            "InsBloggerEntry",
-            "PlatformEntry",
-            "RecommendInfoVO",
-            "ShopEntry",
-            "TiktokStreamerEntry",
-            "UserCustomMonitorInsBloggerVO",
-            "UserCustomMonitorPlatformVO",
-            "PinterestAccountVO",
-            "PinterestBlogDetailVO",
-            "PinterestBlogForMnVO",
-            "PinterestBlogImageFomMnVO",
-            "PinterestBlogImageForImgSearchVO",
-            "PinterestBlogImageVO",
-            "PinterestBlogVO",
-            "PinterestImageBoxVO",
-            "PinterestBoardTabVO",
-            "lastPinPic",
-            "PinterestBoardVO",
-            "PinterestUserAccurateVO",
-            "PinPic",
-            "PinterestUserFollowVO",
-            "NewInPinPic",
-            "PinterestUserInfoVO",
-            "PlatformGoodsListEntry",
-            "PlatformListVO",
-            "PlatformRecommendVO",
-            "PlatformRelatedBloggerVO",
-            "PlatformRelatedLinkVO",
-            "AmazonRankListVO",
-            "RankHistoryVO",
-            "TemuRankListVO",
-            "GCCategoryPromotionInfoVO",
-            "ImageBoxVO",
-            "PromotionInfoVO",
-            "SearchFashionerInfoVO",
-            "SearchFashionerViewInfoVO",
-            "UserSelectHistoryVO",
-            "UserSelectRecordVO",
-            "AmazonShopOverviewDateHistogramVO",
-            "AmazonShopOverviewVO",
-            "ShopDetailVO",
-            "ShopHotCategoryItemVO",
-            "ShopListVO",
-            "ShopListEntry",
-            "ShopNameVO",
-            "ShopOverviewDateHistogramVO",
-            "ShopOverviewVO",
-            "ShopRecommendVO",
-            "TemuShopOverviewDateHistogramVO",
-            "TemuShopOverviewVO",
-            "FilterTemplateVO",
-            "TiktokStreamerAtInfoVO",
-            "TiktokStreamerDetailStatsVO",
-            "TiktokStreamerDetailVO",
-            "NewVideoEntity",
-            "TiktokStreamerListVO",
-            "TiktokStreamerSelectionVO",
-            "TiktokStreamerTopicInfoVO",
-            "TiktokVideoDetailStatsVO",
-            "TiktokVideoDetailVO",
-            "TiktokVideoSelectionVO",
-            "TiktokAccountVO",
-            "TiktokStreamerFollowVO",
-            "VideoImageEntry",
-            "ParamFiltersVO"
-        ],
-        "children": {}
-    },
-    "common_utilities": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/util",
-        "components": [
-            "AuthUtils",
-            "BeanUtils",
-            "CommaUtils",
-            "CommonUtils",
-            "FileUtils",
-            "FunctionUtils",
-            "HttpClientUtil",
-            "HttpUtils",
-            "IdGenerator",
-            "MD5Util",
-            "MetricUtils",
-            "NumberUtil",
-            "ObjectFieldUtils",
-            "OssUploadUtils",
-            "PageSetUtils",
-            "RequestHelper",
-            "SeasonUtils",
-            "ThreadContextHandler",
-            "ThreadPoolUtil",
-            "ZipUtil"
-        ],
-        "children": {}
-    },
-    "common_translation": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate",
-        "components": [
-            "LanguageConstant",
-            "HttpTranslateConstants",
-            "TranslateBodyAdvice",
-            "TranslateLocaleResolver",
-            "TranslateRequestFilter",
-            "TargetLanguage",
-            "TranslatorConfiguration",
-            "LanguageHelper",
-            "RemoteFileDataLoader",
-            "ArrayTranslateHandler",
-            "JsonTranslateHandler",
-            "ListTranslateHandler",
-            "MapTranslateHandler",
-            "MultiStringTranslateHandler",
-            "NormalTranslateHandler",
-            "ObjectTranslateHandler",
-            "SetTranslateHandler",
-            "StringTranslateHandler",
-            "TransText",
-            "FileConstants",
-            "CreateMetaRequest",
-            "CreateTransRequest",
-            "GoogleTranslateRequest",
-            "ListMetaRequest",
-            "MergeMetaRequest",
-            "MicrosoftTranslateRequest",
-            "UpdateMetaRequest",
-            "UpdateTransRequest",
-            "TransTextDTO",
-            "Translation",
-            "MicrosoftTranslateDTO"
-        ],
-        "children": {}
-    },
-    "common_remote_api": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/remote",
-        "components": [
-            "ImgSearchParam",
-            "ImgSearchRequest",
-            "OnlineBloggerRequest",
-            "BloggerCancelBindRequest",
-            "ExternalItemInfoParam",
-            "ImgSearchResp",
-            "OnlineBloggerResponse",
-            "MarketSummaryDTO",
-            "WordCloud",
-            "RecommendationDTO",
-            "DailyInspiration",
-            "SwotAnalysisDTO",
-            "DesignMenuDTO",
-            "DesignMenuResp",
-            "DesignMenuTreeDTO",
-            "ExternalItemInfoVo",
-            "InsBloggerBindDTO",
-            "InsBloggerBindResultDTO",
-            "InsBloggerDTO",
-            "InsImageBlogDTO",
-            "InsTopicDTO",
-            "InsVideoDataDTO"
-        ],
-        "children": {}
-    },
-    "core_configuration": {
-        "path": "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/config",
-        "components": [
-            "AuthConfig",
-            "FeignConfig",
-            "LifungMybatisConfiguration",
-            "MybatisPlusConfig",
-            "SystemConfig"
-        ],
-        "children": {}
-    },
-    "core_mappers": {
-        "path": "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/dao/mapper",
-        "components": [
-            "LifengAbroadSocialBlogKeywordsInfoMapper",
-            "FacebookBloggerMappingMapper",
-            "AbroadShopSelectionMapper",
-            "InsBloggerMapper",
-            "LabelExcludeResultMapper",
-            "ExportTaskMapper",
-            "AbroadImgSearchFeedbackMapper",
-            "UserCustomMonitorShopMapper",
-            "OssPictureLinkMapper",
-            "RankAnalyzeConfigMapper",
-            "PromotionSpotMapper"
-        ],
-        "children": {}
-    },
-    "core_rpc": {
-        "path": "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/dao/rpc",
-        "components": [
-            "FeignSnakeCaseConfig",
-            "ImgSearchApi",
-            "LfKeywordResponse"
-        ],
-        "children": {}
-    },
-    "core_helpers": {
-        "path": "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/helper",
-        "components": [
-            "ImgSearchCacheHelper",
-            "FrontEndConfigHelper",
-            "InsEntityHelper",
-            "UserGroupInsBloggerHelper",
-            "UserGroupPinterestUserHelper",
-            "UserGroupShopHelper",
-            "UserGroupTiktokStreamerHelper",
-            "UserCustomMonitorInsBloggerHelper",
-            "UserCustomMonitorPinterestUserHelper",
-            "UserCustomMonitorProductHelper",
-            "UserCustomMonitorTiktokStreamerHelper",
-            "TranslateDictHelper"
-        ],
-        "children": {}
-    },
-    "core_typehandlers": {
-        "path": "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/typehandler",
-        "components": [
-            "LongListTypeHandler",
-            "StringListOfSplitTypeHandler",
-            "StringListTypeHandler"
-        ],
-        "children": {}
-    },
-    "elasticsearch_config": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/config",
-        "components": [
-            "ElasticRestJavaClientConfig"
-        ],
-        "children": {}
-    },
-    "elasticsearch_models": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/base/model",
-        "components": [
-            "NestedAgg",
-            "RangeAgg",
-            "SummaryAgg",
-            "EsIndexNamesConstant",
-            "EsResponseConstant",
-            "BusAggDTO",
-            "SortBuilder"
-        ],
-        "children": {}
-    },
-    "elasticsearch_builders": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/builder",
-        "components": [
-            "ImageBusQueryDSLBuilder",
-            "GoodsExampleBuilder",
-            "LfGoodsPriceQueryBuilder",
-            "LfGoodsQueryBuilder",
-            "LfGoodsSkcQueryBuilder",
-            "SearchKeyGoogleTrendQueryBuilder",
-            "LfSocialProductQueryBuilder"
-        ],
-        "children": {}
-    },
-    "elasticsearch_fields": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/fields",
-        "components": [
-            "ImageBusFields",
-            "AggUsedName",
-            "GoodsEntityField",
-            "SearchKeyGoogleTrendField",
-            "SocialProductFields"
-        ],
-        "children": {}
-    },
-    "elasticsearch_domain": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/model/domain",
-        "components": [
-            "RecogGenderConstant",
-            "BoxPosition",
-            "ImageBusEntityDO",
-            "ToTagBloggerData",
-            "InsVideoData",
-            "BoxLabelRetDO",
-            "ImageTopicEntityDO",
-            "InsBloggerImageEntityDTO",
-            "GoodsEntityDO",
-            "GoodsOnSaleDateDO",
-            "GoodsSaleDateDO",
-            "GoodsSkcInfoDO",
-            "GoodsSkuInfoDO",
-            "GoodsTimeDataDO",
-            "GoogletrandsPredictMetricPO",
-            "LFSocialProductDO"
-        ],
-        "children": {}
-    },
-    "elasticsearch_examples": {
-        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/model/example",
-        "components": [
-            "InsBlogExample",
-            "InsItemExample",
-            "InsTopicEsExample",
-            "MetaAdvertQueryExample",
-            "MetaPostQueryExample",
-            "GoodsMetricExample",
-            "OverviewTrendAnalysisExample",
-            "RankListAnalyzeExample"
-        ],
-        "children": {}
-    },
-    "service_config": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/config",
-        "components": [
-            "FrontEndConfigServiceImpl",
-            "RankAnalyzeConfigServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_event": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/event",
-        "components": [
-            "UserPlatformMonitorEventListener"
-        ],
-        "children": {}
-    },
-    "service_helpers": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper",
-        "components": [
-            "OverviewAnalyzeHelper",
-            "OverviewContrastAnalyzeHelper",
-            "OverviewTrendAnalysisHelper",
-            "SiteAnalyzeLabelHelper",
-            "AuthorityHelper",
-            "InsRelationBloggerHelper",
-            "SaleTrendHelper",
-            "MetaAccountHelper",
-            "MetaRelationProductHelper",
-            "MonitorManageHelper",
-            "FirstOnSaleInPeriodSelectionRequestParamResolver",
-            "RegionListSortParamResolver",
-            "RelatedPlatformRequestParamResolver",
-            "BanRequestParamResolver",
-            "BrandNameSearchRequestParamResolver",
-            "BsrRankRequestParamResolver",
-            "ColorMultiSelectionRequestParamResolver",
-            "ColorOnSaleDateSelectionRequestParamResolver",
-            "CommentNumRangeSelectRequestParamResolver",
-            "DesignLabelMultiSelectionParamResolver",
-            "FirstOnSaleDateSelectionRequestParamResolver",
-            "GoodParamIdsRequestParamResolver",
-            "GoodsCommonSortRequestParamResolver",
-            "GoodsFilterRequestParamResolver",
-            "GoodsTagsRequestParamResolver",
-            "InPlusSizeSelectionRequestParamResolver",
-            "InRankRequestParamResolver",
-            "IsOnSaleRequestParamResolver",
-            "IsSuitSelectionRequestParamResolver",
-            "KjCategoryMultiSelectionRequestParamResolver",
-            "LastRestockDateSelectionRequestParamResolver",
-            "MainSaleAreaMultiSelectionRequestParamResolver",
-            "MetaFlagRequestParamResolver",
-            "MonitorPlatformMultiSelectionRequestParamResolver",
-            "MultiColorDateRangeParamResolver",
-            "MultiMappedPropertySelectionRequestParamResolver",
-            "NewInReplenishmentParamResolver",
-            "NoFirstOnSaleDateSelectionRequestParamResolver",
-            "OnSaleDateSelectionRequestParamResolver",
-            "OriginCategoryMultiSelectionRequestParamResolver",
-            "PaginationRequestParamResolver",
-            "PeriodMetricRequestParamResolver",
-            "PeriodMetricSortRequestParamResolver",
-            "PlatformMultiSelectionRequestParamResolver",
-            "PriceRangeRequestParamResolver",
-            "ProductGranularitySelectionRequestParamResolver",
-            "ScoreRangeSelectRequestResolver",
-            "ShopExistRequestParamResolver",
-            "ShopSelectionRequestParamResolver",
-            "ShortInSizeRequestParamResolver",
-            "StockChange30DayRangeSelectionRequestParamResolver",
-            "StockRangeRequestParamResolver",
-            "StyleConfigMultiSelectionRequestParamResolver",
-            "StyleMultiSelectionRequestParamResolver",
-            "TextSearchRequestParamResolver",
-            "BsrRankChangeSelectRequestResolver",
-            "OnSaleSkuNumSelectRequestParamResolver",
-            "CommentNum15DayRangeSelectRequestParamResolver",
-            "CommentNum30DayRangeSelectionRequestParamResolver",
-            "CommentNum7DayRangeSelectRequestParamResolver",
-            "CommentNumYesterdayRangeSelectRequestParamResolver",
-            "SaleAmount15DayRangeSelectRequestParamResolver",
-            "SaleAmount30DayRangeSelectRequestParamResolver",
-            "SaleAmount7DayRangeSelectRequestParamResolver",
-            "SaleAmountYesterdayRangeSelectRequestParamResolver",
-            "NewInSaleVolume7DayRangeSelectionParamResolver",
-            "SaleVolume15DayRangeSelectRequestParamResolver",
-            "SaleVolume30DayRangeSelectRequestParamResolver",
-            "SaleVolume7DayRangeSelectRequestParamResolver",
-            "SaleVolumeShopTopRangeSelectRequestParamResolver",
-            "SaleVolumeTotalRangeSelectRequestParamResolver",
-            "SaleVolumeYesterdayRangeSelectRequestParamResolver",
-            "SaleVolumeYesterdayShopTopRangeSelectRequestParamResolver",
-            "PlatformVisitHelper",
-            "QueryRuleHelper",
-            "ParseSearchTextHelper",
-            "UserSelectHistoryHelper",
-            "UserEntityToppingRecordHelper"
-        ],
-        "children": {}
-    },
-    "service_business_objects": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/bo",
-        "components": [
-            "ClientVersion",
-            "BaseBO",
-            "RelatedPlatformQueryBO",
-            "SheinBO"
-        ],
-        "children": {}
-    },
-    "service_account": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/account",
-        "components": [
-            "AccountServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_authority": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority",
-        "components": [
-            "AuthorityServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_brand": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/brand",
-        "components": [
-            "BrandDetailsManagerServiceImpl",
-            "BrandDetailsServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_consumer_analysis": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/consumerAnalysis",
-        "components": [
-            "ConsumerAnalysisServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_edit": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/edit",
-        "components": [
-            "EditManageServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_fashion": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion",
-        "components": [
-            "FashionImageServiceImpl",
-            "FashionInsBloggerSelectionServiceImpl",
-            "FashionOptionServiceImpl",
-            "InsBlogServiceImpl",
-            "InsBloggerServiceImpl",
-            "InsItemServiceImpl",
-            "InsTopicServiceImpl",
-            "LfDesignOptionServiceImpl",
-            "RunwayAnalysisServiceImpl",
-            "RunwayServiceImpl",
-            "TrendAnalysisServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_goods": {
+    "Goods-Module": {
         "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods",
         "components": [
-            "GoodServiceImpl",
-            "GoodsAnalyzeServiceImpl",
-            "GoodsDetailServiceImpl",
-            "GoodsListServiceImpl",
-            "GoodsSkuServiceImpl",
-            "GoodsBrandServiceImpl",
-            "GoodsCategoryManagerServiceImpl",
-            "GoodsCategoryServiceImpl",
-            "GoodsColorManagerServiceImpl",
-            "GoodsColorServiceImpl",
-            "GoodsPropertyServiceImpl",
-            "GoodsSelectionServiceImpl",
-            "GoodsStyleManagerServiceImpl",
-            "GoodsStyleServiceImpl",
-            "MappedPropertySelectionServiceImpl",
-            "PlatformRegionServiceImpl",
-            "TemuGoodsServiceImpl"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/espo/goods/GoodsBusPO.java::GoodsPk",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/goods/sku/GoodsSkuPO.java::GoodsSkuPO",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodServiceImpl.java::GoodServiceImpl",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodsListServiceImpl.java::GoodsListServiceImpl",
+            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/goods/GoodsListController.java::GoodsListController",
+            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/builder/goods/LfGoodsQueryBuilder.java::LfGoodsQueryBuilder"
         ],
-        "children": {}
+        "children": {
+            "goods_data_models": {
+                "components": [
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/espo/goods/GoodsBusPO.java::GoodsPk",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/goods/sku/GoodsSkuPO.java::GoodsSkuPO"
+                ],
+                "children": {}
+            },
+            "product_discovery": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodServiceImpl.java::GoodServiceImpl"
+                ],
+                "children": {}
+            },
+            "goods_search_listing": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/goods/impl/GoodsListServiceImpl.java::GoodsListServiceImpl",
+                    "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/goods/GoodsListController.java::GoodsListController",
+                    "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/builder/goods/LfGoodsQueryBuilder.java::LfGoodsQueryBuilder"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_homepage": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/homepage",
+    "Fashion-Ins-Module": {
+        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion",
         "components": [
-            "HomepageCustomisationServiceImpl"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsBloggerPO.java::InsBloggerPO",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsTopicPO.java::InsTopicPO",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBloggerServiceImpl.java::InsBloggerServiceImpl",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBlogServiceImpl.java::InsBlogServiceImpl",
+            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/fashion/InsBloggerController.java::InsBloggerController",
+            "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/dao/mapper/olapfashion/InsBloggerMapper.java::InsBloggerMapper"
         ],
-        "children": {}
+        "children": {
+            "content_topic_analysis": {
+                "components": [
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsTopicPO.java::InsTopicPO",
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBlogServiceImpl.java::InsBlogServiceImpl"
+                ],
+                "children": {}
+            },
+            "blogger_management": {
+                "components": [
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/fashion/ins/InsBloggerPO.java::InsBloggerPO",
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/fashion/Impl/InsBloggerServiceImpl.java::InsBloggerServiceImpl",
+                    "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/fashion/InsBloggerController.java::InsBloggerController",
+                    "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/dao/mapper/olapfashion/InsBloggerMapper.java::InsBloggerMapper"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_internal": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/internal",
-        "components": [
-            "InternalServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_investigate": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/investigate",
-        "components": [
-            "InvestigateServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_keyword": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/keyword",
-        "components": [
-            "KeywordServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_library": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/library",
-        "components": [
-            "LibraryServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_market_analysis": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/marketAnalyse",
-        "components": [
-            "LfMarketAnalysisServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_marketing": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/marketing",
-        "components": [
-            "MetaAdBlogServiceImpl",
-            "MetaAdvertServiceImpl",
-            "MetaPostServiceImpl",
-            "MetaShopProductServiceImpl",
-            "SimilarWebInfoServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_overview": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/overview",
-        "components": [
-            "GoodsOverviewServiceImpl",
-            "OverviewAnalyzeServiceImpl",
-            "OverviewSelectionServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_pinterest": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest",
-        "components": [
-            "PinterestBlogServiceImpl",
-            "PinterestBoardServiceImpl",
-            "PinterestSelectionServiceImpl",
-            "PinterestUserServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_platform": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/platform",
-        "components": [
-            "PlatformGoodsMetricServiceImpl",
-            "PlatformInfoServiceImpl",
-            "PlatformManagerServiceImpl",
-            "PlatformMarketingServiceImpl",
-            "PlatformSelectionServiceImpl",
-            "PlatformTabConfigServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_price_range": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/priceRange",
-        "components": [
-            "PriceRangeManagerServiceImpl",
-            "PriceRangeServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_rank_list": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/rankList",
-        "components": [
-            "GoodsRankInfoServiceImpl",
-            "RankListManagerServiceImpl",
-            "RankListServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_rpc": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/rpc",
-        "components": [
-            "DesignMenuServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_search": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/search",
-        "components": [
-            "UserSearchHistoryServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_search_key": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/searchKey",
-        "components": [
-            "LifengDashboardMarketVO",
-            "LifengDashboardRunwayVO",
-            "LifengDashboardSocialMediaVO",
-            "LifengSearchKeyServiceImpl",
-            "GoogleSearchKeywordOverviewRequest",
-            "GoogleSearchKeywordTrendDetailRequest",
-            "LifengDashboardMarketRequest",
-            "LifengDashboardOverallListRequest",
-            "LifengDashboardOverviewRequest",
-            "LifengDashboardRunwayRequest",
-            "LifengDashboardSocialMediaRequest"
-        ],
-        "children": {}
-    },
-    "service_select": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/select",
-        "components": [
-            "UserSelectHistoryServiceImpl",
-            "UserSelectRecordServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_social": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/social",
-        "components": [
-            "SocialAnalysisServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_strategy": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/strategy",
-        "components": [
-            "LfCategoryStatisticConsumerStrategy",
-            "LfCategoryStatisticKeywordStrategy",
-            "LfCategoryStatisticMarketStrategy",
-            "LfCategoryStatisticRequest"
-        ],
-        "children": {}
-    },
-    "service_template": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/template",
-        "components": [
-            "BanTemplateManagerServiceImpl",
-            "BanTemplateServiceImpl",
-            "FilterTemplateManagerServiceImpl"
-        ],
-        "children": {}
-    },
-    "service_tiktok": {
+    "TikTok-Module": {
         "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/tiktok",
         "components": [
-            "TiktokCountryServiceImpl",
-            "TiktokStreamerSelectionServiceImpl",
-            "TiktokStreamerServiceImpl",
-            "TiktokVideoSelectionServiceImpl",
-            "TiktokVideoServiceImpl"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/tiktok/TiktokStreamerPO.java::TiktokStreamerPO",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/tiktok/TiktokVideoPO.java::TiktokVideoPO",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/tiktok/streamer/TiktokStreamerServiceImpl.java::TiktokStreamerServiceImpl",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/tiktok/video/TiktokVideoServiceImpl.java::TiktokVideoServiceImpl",
+            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/tiktok/TiktokStreamerController.java::TiktokStreamerController"
         ],
         "children": {}
     },
-    "service_translate": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate",
+    "Pinterest-Module": {
+        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest",
         "components": [
-            "GoogleInterfaceTranslationApi",
-            "MicrosoftInterfaceTranslationApi",
-            "TranslateDictServiceImpl",
-            "TranslationAdminServiceImpl",
-            "TranslationServiceImpl"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/user/PinterestUserInfoPO.java::PinterestUserInfoPO",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/blog/PinterestBlogPO.java::PinterestBlogPO",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest/impl/PinterestBlogServiceImpl.java::PinterestBlogServiceImpl",
+            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/pinterest/PinterestBlogController.java::PinterestBlogController"
         ],
-        "children": {}
+        "children": {
+            "pinterest_user_data": {
+                "components": [
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/user/PinterestUserInfoPO.java::PinterestUserInfoPO"
+                ],
+                "children": {}
+            },
+            "pinterest_blog_management": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/pinterest/impl/PinterestBlogServiceImpl.java::PinterestBlogServiceImpl",
+                    "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/pinterest/PinterestBlogController.java::PinterestBlogController",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/pinterest/blog/PinterestBlogPO.java::PinterestBlogPO"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_whitespace": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/whitespace",
+    "Monitor-Module": {
+        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor",
         "components": [
-            "WhitespaceServiceImpl"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/dto/monitor/MonitorManageInfoDTO.java::MonitorManageInfoDTO",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor/MonitorManageHelper.java::MonitorManageHelper",
+            "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/helper/monitor/UserCustomMonitorShopHelper.java::UserCustomMonitorShopHelper",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/monitor/UserCustomMonitorShopPO.java::UserCustomMonitorShopPO"
         ],
-        "children": {}
+        "children": {
+            "monitor_core": {
+                "components": [
+                    "abroad-dataline-core/src/main/java/com/zhiyi/abroad/core/helper/monitor/UserCustomMonitorShopHelper.java::UserCustomMonitorShopHelper",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/po/monitor/UserCustomMonitorShopPO.java::UserCustomMonitorShopPO"
+                ],
+                "children": {}
+            },
+            "monitor_services": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/monitor/MonitorManageHelper.java::MonitorManageHelper",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/dto/monitor/MonitorManageInfoDTO.java::MonitorManageInfoDTO"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_workplace": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/workplace",
+    "Translation-Module": {
+        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate",
         "components": [
-            "ParamFiltersServiceImpl",
-            "RecentVisitServiceImpl"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate/client/config/TranslatorConfiguration.java::TranslatorConfiguration",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/impl/TranslationServiceImpl.java::TranslationServiceImpl",
+            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/translate/TranslateController.java::TranslateController",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/GoogleInterfaceTranslationApi.java::GoogleInterfaceTranslationApi"
         ],
-        "children": {}
+        "children": {
+            "dictionary_management": {
+                "components": [
+                    "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/translate/TranslateController.java::TranslateController"
+                ],
+                "children": {}
+            },
+            "translation_core": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/impl/TranslationServiceImpl.java::TranslationServiceImpl",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/translate/client/config/TranslatorConfiguration.java::TranslatorConfiguration"
+                ],
+                "children": {}
+            },
+            "external_integration": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/translate/GoogleInterfaceTranslationApi.java::GoogleInterfaceTranslationApi"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_sms": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/sms",
+    "Analysis-Insight-Module": {
+        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview",
         "components": [
-            "MessageServiceImpl"
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview/OverviewAnalyzeHelper.java::OverviewAnalyzeHelper",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/overview/impl/OverviewAnalyzeServiceImpl.java::OverviewAnalyzeServiceImpl",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/request/overview/insight/OverviewAnalyzeRequest.java::OverviewAnalyzeRequest",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/vo/analyze/insight/OverviewTrendAnalysisVO.java::OverviewTrendAnalysisVO"
         ],
-        "children": {}
+        "children": {
+            "overview_analysis": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/overview/impl/OverviewAnalyzeServiceImpl.java::OverviewAnalyzeServiceImpl",
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/helper/analyze/overview/OverviewAnalyzeHelper.java::OverviewAnalyzeHelper",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/request/overview/insight/OverviewAnalyzeRequest.java::OverviewAnalyzeRequest",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/vo/analyze/insight/OverviewTrendAnalysisVO.java::OverviewTrendAnalysisVO"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_sso": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/sso",
+    "Auth-Account-Module": {
+        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority",
         "components": [
-            "LfExUserService"
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/domain/user/UserInfoEntity.java::UserInfoEntity",
+            "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority/impl/AuthorityServiceImpl.java::AuthorityServiceImpl",
+            "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/authority/AuthController.java::AuthController",
+            "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/util/AuthUtils.java::AuthUtils"
         ],
-        "children": {}
+        "children": {
+            "authority_management": {
+                "components": [
+                    "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/service/authority/impl/AuthorityServiceImpl.java::AuthorityServiceImpl"
+                ],
+                "children": {}
+            },
+            "user_context": {
+                "components": [
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/domain/user/UserInfoEntity.java::UserInfoEntity",
+                    "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/util/AuthUtils.java::AuthUtils"
+                ],
+                "children": {}
+            },
+            "authentication_service": {
+                "components": [
+                    "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/authority/AuthController.java::AuthController"
+                ],
+                "children": {}
+            }
+        }
     },
-    "service_logger": {
-        "path": "abroad-dataline-service/src/main/java/com/zhiyi/abroad/service/logger",
+    "ElasticSearch-Infrastructure": {
+        "path": "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/config",
         "components": [
-            "ADLoggerFactory"
-        ],
-        "children": {}
-    },
-    "web_application": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad",
-        "components": [
-            "SpringWebApplication"
-        ],
-        "children": {}
-    },
-    "web_config": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/config",
-        "components": [
-            "ThreadPoolConfig",
-            "TranslatorConfig",
-            "WebMvcConfig",
-            "FeignClientsConfig"
-        ],
-        "children": {}
-    },
-    "web_controllers_system": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller",
-        "components": [
-            "SystemInfoController"
-        ],
-        "children": {}
-    },
-    "web_controllers_authority": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/authority",
-        "components": [
-            "AuthController",
-            "AuthorityController"
-        ],
-        "children": {}
-    },
-    "web_controllers_brand": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/brand",
-        "components": [
-            "BrandController"
-        ],
-        "children": {}
-    },
-    "web_controllers_config": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/config",
-        "components": [
-            "CurrencyConfigController",
-            "PlatformConfigController",
-            "RankAnalyzeConfigController"
-        ],
-        "children": {}
-    },
-    "web_controllers_consumer_analysis": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/consumerAnalysis",
-        "components": [
-            "LfConsumerAnalysisController"
-        ],
-        "children": {}
-    },
-    "web_controllers_dashboard": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/dashboard",
-        "components": [
-            "LifengDashboardController",
-            "LifengSearchKeywordController"
-        ],
-        "children": {}
-    },
-    "web_controllers_edit": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/edit",
-        "components": [
-            "EditManageController"
-        ],
-        "children": {}
-    },
-    "web_controllers_fashion": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/fashion",
-        "components": [
-            "FashionOptionController",
-            "InsBlogController",
-            "InsBloggerController",
-            "InsItemController",
-            "InsTopicController",
-            "LfDesignOptionController",
-            "RunwayAnalysisController",
-            "RunwayController"
-        ],
-        "children": {}
-    },
-    "web_controllers_goods": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/goods",
-        "components": [
-            "CommonGoodsController",
-            "CommonGoodsSelectionController",
-            "GoodsCenterController",
-            "GoodsDetailController",
-            "GoodsListController",
-            "GoodsSelectionController",
-            "GoodsSkuAnalyzeController",
-            "ImageSearchController"
-        ],
-        "children": {}
-    },
-    "web_controllers_homepage": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/hompage",
-        "components": [
-            "HomeSearchController",
-            "HomepageController"
-        ],
-        "children": {}
-    },
-    "web_controllers_internal": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/internal",
-        "components": [
-            "InternalController"
-        ],
-        "children": {}
-    },
-    "web_controllers_keyword": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/keyword",
-        "components": [
-            "KeywordController",
-            "KeywordManageController"
-        ],
-        "children": {}
-    },
-    "web_controllers_library": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/library",
-        "components": [
-            "LibraryController"
-        ],
-        "children": {}
-    },
-    "web_controllers_login": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/login",
-        "components": [
-            "LoginUserController"
-        ],
-        "children": {}
-    },
-    "web_controllers_market_analysis": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/marketAnalyse",
-        "components": [
-            "LfMarketAnalysisController"
-        ],
-        "children": {}
-    },
-    "web_controllers_marketing": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/marketing",
-        "components": [
-            "MarketingController",
-            "MetaAdvertController",
-            "MetaPostController",
-            "MetaShopProductController",
-            "SimilarWebInfoController",
-            "MetaAdBlogController",
-            "MetaAdBlogSelectionController"
-        ],
-        "children": {}
-    },
-    "web_controllers_overview": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/overview",
-        "components": [
-            "OverviewSelectionController",
-            "PriceRangeController"
-        ],
-        "children": {}
-    },
-    "web_controllers_pinterest": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/pinterest",
-        "components": [
-            "PinterestBlogController",
-            "PinterestBoardController",
-            "PinterestSelectionController",
-            "PinterestUserController"
-        ],
-        "children": {}
-    },
-    "web_controllers_platform": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/platform",
-        "components": [
-            "PlatformController",
-            "PlatformMarketingController",
-            "PlatformSelectionController",
-            "PlatformTabConfigController"
-        ],
-        "children": {}
-    },
-    "web_controllers_rank_list": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/rankList",
-        "components": [
-            "RankListController"
-        ],
-        "children": {}
-    },
-    "web_controllers_search": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/search",
-        "components": [
-            "UserSearchHistoryController"
-        ],
-        "children": {}
-    },
-    "web_controllers_select": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/select",
-        "components": [
-            "SelectRecordController"
-        ],
-        "children": {}
-    },
-    "web_controllers_shop": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/shop",
-        "components": [
-            "ShopController",
-            "ShopSelectionController"
-        ],
-        "children": {}
-    },
-    "web_controllers_social": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/social",
-        "components": [
-            "ConsumerAnalysisController"
-        ],
-        "children": {}
-    },
-    "web_controllers_tiktok": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/tiktok",
-        "components": [
-            "TiktokStreamerController",
-            "TiktokStreamerSelectionController",
-            "TiktokVideoController",
-            "TiktokVideoSelectionController"
-        ],
-        "children": {}
-    },
-    "web_controllers_translate": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/translate",
-        "components": [
-            "DictionaryAdminController",
-            "DictionaryController",
-            "TranslateController"
-        ],
-        "children": {}
-    },
-    "web_controllers_whitespace": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/whitespace",
-        "components": [
-            "WhitespaceController"
-        ],
-        "children": {}
-    },
-    "web_controllers_workplace": {
-        "path": "abroad-dataline-web/src/main/java/com/zhiyi/abroad/web/controller/workplace",
-        "components": [
-            "ParamFiltersController",
-            "RecentVisitController"
-        ],
-        "children": {}
-    },
-    "common_api": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/api",
-        "components": [
-            "RemoteRequest"
-        ],
-        "children": {}
-    },
-    "common_cache": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/cache",
-        "components": [
-            "CacheManagerNames"
-        ],
-        "children": {}
-    },
-    "common_event": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/event",
-        "components": [
-            "UserMonitorPlatformEvent"
-        ],
-        "children": {}
-    },
-    "common_entity_example": {
-        "path": "abroad-dataline-common/src/main/java/com/zhiyi/abroad/common/entity/example",
-        "components": [
-            "EntityBaseExample",
-            "CommentInfoExample",
-            "InsAtBloggerDataExample",
-            "InsBloggerExample",
-            "InsTrendAnalysisExample",
-            "InsXhsCrossAnalysisExample",
-            "AccumulateQueryBuilder",
-            "AggQueryBuilder",
-            "GoodsSkuDailyExample",
-            "GoodsSkuQueryExample",
-            "InsImageBlogExample",
-            "BlogBuilder1",
-            "BlogWithBoxBuilder",
-            "PinterestBoardExample",
-            "PinterestUserInfoExample",
-            "QueryRuleExample",
-            "ShopDailyDataExample",
-            "ShopInfoExample",
-            "TiktokStreamerQueryExample",
-            "TiktokVideoQueryExample",
-            "TranslateExample",
-            "SearchModel"
+            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/config/ElasticRestJavaClientConfig.java::ElasticRestJavaClientConfig",
+            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/base/model/constant/EsIndexNamesConstant.java::EsIndexNamesConstant",
+            "abroad-dataline-elasticsh/src/main/java/com/zhiyi/abroad/es/base/model/agg/NestedAgg.java::NestedAgg"
         ],
         "children": {}
     }
