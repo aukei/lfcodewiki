@@ -1,0 +1,51 @@
+{
+    "generation_info": {
+        "timestamp": "2026-03-25T17:50:19.188662",
+        "main_model": "google/gemini-3-flash-preview",
+        "generator_version": "1.0.1",
+        "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAITechPack",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 419,
+        "leaf_nodes": 184,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "azure_storage.md",
+        "techpack_compare.md",
+        "xts_transformation.md",
+        "xts_transformation_services.md",
+        "microsoft_graph.md",
+        "authentication.md",
+        "ai_llm_providers.md",
+        "frontend_screens.md",
+        "advanced_search.md",
+        "image_data_management.md",
+        "frontend_common_ui.md",
+        "backend_dtos.md",
+        "frontend_app_models.md",
+        "image_management.md",
+        "techpack_management.md",
+        "identity_management.md",
+        "extraction_services.md",
+        "trend_engine.md",
+        "external_adapters.md",
+        "data_models_api.md",
+        "xts_order_management.md",
+        "costing_estimation.md",
+        "techpack_core_service.md",
+        "core_extraction.md",
+        "security_authorization.md",
+        "lf_apim.md",
+        "extraction_engine.md",
+        "user_auth_management.md",
+        "techpack_core_service_details.md",
+        "openai_service.md",
+        "estimation_reporting.md",
+        "pdf_extraction_services.md"
+    ]
+}

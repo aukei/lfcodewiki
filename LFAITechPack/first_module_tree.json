@@ -1,0 +1,130 @@
+{
+    "techpack_core_service": {
+        "path": "services/techpack_service.py",
+        "components": [
+            "services/techpack_service.py::TechPackService",
+            "services/techpack_management.py::TechPackManagementService",
+            "controllers/Techpack.py::TechpackController",
+            "repository/techpack_repository.py::TechpackRepository"
+        ],
+        "children": {}
+    },
+    "extraction_engine": {
+        "path": "services/extraction",
+        "components": [
+            "services/extraction/extraction_factory.py::ExtractionServiceFactory",
+            "services/extraction/base_extraction.py::BaseExtractionService",
+            "services/extraction/doen_extraction.py::DOENExtractionService",
+            "services/extraction/walmart_extraction.py::WalmartExtractionService",
+            "services/extraction/etam_lingerie_extraction.py::EtamLingerieExtractionService",
+            "services/extraction/landsend_extraction.py::LandsEndExtractionService",
+            "services/extraction/oa_extraction.py::OAExtractionService",
+            "services/openai_service.py::OpenAIService",
+            "services/GoogleGemini.py::GeminiService"
+        ],
+        "children": {
+            "extraction_services": {
+                "components": [
+                    "services/extraction/extraction_factory.py::ExtractionServiceFactory",
+                    "services/extraction/base_extraction.py::BaseExtractionService",
+                    "services/extraction/doen_extraction.py::DOENExtractionService",
+                    "services/extraction/walmart_extraction.py::WalmartExtractionService",
+                    "services/extraction/etam_lingerie_extraction.py::EtamLingerieExtractionService",
+                    "services/extraction/landsend_extraction.py::LandsEndExtractionService",
+                    "services/extraction/oa_extraction.py::OAExtractionService"
+                ],
+                "children": {}
+            },
+            "ai_llm_providers": {
+                "components": [
+                    "services/openai_service.py::OpenAIService",
+                    "services/GoogleGemini.py::GeminiService"
+                ],
+                "children": {}
+            }
+        }
+    },
+    "costing_estimation": {
+        "path": "services/techpack_costing.py",
+        "components": [
+            "services/techpack_costing.py::CostingService",
+            "services/costing/aeo_cm_yy_estimation_service.py::AeoCmYyEstimationService",
+            "controllers/TechpackCosting.py::TechpackCostingController",
+            "repository/techpack_costing_repository.py::TechpackCostingRepository",
+            "services/reports/ai_estimation_report.py::AiEstimationReportService"
+        ],
+        "children": {}
+    },
+    "xts_transformation": {
+        "path": "services/xts_transformation",
+        "components": [
+            "services/xts_transformation/default_xts_transformation_service.py::DefaultXtsTransformationService",
+            "services/xts_transformation/walmart_xts_transformation_service.py::WalmartXtsTransformationService",
+            "services/xts_transformation/doen_xts_transformation_service.py::DoenXtsTransformationService",
+            "controllers/XtsOrder.py::XtsOrderController",
+            "repository/xts_order_repository.py::XtsOrderRepository"
+        ],
+        "children": {}
+    },
+    "frontend_screens": {
+        "path": "frontend/src/screens",
+        "components": [
+            "frontend/src/screens/homepage/item-table.tsx::TechpackDataSource",
+            "frontend/src/screens/techpack-detail/index.tsx::Fabric",
+            "frontend/src/screens/advanced-search/index.tsx::QueryParams",
+            "frontend/src/screens/techpack-compare/navigation.tsx::Props",
+            "frontend/src/screens/login/index.tsx::AuthenticationRequest"
+        ],
+        "children": {}
+    },
+    "frontend_common_ui": {
+        "path": "frontend/src/components",
+        "components": [
+            "frontend/src/components/input/index.tsx::Props",
+            "frontend/src/components/multi-select/index.tsx::Props",
+            "frontend/src/components/date-range-picker/index.tsx::Props",
+            "frontend/src/components/progress-bar/index.tsx::Props",
+            "frontend/src/components/spinner/index.tsx::Props"
+        ],
+        "children": {}
+    },
+    "user_auth_management": {
+        "path": "services/authz.py",
+        "components": [
+            "services/authz.py::AuthzService",
+            "services/techpack_security.py::TechPackSecurity",
+            "repository/techpack_user.py::TechpackUserRepository",
+            "models/user.py::User"
+        ],
+        "children": {}
+    },
+    "external_adapters": {
+        "path": "adapter",
+        "components": [
+            "adapter/lfai_apim_adapter.py::LFApimAdapter",
+            "adapter/microsoft_graph_adapter.py::MicrosoftGraphAdapter",
+            "services/AzureStorageContainerService.py::AzureStorageContainerService",
+            "adapter/trend_engine_adapter.py::TrendEngineAdapter"
+        ],
+        "children": {}
+    },
+    "data_models_api": {
+        "path": "frontend/src/types/api.ts",
+        "components": [
+            "frontend/src/types/api.ts::TechpackDetailResponse",
+            "frontend/src/types/api.ts::TRFQCostResponse",
+            "frontend/src/types/app.ts::Techpack",
+            "models/api_response_dto.py::ApiResponseDto"
+        ],
+        "children": {}
+    },
+    "image_management": {
+        "path": "services/techpack_image.py",
+        "components": [
+            "services/techpack_image.py::TechPackImageService",
+            "controllers/TechpackImage.py::TechpackImageController",
+            "repository/techpack_image_repository.py::TechpackImageRepository"
+        ],
+        "children": {}
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "generation_info": {
+        "timestamp": "2026-03-25T17:38:58.868546",
+        "main_model": "google/gemini-3-flash-preview",
+        "generator_version": "1.0.1",
+        "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIDesign",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 381,
+        "leaf_nodes": 379,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "Database_Management.md",
+        "Search_Services.md",
+        "Azure_Cloud_Storage.md",
+        "ComfyUI_Automation.md",
+        "Ideation_Workbench.md",
+        "OpenAI_Integration.md"
+    ]
+}

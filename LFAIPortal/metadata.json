@@ -1,0 +1,23 @@
+{
+    "generation_info": {
+        "timestamp": "2026-03-25T17:42:38.360099",
+        "main_model": "google/gemini-3-flash-preview",
+        "generator_version": "1.0.1",
+        "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/LFAIPortal",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 805,
+        "leaf_nodes": 74,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "database_repository.md",
+        "e2b_sandbox_execution.md",
+        "external_tools.md",
+        "api_layer.md"
+    ]
+}

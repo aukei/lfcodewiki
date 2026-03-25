@@ -1,0 +1,29 @@
+{
+    "type-system": {
+        "components": [
+            "app/src/types/index.ts::Layer",
+            "app/src/types/index.ts::CanvasConfig",
+            "app/src/types/index.ts::AIConfig",
+            "app/src/types/index.ts::GeneratedResult",
+            "app/src/types/index.ts::Transform",
+            "app/src/types.ts::Layer",
+            "app/src/types.ts::CanvasConfig",
+            "app/src/types.ts::AIConfig",
+            "app/src/types.ts::GeneratedResult"
+        ],
+        "children": {}
+    },
+    "canvas-system": {
+        "components": [
+            "app/src/components/Canvas/Canvas.tsx::CanvasRef"
+        ],
+        "children": {}
+    },
+    "ai-service": {
+        "components": [
+            "app/src/services/fal.ts::IcLightV2Input",
+            "app/src/services/fal.ts::IcLightV2Output"
+        ],
+        "children": {}
+    }
+}

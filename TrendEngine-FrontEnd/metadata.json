@@ -1,0 +1,26 @@
+{
+    "generation_info": {
+        "timestamp": "2026-03-25T17:29:10.889275",
+        "main_model": "anthropic/claude-sonnet-4-5",
+        "generator_version": "1.0.1",
+        "repo_path": "/home/aukei/clawd/projects/lfcodewiki/repos/TrendEngine-FrontEnd",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 1857,
+        "leaf_nodes": 56,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "view-modules.md",
+        "README.md",
+        "utilities-helpers.md",
+        "ui-component-system.md",
+        "core-infrastructure.md",
+        "state-management-hooks.md",
+        "business-components.md"
+    ]
+}

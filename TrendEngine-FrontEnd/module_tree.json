@@ -1,0 +1,88 @@
+{
+    "core-infrastructure": {
+        "components": [
+            "packages/trend-engine/src/env.d.ts::ImportMetaEnv",
+            "packages/trend-engine/src/env.d.ts::ImportMeta",
+            "packages/trend-engine/scripts/vite-plugin-generate-routes.ts::RouteObject",
+            "packages/trend-engine/scripts/vite-plugin-generate-routes.ts::GlobResult",
+            "packages/trend-engine/scripts/vite-plugin-generate-routes.ts::RouteMap",
+            "packages/trend-engine/src/vite-env.d.ts::Window",
+            "packages/trend-engine/src/vite-env.d.ts::Array"
+        ],
+        "children": {}
+    },
+    "ui-component-system": {
+        "components": [
+            "packages/trend-engine/src/component/ui/button.tsx::ButtonProps",
+            "packages/trend-engine/src/component/ui/badge.tsx::BadgeProps",
+            "packages/trend-engine/src/component/ui/text.tsx::Props",
+            "packages/trend-engine/src/component/ui/use-toast.ts::State",
+            "packages/trend-engine/src/component/ui/icon/types.ts::IconProps",
+            "packages/trend-engine/src/component/ui/combobox/single.tsx::ComboboxProps",
+            "packages/trend-engine/src/component/ui/cascader/single.tsx::CascadeProps",
+            "packages/trend-engine/src/component/form/form.tsx::FormProps",
+            "packages/trend-engine/src/component/form/use-form.ts::FormFieldProps",
+            "packages/trend-engine/src/component/layout/flex.tsx::FlexProps",
+            "packages/trend-engine/src/component/layout/grid.tsx::GridListProps",
+            "packages/trend-engine/src/component/layout/masonry.tsx::MasonryRootProps",
+            "packages/trend-engine/src/component/layout/masonry.tsx::MasonryData"
+        ],
+        "children": {}
+    },
+    "business-components": {
+        "components": [
+            "packages/trend-engine/src/bc/back-top/index.tsx::BackTopProps",
+            "packages/trend-engine/src/bc/batch/base.tsx::ListItem",
+            "packages/trend-engine/src/bc/batch/base.tsx::BatchCancelProps",
+            "packages/trend-engine/src/bc/batch/base.tsx::BatchItemProps",
+            "packages/trend-engine/src/bc/batch/base.tsx::BatchAllProps",
+            "packages/trend-engine/src/bc/batch/base.tsx::BatchNumProps",
+            "packages/trend-engine/src/bc/batch/base.tsx::BatchProps",
+            "packages/trend-engine/src/bc/image-box/index.tsx::LabelItem",
+            "packages/trend-engine/src/bc/upload-image.tsx::UploadImageProps",
+            "packages/trend-engine/src/bc/filter/category-combobox.tsx::CategoryComboboxProps",
+            "packages/trend-engine/src/bc/filter/time-combobox.tsx::TimeComboboxProps",
+            "packages/trend-engine/src/bc/filter/fashion/fashion-industry-category-num-cascader-multi.tsx::CategoryCascaderMultiProps",
+            "packages/trend-engine/src/bc/chart/chart.tsx::ChartItemComponent"
+        ],
+        "children": {}
+    },
+    "view-modules": {
+        "components": [
+            "packages/trend-engine/src/view/work-stage/consumer-analysis/trend-discovery.tsx::TableProps",
+            "packages/trend-engine/src/view/work-stage/consumer-analysis/trend-discovery.tsx::IProps",
+            "packages/trend-engine/src/view/work-stage/detail/product/sku/product-descriptions/index.default.tsx::Properties",
+            "packages/trend-engine/src/view/work-stage/detail/product/tabs.tsx::TabOption",
+            "packages/trend-engine/src/view/work-stage/detail/product/tabs.tsx::TabProps",
+            "packages/trend-engine/src/view/work-stage/detail/runway-analysis/runway-image-box.tsx::LabelItem",
+            "packages/trend-engine/src/view/work-stage/detail/instagrammer/summary-cards.tsx::SummaryCardProps",
+            "packages/trend-engine/src/view/work-stage/search-result/search-header.tsx::SearchQueryProps",
+            "packages/trend-engine/src/view/work-stage/search-result/all/content.tsx::ContentProps",
+            "packages/trend-engine/src/view/work-stage/search-result/all/info-card.tsx::InfoCardProps",
+            "packages/trend-engine/src/view/work-stage/runway-analysis/analysis-statistics/index.tsx::Tabs",
+            "packages/trend-engine/src/view/work-stage/market-analysis/analysis-statistics/index.tsx::Tabs",
+            "packages/trend-engine/src/view/work-stage/libraries/pinterest/filter.tsx::FilterProps",
+            "packages/trend-engine/src/view/work-stage/lf-internal/apparel-baby/pom/PomFilter.tsx::PDFFilterParams",
+            "packages/trend-engine/src/view/work-stage/lf-internal/overview/utils.ts::Column",
+            "packages/trend-engine/src/view/work-stage/setting/types.ts::RoleInfo",
+            "packages/trend-engine/src/view/work-stage/setting/roles-config/delete-role.tsx::DeleteRoleProps"
+        ],
+        "children": {}
+    },
+    "state-management-hooks": {
+        "components": [
+            "packages/trend-engine/src/hook/use-record-flow.ts::RecordFlowProps",
+            "packages/trend-engine/src/hook/use-record-flow.ts::Options",
+            "packages/trend-engine/src/hook/use-url-state.ts::Options",
+            "packages/trend-engine/src/component/keep-alive/index.tsx::KeepAliveProps",
+            "packages/trend-engine/src/component/keep-alive/index.tsx::WrapperProps"
+        ],
+        "children": {}
+    },
+    "utilities-helpers": {
+        "components": [
+            "packages/trend-engine/src/lib/file.ts::TableProps"
+        ],
+        "children": {}
+    }
+}
